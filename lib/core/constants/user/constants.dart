@@ -6,3 +6,8 @@ String userDummyImage =
 SizedBox sizedBox10 = const SizedBox(
   width: 10,
 );
+SizedBox sizedBoxHeight10 = const SizedBox(
+  height: 10,
+);
+
+String UserName = 'Harikrishnan Mv';

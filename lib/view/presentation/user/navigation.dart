@@ -1,5 +1,5 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
-import 'package:ecommerceapp/view/presentation/user/screenAccountU.dart';
+import 'package:ecommerceapp/view/presentation/user/account_screen/screenAccountU.dart';
 import 'package:ecommerceapp/view/presentation/user/screenCategoryU.dart';
 import 'package:ecommerceapp/view/presentation/user/screenDiscoverU.dart';
 import 'package:ecommerceapp/view/presentation/user/screenHomeU.dart';
