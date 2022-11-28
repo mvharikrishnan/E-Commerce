@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
-import 'package:ecommerceapp/view/presentation/user/widget/homeScreenProductTile.dart';
-import 'package:ecommerceapp/view/presentation/user/widget/slidingBarItemTile.dart';
+import 'package:ecommerceapp/view/presentation/user/home_screen/widget/homeScreenProductTile.dart';
+import 'package:ecommerceapp/view/presentation/user/home_screen/widget/slidingBarItemTile.dart';
 import 'package:flutter/material.dart';
 
 class ScreenHomeUser extends StatelessWidget {
