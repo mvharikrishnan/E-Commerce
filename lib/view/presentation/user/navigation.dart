@@ -1,7 +1,7 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/view/presentation/user/account_screen/screenAccountU.dart';
 import 'package:ecommerceapp/view/presentation/user/screenCategoryU.dart';
-import 'package:ecommerceapp/view/presentation/user/screenDiscoverU.dart';
+import 'package:ecommerceapp/view/presentation/user/discover_screen/screenDiscoverU.dart';
 import 'package:ecommerceapp/view/presentation/user/home_screen/screenHomeU.dart';
 import 'package:flutter/material.dart';
 
