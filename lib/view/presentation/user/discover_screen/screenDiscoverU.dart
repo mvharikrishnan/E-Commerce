@@ -81,7 +81,7 @@ class ScreenDiscoverUser extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: NetworkImage(userDummyImage)
+                              image: NetworkImage(userDummyImage),
                             ),
                           ),
                         ),
@@ -124,7 +124,9 @@ class ScreenDiscoverUser extends StatelessWidget {
                     ],
                   );
                 },
-                separatorBuilder: (context, index) => sizedBoxHeight10,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 20,
+                ),
                 itemCount: 10,
               ),
             ),
