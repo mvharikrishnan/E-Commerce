@@ -17,70 +17,87 @@ class ScreenCategoryUser extends StatelessWidget {
       'Sculptures',
       'Antiques'
     ];
-    return Scaffold(
-      appBar: appBarUser(context),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Text(
-                  'Categories',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Expanded(
-              child: GridView.builder(
-                itemCount: dummylistNames.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 15,
-                  crossAxisSpacing: 15,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      //screen to category viewing list screen
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Category_Viewing_List_Screen(
-                            CategoryName: dummylistNames[index]),
-                      ));
-                    },
-                    child: Container(
-                      width: 166,
-                      height: 168,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: skyBlueLightK,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            dummylistNames[index],
-                            style: const TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                          Container(
-                            width: 88,
-                            height: 79,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(userDummyImage),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.white,
+                offWhiteK,
+              ]),
+          color: darkBlueLightK,
+          borderRadius: BorderRadius.circular(10)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: appBarUser(context),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Text(
+                    'Categories',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-            ),
-          ],
+              Expanded(
+                child: GridView.builder(
+                  itemCount: dummylistNames.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 15,
+                  ),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        //screen to category viewing list screen
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Category_Viewing_List_Screen(
+                              CategoryName: dummylistNames[index]),
+                        ));
+                      },
+                      child: Container(
+                        width: 166,
+                        height: 168,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [skyBlueLightK, skyBlueLightK]),
+                          borderRadius: BorderRadius.circular(10),
+                          color: skyBlueLightK,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              dummylistNames[index],
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
+                            ),
+                            Container(
+                              width: 88,
+                              height: 79,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(userDummyImage),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

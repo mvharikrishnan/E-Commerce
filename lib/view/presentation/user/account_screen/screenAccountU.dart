@@ -13,54 +13,67 @@ class ScreenAccountUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBarUser(context),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                const Text(
-                  'Hello, ',
-                  style: TextStyle(fontSize: 24),
-                ),
-                Text(
-                  UserName,
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                sizedBoxHeight10,
-                const account_profile(),
-                sizedBoxHeight10,
-                const account_edit_button(),
-                sizedBoxHeight10,
-                const settingTile(
-                  settingTitleName: 'Your Order',
-                ),
-                const settingTile(
-                  settingTitleName: 'Wish List',
-                ),
-                const settingTile(
-                  settingTitleName: 'Manage Address',
-                ),
-                const settingTile(
-                  settingTitleName: 'Privacy Note',
-                ),
-                const settingTile(
-                  settingTitleName: 'Login And Security',
-                ),
-              ],
-            ),
-            Column(
-              children: const [Text('Made with ❤️ by Harikrishnan Mv')],
-            )
-          ],
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.white,
+                offWhiteK,
+              ]),
+          color: darkBlueLightK,
+          borderRadius: BorderRadius.circular(10)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: appBarUser(context),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Text(
+                    'Hello, ',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  Text(
+                    UserName,
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  sizedBoxHeight10,
+                  const account_profile(),
+                  sizedBoxHeight10,
+                  const account_edit_button(),
+                  sizedBoxHeight10,
+                  const settingTile(
+                    settingTitleName: 'Your Order',
+                  ),
+                  const settingTile(
+                    settingTitleName: 'Wish List',
+                  ),
+                  const settingTile(
+                    settingTitleName: 'Manage Address',
+                  ),
+                  const settingTile(
+                    settingTitleName: 'Privacy Note',
+                  ),
+                  const settingTile(
+                    settingTitleName: 'Login And Security',
+                  ),
+                ],
+              ),
+              Column(
+                children: const [Text('Made with ❤️ by Harikrishnan Mv')],
+              )
+            ],
+          ),
         ),
       ),
     );
