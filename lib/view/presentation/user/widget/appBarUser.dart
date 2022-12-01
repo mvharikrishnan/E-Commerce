@@ -1,15 +1,19 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/view/presentation/user/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 
-AppBar appBarUser() {
+AppBar appBarUser(BuildContext context) {
   return AppBar(
     backgroundColor: skyBlueLightK,
     elevation: 0,
     iconTheme: IconThemeData(color: darkBlueK),
     actions: [
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          //navigation of user to cart
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Cart_Screen(),));
+        },
         icon: Icon(
           Icons.shopping_cart_outlined,
           color: darkBlueK,

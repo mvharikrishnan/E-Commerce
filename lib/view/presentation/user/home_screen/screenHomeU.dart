@@ -12,7 +12,7 @@ class ScreenHomeUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarUser(),
+      appBar: appBarUser(context),
       drawer: Drawer(
         backgroundColor: offWhiteK,
       ),
