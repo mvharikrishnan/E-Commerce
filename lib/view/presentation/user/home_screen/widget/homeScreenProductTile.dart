@@ -15,7 +15,7 @@ class HomeScreenGridTile extends StatelessWidget {
           builder: (context) => const Product_Viewing_screen(
             ProductImage: 'assets/drawingImage/drawing3.jpeg',
             ProductName: 'Pencil Protrait-A4',
-            ProductPrice: "150/-",
+            ProductPrice: "150",
           ),
         ));
       },
