@@ -5,8 +5,7 @@ import 'package:ecommerceapp/view/presentation/user/account_screen/widget/accoun
 import 'package:ecommerceapp/view/presentation/user/account_screen/widget/settingTile.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class ScreenAccountUser extends StatelessWidget {
   const ScreenAccountUser({super.key});
@@ -52,19 +51,34 @@ class ScreenAccountUser extends StatelessWidget {
                   sizedBoxHeight10,
                   const account_edit_button(),
                   sizedBoxHeight10,
-                  const settingTile(
+                   settingTile(
+                    onPressed:() {
+                      //navigation to your order
+                    },
                     settingTitleName: 'Your Order',
                   ),
-                  const settingTile(
+                   settingTile(
+                    onPressed: () {
+                      //navigation to wwish list
+                    },
                     settingTitleName: 'Wish List',
                   ),
-                  const settingTile(
+                   settingTile(
+                    onPressed: () {
+                      //navigation to manage address
+                    },
                     settingTitleName: 'Manage Address',
                   ),
-                  const settingTile(
+                   settingTile(
+                    onPressed: () {
+                      //navigation to privacy note
+                    },
                     settingTitleName: 'Privacy Note',
                   ),
-                  const settingTile(
+                   settingTile(
+                    onPressed: () {
+                      //navigation to login and secutity
+                    },
                     settingTitleName: 'Login And Security',
                   ),
                 ],

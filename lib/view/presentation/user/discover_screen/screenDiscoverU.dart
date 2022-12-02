@@ -9,6 +9,13 @@ class ScreenDiscoverUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List DummyArts = [
+      'assets/drawingImage/drawing1.jpeg',
+      'assets/drawingImage/drawing2.jpeg',
+      'assets/drawingImage/drawing3.jpeg',
+      'assets/drawingImage/drawing4.jpeg',
+      'assets/drawingImage/drawing5.jpeg'
+    ];
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -94,8 +101,8 @@ class ScreenDiscoverUser extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(userDummyImage),
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(DummyArts[index]),
                                 ),
                               ),
                             ),
@@ -143,7 +150,7 @@ class ScreenDiscoverUser extends StatelessWidget {
                   separatorBuilder: (context, index) => const SizedBox(
                     height: 10,
                   ),
-                  itemCount: 10,
+                  itemCount: DummyArts.length,
                 ),
               ),
             ],

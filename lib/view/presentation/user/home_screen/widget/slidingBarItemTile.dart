@@ -24,7 +24,10 @@ class SlidingBarItem extends StatelessWidget {
                     width: 74,
                     height: 74,
                     decoration: BoxDecoration(
-                      color: darkBlueLightK,
+                      image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                              'assets/drawingImage/drawing1.jpeg')),
                       borderRadius: BorderRadius.circular(10),
                     )),
               ],

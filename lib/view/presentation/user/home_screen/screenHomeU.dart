@@ -29,9 +29,19 @@ class ScreenHomeUser extends StatelessWidget {
           backgroundColor: offWhiteK,
         ),
         body: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // const SlidingBarItem(),
+            SizedBox(
+              height: 100,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => const SlidingBarItem(),
+                separatorBuilder: (context, index) => sizedBox10,
+                itemCount: 10,
+              ),
+            ),
             CarouselSlider(
               options: CarouselOptions(height: 185.0),
               items: [1, 2, 3, 4, 5].map((i) {
@@ -40,7 +50,14 @@ class ScreenHomeUser extends StatelessWidget {
                     return Container(
                       width: MediaQuery.of(context).size.width,
                       margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: const BoxDecoration(color: Colors.amber),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                              'assets/drawingImage/artfestposter2.jpg'),
+                        ),
+                        // color: Colors.amber,
+                      ),
                       // child: Text(
                       //   'text $i',
                       //   style: TextStyle(fontSize: 16.0),
@@ -58,17 +75,22 @@ class ScreenHomeUser extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: GridView.builder(
-                itemCount: 30,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 4.0,
-                    mainAxisSpacing: 4.0),
-                itemBuilder: (context, index) {
-                  return HomeScreenGridTile();
-                },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                  itemCount: 30,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 1 / 1.5,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 4.0,
+                      mainAxisSpacing: 10.0),
+                  itemBuilder: (context, index) {
+                    return const HomeScreenGridTile();
+                  },
+                ),
               ),
             ),
+            // HomeScreenGridTile()
           ],
         ),
       ),
