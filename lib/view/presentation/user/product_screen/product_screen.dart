@@ -2,8 +2,10 @@ import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/productScreenButton.dart';
 import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/productsDetails.dart';
+import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/review_widget.dart';
 
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
+import 'package:ecommerceapp/view/widget/divider.dart';
 import 'package:flutter/material.dart';
 
 class Product_Viewing_screen extends StatelessWidget {
@@ -102,6 +104,11 @@ class Product_Viewing_screen extends StatelessWidget {
                     const Text(
                       'Smiling Girl Portrail on 300 GSM Canvas drawin with Steadler Pencil. Strathmore A4 Paper.',
                       style: TextStyle(fontSize: 17),
+                    ),
+                    sizedBoxHeight10,
+                    const Text(
+                      'Creator:Creator Name',
+                      style: TextStyle(color: Colors.blue),
                     )
                   ],
                 ),
@@ -129,11 +136,10 @@ class Product_Viewing_screen extends StatelessWidget {
                     const Text('Secure Transaction')
                   ],
                 ),
-                const Divider(
-                  height: 10,
-                  thickness: 5,
-                ),
-                const ProductsDetails()
+                DividerEcommerce(),
+                const ProductsDetails(),
+                DividerEcommerce(),
+                const Review_Screen(),
               ],
             ),
           ),
@@ -141,4 +147,6 @@ class Product_Viewing_screen extends StatelessWidget {
       ),
     );
   }
+
+ 
 }
