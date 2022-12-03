@@ -1,10 +1,10 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/user/cart/cart_screen.dart';
-import 'package:ecommerceapp/view/presentation/user/check_out_screen/check_out_screen.dart';
-import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/productScreenButton.dart';
-import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/productsDetails.dart';
-import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/review_widget.dart';
+import 'package:ecommerceapp/view/presentation/user/check_out/check_out_screen.dart';
+import 'package:ecommerceapp/view/presentation/user/product/widgets/productScreenButton.dart';
+import 'package:ecommerceapp/view/presentation/user/product/widgets/productsDetails.dart';
+import 'package:ecommerceapp/view/presentation/user/product/widgets/review_widget.dart';
 
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/widget/divider.dart';

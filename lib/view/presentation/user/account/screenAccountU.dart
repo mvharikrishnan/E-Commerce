@@ -1,9 +1,9 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
-import 'package:ecommerceapp/view/presentation/user/account_screen/widget/account_edit_button.dart';
-import 'package:ecommerceapp/view/presentation/user/account_screen/widget/account_profile.dart';
-import 'package:ecommerceapp/view/presentation/user/account_screen/widget/settingTile.dart';
-import 'package:ecommerceapp/view/presentation/user/order_screen/order_screen.dart';
+import 'package:ecommerceapp/view/presentation/user/account/widget/account_edit_button.dart';
+import 'package:ecommerceapp/view/presentation/user/account/widget/account_profile.dart';
+import 'package:ecommerceapp/view/presentation/user/account/widget/settingTile.dart';
+import 'package:ecommerceapp/view/presentation/user/order/order_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/user_address/user_address.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/presentation/user/wish_list_screen/wishlist_screen.dart';

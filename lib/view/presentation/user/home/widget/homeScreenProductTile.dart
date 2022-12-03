@@ -1,5 +1,5 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
-import 'package:ecommerceapp/view/presentation/user/product_screen/product_screen.dart';
+import 'package:ecommerceapp/view/presentation/user/product/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
