@@ -9,7 +9,7 @@ class settingTile extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final String settingTitleName;
-  final Function() onPressed;
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +26,6 @@ class settingTile extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          
           children: [
             Text(
               settingTitleName,
@@ -34,7 +33,7 @@ class settingTile extends StatelessWidget {
             ),
             sizedBox10,
             IconButton(
-                onPressed: () => onPressed,
+                onPressed:  onPressed,
                 //Navigator to the page in new s
                 icon: const Icon(
                   Icons.navigate_next,

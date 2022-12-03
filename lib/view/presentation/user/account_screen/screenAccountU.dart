@@ -3,9 +3,11 @@ import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/user/account_screen/widget/account_edit_button.dart';
 import 'package:ecommerceapp/view/presentation/user/account_screen/widget/account_profile.dart';
 import 'package:ecommerceapp/view/presentation/user/account_screen/widget/settingTile.dart';
+import 'package:ecommerceapp/view/presentation/user/order_screen/order_screen.dart';
+import 'package:ecommerceapp/view/presentation/user/user_address/user_address.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
+import 'package:ecommerceapp/view/presentation/user/wish_list_screen/wishlist_screen.dart';
 import 'package:flutter/material.dart';
-
 
 class ScreenAccountUser extends StatelessWidget {
   const ScreenAccountUser({super.key});
@@ -51,31 +53,41 @@ class ScreenAccountUser extends StatelessWidget {
                   sizedBoxHeight10,
                   const account_edit_button(),
                   sizedBoxHeight10,
-                   settingTile(
-                    onPressed:() {
+                  settingTile(
+                    onPressed: () {
                       //navigation to your order
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const Order_Screen(),
+                      ));
                     },
                     settingTitleName: 'Your Order',
                   ),
-                   settingTile(
+                  settingTile(
                     onPressed: () {
                       //navigation to wwish list
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const WishList_screen(),
+                      ));
                     },
                     settingTitleName: 'Wish List',
                   ),
-                   settingTile(
+                  settingTile(
                     onPressed: () {
                       //navigation to manage address
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const User_Address_Manage_Screen(),
+                      ));
                     },
                     settingTitleName: 'Manage Address',
                   ),
-                   settingTile(
+                  settingTile(
                     onPressed: () {
                       //navigation to privacy note
                     },
                     settingTitleName: 'Privacy Note',
                   ),
-                   settingTile(
+                  settingTile(
                     onPressed: () {
                       //navigation to login and secutity
                     },

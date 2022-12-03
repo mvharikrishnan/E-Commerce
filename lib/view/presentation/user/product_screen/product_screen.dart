@@ -1,5 +1,7 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/view/presentation/user/cart/cart_screen.dart';
+import 'package:ecommerceapp/view/presentation/user/check_out_screen/check_out_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/productScreenButton.dart';
 import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/productsDetails.dart';
 import 'package:ecommerceapp/view/presentation/user/product_screen/widgets/review_widget.dart';
@@ -116,13 +118,26 @@ class Product_Viewing_screen extends StatelessWidget {
                 sizedBoxHeight10,
                 Column(
                   children: [
-                    const ProductScreenButtons(
+                    ProductScreenButtons(
+                      ctx: context,
+                      Onpressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Cart_Screen(),
+                        ));
+                      },
                       ButtonColor: Colors.amber,
                       ButtonText: 'Add to Cart',
                     ),
                     sizedBoxHeight10,
-                    const ProductScreenButtons(
-                      ButtonColor: Color.fromARGB(255, 237, 86, 5),
+                    ProductScreenButtons(
+                      ctx: context,
+                      Onpressed: () {
+                        //navigation to Buy now screen
+                         Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const CheckOutScreen(),
+                        ));
+                      },
+                      ButtonColor: const Color.fromARGB(255, 237, 86, 5),
                       ButtonText: 'Buy Now',
                     ),
                   ],
@@ -147,6 +162,4 @@ class Product_Viewing_screen extends StatelessWidget {
       ),
     );
   }
-
- 
 }
