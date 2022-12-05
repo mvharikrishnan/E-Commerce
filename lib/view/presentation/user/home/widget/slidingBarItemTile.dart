@@ -15,7 +15,7 @@ class SlidingBarItem extends StatelessWidget {
         child: ListView.separated(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: 10,
+          itemCount: 1,
           itemBuilder: (context, index) {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +27,7 @@ class SlidingBarItem extends StatelessWidget {
                       image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                              'assets/drawingImage/drawing1.jpeg')),
+                              'assets/drawingImage/category_icon.png')),
                       borderRadius: BorderRadius.circular(10),
                     )),
               ],

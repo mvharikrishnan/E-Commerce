@@ -39,9 +39,10 @@ class ScreenHomeUser extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => const SlidingBarItem(),
                 separatorBuilder: (context, index) => sizedBox10,
-                itemCount: 10,
+                itemCount: 6,
               ),
             ),
+            sizedBoxHeight10,
             CarouselSlider(
               options: CarouselOptions(height: 185.0),
               items: [1, 2, 3, 4, 5].map((i) {
@@ -67,6 +68,7 @@ class ScreenHomeUser extends StatelessWidget {
                 );
               }).toList(),
             ),
+            sizedBoxHeight10,
             const Padding(
               padding: EdgeInsets.only(left: 15),
               child: Text(
@@ -74,6 +76,7 @@ class ScreenHomeUser extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
+            sizedBoxHeight10,
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

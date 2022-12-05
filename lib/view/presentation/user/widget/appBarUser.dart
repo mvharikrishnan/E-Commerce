@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/view/presentation/creator/home/creator_home_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,9 @@ AppBar appBarUser(BuildContext context) {
       IconButton(
         onPressed: () {
           //navigation of user to cart
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Cart_Screen(),));
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Cart_Screen(),
+          ));
         },
         icon: Icon(
           Icons.shopping_cart_outlined,
@@ -21,9 +24,16 @@ AppBar appBarUser(BuildContext context) {
         ),
       ),
       sizedBox10,
-      CircleAvatar(
-        radius: 25,
-        backgroundImage: NetworkImage(userDummyImage),
+      GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Creator_Home_screen(),
+          ));
+        },
+        child: CircleAvatar(
+          radius: 25,
+          backgroundImage: NetworkImage(userDummyImage),
+        ),
       ),
       sizedBox10,
     ],
