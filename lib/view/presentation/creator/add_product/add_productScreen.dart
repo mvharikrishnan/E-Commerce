@@ -1,5 +1,10 @@
+import 'dart:developer';
+
+import 'package:ecommerceapp/controller/creatorAddProduct.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
+import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/creator/add_product/methods/addMethods.dart';
 import 'package:ecommerceapp/view/presentation/creator/add_product/widgets/addProductTextFormField.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/appBarCreator.dart';
@@ -11,6 +16,18 @@ class Add_Product_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController productNameController = TextEditingController();
+    final TextEditingController productDescriptionController =
+        TextEditingController();
+    final TextEditingController productCategoryController =
+        TextEditingController();
+    final TextEditingController productPriceController =
+        TextEditingController();
+    final TextEditingController productMaterialController =
+        TextEditingController();
+    final TextEditingController productSizeController = TextEditingController();
+    final TextEditingController productMediumController =
+        TextEditingController();
     return Container(
       decoration: backGroundColor(),
       child: SafeArea(
@@ -21,14 +38,13 @@ class Add_Product_Screen extends StatelessWidget {
               children: [
                 appBarCreator(context),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Add Products',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 24),
+                        style: HeadingTextStyle(),
                       ),
                       sizedBoxHeight10,
                       Column(
@@ -75,45 +91,81 @@ class Add_Product_Screen extends StatelessWidget {
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Add Product Name'),
                       sizedBoxHeight10,
-                      const AddProductTextFormField(),
+                      AddProductTextFormField(
+                        controller: productNameController,
+                      ),
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Add Product Description'),
                       sizedBoxHeight10,
-                      const AddProductTextFormField(),
+                      AddProductTextFormField(
+                        MaxLine: 5,
+                        controller: productDescriptionController,
+                      ),
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Product Category'),
                       sizedBoxHeight10,
-                      const AddProductTextFormField(),
+                      AddProductTextFormField(
+                        controller: productCategoryController,
+                      ),
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Prize'),
                       sizedBoxHeight10,
-                      const AddProductTextFormField(),
+                      AddProductTextFormField(
+                        controller: productPriceController,
+                      ),
                       AddProductFormTitle(Title: 'Product Material'),
                       sizedBoxHeight10,
-                      const AddProductTextFormField(),
+                      AddProductTextFormField(
+                        controller: productMaterialController,
+                      ),
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Product Size'),
                       sizedBoxHeight10,
-                      const AddProductTextFormField(),
+                      AddProductTextFormField(
+                        controller: productSizeController,
+                      ),
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Product Medium'),
                       sizedBoxHeight10,
-                      const AddProductTextFormField(),
+                      AddProductTextFormField(
+                        controller: productMediumController,
+                      ),
                       sizedBoxHeight10,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: 50,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: darkBlueK,
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Center(
-                                child: Text(
-                              'Add Product',
-                              style: TextStyle(color: KWhite),
-                            )),
+                          GestureDetector(
+                            onTap: () {
+                              //add product to firebase function here
+                              final newProduct = ProductModel(
+                                productName: productNameController.text.trim(),
+                                productDescription:
+                                    productDescriptionController.text.trim(),
+                                category: productCategoryController.text.trim(),
+                                productPrice:
+                                    productPriceController.text.trim(),
+                                productMaterial:
+                                    productMaterialController.text.trim(),
+                                productMedium:
+                                    productMediumController.text.trim(),
+                                productSize: productSizeController.text.trim(),
+                              );
+                              log('Before Method');
+                              AddProductToFB(productModel: newProduct);
+                              log('After Method');
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: darkBlueK,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Center(
+                                  child: Text(
+                                '  Add Product  ',
+                                style: TextStyle(color: KWhite),
+                              )),
+                            ),
                           ),
                         ],
                       ),
