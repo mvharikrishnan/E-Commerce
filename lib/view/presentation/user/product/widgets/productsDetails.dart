@@ -1,31 +1,29 @@
-
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:flutter/material.dart';
 
-
 class ProductsDetails extends StatelessWidget {
-  const ProductsDetails({super.key});
-
+  const ProductsDetails({required this.productModel, super.key});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        Text(
+      children: [
+        const Text(
           "Details",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         detailsWidget(
           RowDetails: 'Material',
-          RowTitle: 'Paper',
+          RowTitle: "${productModel.productMaterial}",
         ),
         detailsWidget(
           RowDetails: 'Size',
-          RowTitle: 'A4',
+          RowTitle: '${productModel.productSize}',
         ),
         detailsWidget(
           RowDetails: 'Medium',
-          RowTitle: 'Graphite',
+          RowTitle: '${productModel.productMedium}',
         ),
-
       ],
     );
   }

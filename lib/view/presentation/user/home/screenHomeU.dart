@@ -88,7 +88,6 @@ class ScreenHomeUser extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: StreamBuilder<List<ProductModel>>(
                     stream: FetchProducts(CollectionName: 'CreatorsProducts'),
-                    
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Text('Something Went Wrong ${snapshot.error}');
@@ -126,23 +125,5 @@ class ScreenHomeUser extends StatelessWidget {
   }
 }
 
-// Widget BuildProducts(ProductModel productModel) =>
-// HomeScreenGridTile(productModel: productModel);
-
 Widget BuildProducts(ProductModel productModel) =>
     HomeScreenGridTile(productModel: productModel);
-
-//  GridView.builder(
-//                           itemCount: Products.length,
-//                           shrinkWrap: true,
-//                           physics: const ScrollPhysics(),
-//                           gridDelegate:
-//                               const SliverGridDelegateWithFixedCrossAxisCount(
-//                                   childAspectRatio: 1 / 1.5,
-//                                   crossAxisCount: 2,
-//                                   crossAxisSpacing: 4.0,
-//                                   mainAxisSpacing: 10.0),
-//                           itemBuilder:(context, index) {
-//                             return ;
-//                           },
-//                         );

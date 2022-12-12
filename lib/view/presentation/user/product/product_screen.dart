@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/cart/cart_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/check_out/check_out_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/product/widgets/productScreenButton.dart';
@@ -12,14 +13,9 @@ import 'package:flutter/material.dart';
 
 class Product_Viewing_screen extends StatelessWidget {
   const Product_Viewing_screen(
-      {required this.ProductImage,
-      required this.ProductName,
-      required this.ProductPrice,
-      super.key});
-  final String ProductName;
-  final String ProductPrice;
+      {required this.productModel, required this.ProductImage, super.key});
   final String ProductImage;
-
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +41,7 @@ class Product_Viewing_screen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      ProductName,
+                      productModel.productName,
                       style: const TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold),
                     ),
@@ -81,7 +77,7 @@ class Product_Viewing_screen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "₹$ProductPrice",
+                      "₹${productModel.productPrice}",
                       style: const TextStyle(
                           fontSize: 29, fontWeight: FontWeight.bold),
                     ),
@@ -103,8 +99,8 @@ class Product_Viewing_screen extends StatelessWidget {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     sizedBoxHeight10,
-                    const Text(
-                      'Smiling Girl Portrail on 300 GSM Canvas drawin with Steadler Pencil. Strathmore A4 Paper.',
+                     Text(
+                      productModel.productDescription,
                       style: TextStyle(fontSize: 17),
                     ),
                     sizedBoxHeight10,
@@ -133,7 +129,7 @@ class Product_Viewing_screen extends StatelessWidget {
                       ctx: context,
                       Onpressed: () {
                         //navigation to Buy now screen
-                         Navigator.of(context).push(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const CheckOutScreen(),
                         ));
                       },
@@ -152,7 +148,7 @@ class Product_Viewing_screen extends StatelessWidget {
                   ],
                 ),
                 DividerEcommerce(),
-                const ProductsDetails(),
+                 ProductsDetails(productModel: productModel),
                 DividerEcommerce(),
                 const Review_Screen(),
               ],

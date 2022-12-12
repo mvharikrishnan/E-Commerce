@@ -13,10 +13,9 @@ class HomeScreenGridTile extends StatelessWidget {
       onTap: () {
         //navigate to product viwing screen
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const Product_Viewing_screen(
+          builder: (context) => Product_Viewing_screen(
             ProductImage: 'assets/drawingImage/drawing3.jpeg',
-            ProductName: 'Pencil Protrait-A4',
-            ProductPrice: "150",
+            productModel: productModel,
           ),
         ));
       },
@@ -41,7 +40,7 @@ class HomeScreenGridTile extends StatelessWidget {
               ),
             ),
           ),
-           Positioned(
+          Positioned(
             bottom: 67,
             left: 5,
             child: Text(
@@ -49,7 +48,7 @@ class HomeScreenGridTile extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-           Positioned(
+          Positioned(
             left: 5,
             bottom: 50,
             child: Text(
@@ -57,7 +56,7 @@ class HomeScreenGridTile extends StatelessWidget {
               style: TextStyle(fontSize: 15, color: Colors.grey),
             ),
           ),
-           Positioned(
+          Positioned(
             left: 5,
             bottom: 10,
             child: Text(
