@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/presentation/user/home/widget/homeScreenProductTile.dart';
 import 'package:ecommerceapp/view/presentation/user/home/widget/slidingBarItemTile.dart';
@@ -84,18 +86,33 @@ class ScreenHomeUser extends StatelessWidget {
                 fit: FlexFit.loose,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GridView.builder(
-                    itemCount: 30,
-                    shrinkWrap: true,
-                    physics: const ScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 1 / 1.5,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 4.0,
-                            mainAxisSpacing: 10.0),
-                    itemBuilder: (context, index) {
-                      return const HomeScreenGridTile();
+                  child: StreamBuilder<List<ProductModel>>(
+                    stream: FetchProducts(CollectionName: 'CreatorsProducts'),
+                    
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Text('Something Went Wrong ${snapshot.error}');
+                      }
+
+                      if (snapshot.hasData) {
+                        final Products = snapshot.data!;
+
+                        return GridView(
+                          shrinkWrap: true,
+                          physics: const ScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 1 / 1.5,
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 4.0,
+                                  mainAxisSpacing: 10.0),
+                          children: Products.map(BuildProducts).toList(),
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
                     },
                   ),
                 ),
@@ -108,3 +125,24 @@ class ScreenHomeUser extends StatelessWidget {
     );
   }
 }
+
+// Widget BuildProducts(ProductModel productModel) =>
+// HomeScreenGridTile(productModel: productModel);
+
+Widget BuildProducts(ProductModel productModel) =>
+    HomeScreenGridTile(productModel: productModel);
+
+//  GridView.builder(
+//                           itemCount: Products.length,
+//                           shrinkWrap: true,
+//                           physics: const ScrollPhysics(),
+//                           gridDelegate:
+//                               const SliverGridDelegateWithFixedCrossAxisCount(
+//                                   childAspectRatio: 1 / 1.5,
+//                                   crossAxisCount: 2,
+//                                   crossAxisSpacing: 4.0,
+//                                   mainAxisSpacing: 10.0),
+//                           itemBuilder:(context, index) {
+//                             return ;
+//                           },
+//                         );

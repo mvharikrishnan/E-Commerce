@@ -1,11 +1,12 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/product/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreenGridTile extends StatelessWidget {
-  const HomeScreenGridTile({super.key});
-
+  const HomeScreenGridTile({required this.productModel, super.key});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -40,27 +41,27 @@ class HomeScreenGridTile extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+           Positioned(
             bottom: 67,
             left: 5,
             child: Text(
-              'Pencil Portrail-A4',
+              productModel.productName,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          const Positioned(
+           Positioned(
             left: 5,
             bottom: 50,
             child: Text(
-              'Pencil/Portrait',
+              productModel.category,
               style: TextStyle(fontSize: 15, color: Colors.grey),
             ),
           ),
-          const Positioned(
+           Positioned(
             left: 5,
             bottom: 10,
             child: Text(
-              '150/-',
+              productModel.productPrice,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
           ),

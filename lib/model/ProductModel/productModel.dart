@@ -29,7 +29,7 @@ class ProductModel {
   static ProductModel fromJson(Map<String, dynamic> json) => ProductModel(
         productName: json['productName'],
         productDescription: json['productDescription'],
-        category: json['category'],
+        category: json['productCategory'],
         productPrice: json['productPrice'],
         productMaterial: json['productMaterial'],
         productMedium: json['productMedium'],
