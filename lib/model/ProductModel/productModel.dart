@@ -25,4 +25,14 @@ class ProductModel {
         'productSize': productSize,
         'productMedium': productMedium,
       };
+
+  static ProductModel fromJson(Map<String, dynamic> json) => ProductModel(
+        productName: json['productName'],
+        productDescription: json['productDescription'],
+        category: json['category'],
+        productPrice: json['productPrice'],
+        productMaterial: json['productMaterial'],
+        productMedium: json['productMedium'],
+        productSize: json['productSize'],
+      );
 }

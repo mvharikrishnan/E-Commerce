@@ -9,7 +9,7 @@ Future AddProductToFB({required ProductModel productModel}) async {
   //Reference To to the document
   final docCreator = FirebaseFirestore.instance
       .collection('CreatorsProducts')
-      .doc('creatorName');
+      .doc(productModel.productName);
 
   //Instance to the document
   final newProduct = ProductModel(
