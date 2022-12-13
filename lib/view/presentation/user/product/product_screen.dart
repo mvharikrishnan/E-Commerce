@@ -69,7 +69,7 @@ class Product_Viewing_screen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage(ProductImage),
+                      image: NetworkImage(productModel.productImage), //if its null use ProductImage
                     ),
                   ),
                 ),

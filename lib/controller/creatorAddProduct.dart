@@ -5,7 +5,7 @@ import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:flutter/material.dart';
 
-Future AddProductToFB({required ProductModel productModel}) async {
+Future AddProductToFB({required ProductModel productModel,}) async {
   //Reference To to the document
   final docCreator = FirebaseFirestore.instance
       .collection('CreatorsProducts')
@@ -20,6 +20,7 @@ Future AddProductToFB({required ProductModel productModel}) async {
     productMaterial: productModel.productMaterial,
     productMedium: productModel.productMedium,
     productSize: productModel.productSize,
+    productImage: productModel.productImage
   );
 
   //converting the Instance to json Format
@@ -28,8 +29,8 @@ Future AddProductToFB({required ProductModel productModel}) async {
   //create the document and write the data to firebase
   await docCreator.set(newProductJson);
   log('After Adding');
-  SnackBar(
-    content: Text("${productModel.productName} Created"),
-    backgroundColor: kGreen,
-  );
+  // SnackBar(
+  //   content: Text("${productModel.productName} Created"),
+  //   backgroundColor: kGreen,
+  // );
 }

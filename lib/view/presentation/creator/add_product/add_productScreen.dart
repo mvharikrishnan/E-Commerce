@@ -1,6 +1,8 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:ecommerceapp/controller/creatorAddProduct.dart';
+import 'package:ecommerceapp/controller/fireBase_api.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
@@ -9,11 +11,20 @@ import 'package:ecommerceapp/view/presentation/creator/add_product/methods/addMe
 import 'package:ecommerceapp/view/presentation/creator/add_product/widgets/addProductTextFormField.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/appBarCreator.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-class Add_Product_Screen extends StatelessWidget {
+class Add_Product_Screen extends StatefulWidget {
   const Add_Product_Screen({super.key});
 
+  @override
+  State<Add_Product_Screen> createState() => _Add_Product_ScreenState();
+}
+
+class _Add_Product_ScreenState extends State<Add_Product_Screen> {
+  File? ImageFile1;
+  File? ImageFile2;
+  File? ImageFile3;
   @override
   Widget build(BuildContext context) {
     final TextEditingController productNameController = TextEditingController();
@@ -52,25 +63,38 @@ class Add_Product_Screen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                height: 227,
-                                width: 221,
-                                decoration: BoxDecoration(
+                              GestureDetector(
+                                onTap: () => selectFile(),
+                                child: Container(
+                                  height: 227,
+                                  width: 221,
+                                  decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromARGB(255, 192, 191, 191)),
-                                child: iconImageAdd(),
+                                    color: Color.fromARGB(255, 192, 191, 191),
+                                    image: (ImageFile1 != null)
+                                        ? DecorationImage(
+                                            image: FileImage(
+                                                File(ImageFile1!.path)))
+                                        : null,
+                                  ),
+                                  child: iconImageAdd(),
+                                ),
                               ),
                               sizedBox10,
                               Column(
                                 children: [
-                                  Container(
-                                    height: 104,
-                                    width: 115,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color:
-                                            Color.fromARGB(255, 192, 191, 191)),
-                                    child: iconImageAdd(),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      height: 104,
+                                      width: 115,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Color.fromARGB(
+                                              255, 192, 191, 191)),
+                                      child: iconImageAdd(),
+                                    ),
                                   ),
                                   sizedBoxHeight10,
                                   Container(
@@ -135,24 +159,42 @@ class Add_Product_Screen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               //add product to firebase function here
+                              final String FinalImageURL = await uploadFile();
+                              log('Download Image URl : $FinalImageURL');
                               final newProduct = ProductModel(
-                                productName: productNameController.text.trim(),
-                                productDescription:
-                                    productDescriptionController.text.trim(),
-                                category: productCategoryController.text.trim(),
-                                productPrice:
-                                    productPriceController.text.trim(),
-                                productMaterial:
-                                    productMaterialController.text.trim(),
-                                productMedium:
-                                    productMediumController.text.trim(),
-                                productSize: productSizeController.text.trim(),
-                              );
+                                  productName:
+                                      productNameController.text.trim(),
+                                  productDescription:
+                                      productDescriptionController.text.trim(),
+                                  category:
+                                      productCategoryController.text.trim(),
+                                  productPrice:
+                                      productPriceController.text.trim(),
+                                  productMaterial:
+                                      productMaterialController.text.trim(),
+                                  productMedium:
+                                      productMediumController.text.trim(),
+                                  productSize:
+                                      productSizeController.text.trim(),
+                                  productImage: FinalImageURL.toString());
                               log('Before Method');
-                              AddProductToFB(productModel: newProduct);
+
+                              AddProductToFB(
+                                productModel: newProduct,
+                              );
                               log('After Method');
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (context) {
+                              //     return SnackBar(
+                              //       content: Text(
+                              //           "${productNameController.text.trim()} Created"),
+                              //       backgroundColor: kGreen,
+                              //     );
+                              //   },
+                              // );
                             },
                             child: Container(
                               height: 50,
@@ -178,5 +220,31 @@ class Add_Product_Screen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  //files adding
+  Future selectFile() async {
+    log('Select method called');
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+    if (result == null) return;
+    final path = result.files.single.path!;
+    setState(() {
+      ImageFile1 = File(path);
+    });
+    log(ImageFile1!.path);
+  }
+
+  //For uploading flie
+  Future uploadFile() async {
+    log('uploadFile method called');
+    if (ImageFile1 == null) return;
+    final fileName = ImageFile1!.path;
+
+    final destination = 'files/$fileName';
+
+    final ImageURL = await FireBaseApi.uploadFile(destination, ImageFile1!);
+    log('Download Link of image: $ImageURL');
+    return ImageURL;
   }
 }

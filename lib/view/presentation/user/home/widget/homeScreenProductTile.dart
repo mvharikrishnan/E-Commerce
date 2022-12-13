@@ -14,7 +14,7 @@ class HomeScreenGridTile extends StatelessWidget {
         //navigate to product viwing screen
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => Product_Viewing_screen(
-            ProductImage: 'assets/drawingImage/drawing3.jpeg',
+            ProductImage: productModel.productImage,
             productModel: productModel,
           ),
         ));
@@ -30,11 +30,11 @@ class HomeScreenGridTile extends StatelessWidget {
           Container(
             width: 200,
             height: 200,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/drawingImage/drawing3.jpeg')),
-              borderRadius: BorderRadius.only(
+                  image: NetworkImage(productModel.productImage)),
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
               ),
@@ -60,7 +60,7 @@ class HomeScreenGridTile extends StatelessWidget {
             left: 5,
             bottom: 10,
             child: Text(
-              productModel.productPrice,
+              "₹${productModel.productPrice}",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
           ),

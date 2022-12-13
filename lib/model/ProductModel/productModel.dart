@@ -6,15 +6,18 @@ class ProductModel {
   final String productPrice;
   final String productSize;
   final String productMedium;
+  final String productImage;
 
-  ProductModel(
-      {required this.productName,
-      required this.productDescription,
-      required this.category,
-      required this.productPrice,
-      required this.productMaterial,
-      required this.productMedium,
-      required this.productSize});
+  ProductModel({
+    required this.productName,
+    required this.productDescription,
+    required this.category,
+    required this.productPrice,
+    required this.productMaterial,
+    required this.productMedium,
+    required this.productSize,
+    required this.productImage,
+  });
 
   Map<String, dynamic> toJson() => {
         'productName': productName,
@@ -24,6 +27,7 @@ class ProductModel {
         'productPrice': productPrice,
         'productSize': productSize,
         'productMedium': productMedium,
+        'productImage': productImage,
       };
 
   static ProductModel fromJson(Map<String, dynamic> json) => ProductModel(
@@ -34,5 +38,6 @@ class ProductModel {
         productMaterial: json['productMaterial'],
         productMedium: json['productMedium'],
         productSize: json['productSize'],
+        productImage: json['productImage']
       );
 }

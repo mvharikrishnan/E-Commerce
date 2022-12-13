@@ -38,8 +38,8 @@ class ScreenDiscoverUser extends StatelessWidget {
               TextFormField(
                 decoration: InputDecoration(
                     hintText: 'Search',
-                    hintStyle: const TextStyle(
-                        color: Colors.white,
+                    hintStyle:  TextStyle(
+                        color: KWhite,
                         fontSize: 24,
                         fontWeight: FontWeight.bold),
                     prefixIcon: const Icon(Icons.search),
