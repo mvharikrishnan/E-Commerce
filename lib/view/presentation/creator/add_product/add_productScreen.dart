@@ -181,22 +181,22 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                                   productImage: FinalImageURL.toString());
                               log('Before Method');
 
-                              AddProductToFB(
+                              await AddProductToFB(
                                 productModel: newProduct,
                               );
                               log('After Method');
-                              // showDialog(
-                              //   context: context,
-                              //   builder: (context) {
-                              //     return SnackBar(
-                              //       content: Text(
-                              //           "${productNameController.text.trim()} Created"),
-                              //       backgroundColor: kGreen,
-                              //     );
-                              //   },
-                              // );
+
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  '${productNameController.text} Successfully Added',
+                                  style: TextStyle(color: KWhite),
+                                ),
+                                backgroundColor: kGreen,
+                              ));
+                              Navigator.pop(context);
                             },
-                            child: Container(
+                            child: Container( 
                               height: 50,
                               width: 100,
                               decoration: BoxDecoration(

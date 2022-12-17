@@ -54,9 +54,9 @@ class Product_Viewing_screen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  'Pencil Portrait on 250 GSM Paper',
-                  style: TextStyle(
+                Text(
+                  productModel.productMedium,
+                  style: const TextStyle(
                       fontSize: 15,
                       color: Colors.grey,
                       fontWeight: FontWeight.bold),
@@ -69,7 +69,8 @@ class Product_Viewing_screen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(productModel.productImage), //if its null use ProductImage
+                      image: NetworkImage(productModel
+                          .productImage), //if its null use ProductImage
                     ),
                   ),
                 ),
@@ -99,7 +100,7 @@ class Product_Viewing_screen extends StatelessWidget {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     sizedBoxHeight10,
-                     Text(
+                    Text(
                       productModel.productDescription,
                       style: TextStyle(fontSize: 17),
                     ),
@@ -148,7 +149,7 @@ class Product_Viewing_screen extends StatelessWidget {
                   ],
                 ),
                 DividerEcommerce(),
-                 ProductsDetails(productModel: productModel),
+                ProductsDetails(productModel: productModel),
                 DividerEcommerce(),
                 const Review_Screen(),
               ],

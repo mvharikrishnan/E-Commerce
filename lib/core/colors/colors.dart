@@ -10,3 +10,4 @@ Color KWhite = Colors.white;
 Color backgroundColorWhite = Colors.white;
 Color kBlack = Colors.black;
 Color kGreen = Colors.green;
+Color kTransparent = Colors.transparent;

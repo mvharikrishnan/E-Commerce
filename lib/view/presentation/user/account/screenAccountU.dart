@@ -3,6 +3,7 @@ import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/user/account/widget/account_edit_button.dart';
 import 'package:ecommerceapp/view/presentation/user/account/widget/account_profile.dart';
 import 'package:ecommerceapp/view/presentation/user/account/widget/settingTile.dart';
+import 'package:ecommerceapp/view/presentation/user/loginAndSecurity/loginAndSecurity.dart';
 import 'package:ecommerceapp/view/presentation/user/order/order_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/user_address/user_address.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
@@ -90,6 +91,10 @@ class ScreenAccountUser extends StatelessWidget {
                   settingTile(
                     onPressed: () {
                       //navigation to login and secutity
+                       Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            const LoginAndSecurity(),
+                      ));
                     },
                     settingTitleName: 'Login And Security',
                   ),
