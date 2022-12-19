@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/controller/cart.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
@@ -117,10 +118,9 @@ class Product_Viewing_screen extends StatelessWidget {
                   children: [
                     ProductScreenButtons(
                       ctx: context,
-                      Onpressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const Cart_Screen(),
-                        ));
+                      Onpressed: () async {
+                        //add the product to cart
+                        await addToCart(productModel: productModel);
                       },
                       ButtonColor: Colors.amber,
                       ButtonText: 'Add to Cart',
