@@ -1,6 +1,10 @@
+import 'dart:developer';
+
+import 'package:ecommerceapp/controller/adminAddCategory.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/model/categoryModel/catergoryMode.dart';
 import 'package:ecommerceapp/view/presentation/admin/widgets/addCategoryFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -86,8 +90,22 @@ class AddCategory extends StatelessWidget {
                     ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(KWhite)),
-                      onPressed: () {
+                      onPressed: () async {
                         //submit form
+                        final newCategory = categoryModel(
+                            categoryName: categoryNameController.text.trim());
+                        log('Before Adding');
+                        await AddCategoryToFB(CategoryModel: newCategory);
+                        log('Added done');
+
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            '${categoryNameController.text} Successfully Added',
+                            style: TextStyle(color: KWhite),
+                          ),
+                          backgroundColor: kGreen,
+                        ));
+                        Navigator.pop(context);
                       },
                       child: Text(
                         ConstantNames.submit,

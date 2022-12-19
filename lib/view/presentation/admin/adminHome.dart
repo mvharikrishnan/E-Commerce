@@ -15,7 +15,9 @@ class AdminHomePage extends StatelessWidget {
       decoration: backGroundColor(),
       child: Scaffold(
         appBar: const PreferredSize(
-          child: AdminAppBar(),
+          child: AdminAppBar(
+            isVisible: true,
+          ),
           preferredSize: Size(double.infinity, 60),
         ),
         backgroundColor: kTransparent,

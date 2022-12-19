@@ -10,4 +10,5 @@ Color KWhite = Colors.white;
 Color backgroundColorWhite = Colors.white;
 Color kBlack = Colors.black;
 Color kGreen = Colors.green;
+Color KRed = Colors.red;
 Color kTransparent = Colors.transparent;
