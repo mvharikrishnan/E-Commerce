@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/controller/loginController/authentication.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,7 @@ class AdminAppBar extends StatelessWidget {
           child: IconButton(
               onPressed: () {
                 //logout for admin
+                signOut();
               },
               icon: const Icon(Icons.logout_outlined)),
         )

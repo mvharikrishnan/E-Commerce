@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerceapp/core/utils/utils.dart';
 import 'package:ecommerceapp/view/presentation/admin/adminHome.dart';
 import 'package:ecommerceapp/view/presentation/user/navigation.dart';
@@ -29,13 +31,14 @@ class MyApp extends StatelessWidget {
 
 class mainPage extends StatelessWidget {
   mainPage({super.key});
-  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          final user = FirebaseAuth.instance.currentUser;
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -46,7 +49,7 @@ class mainPage extends StatelessWidget {
             );
           } else if (snapshot.hasData) {
             // return const NavigationScreenUser();
-            if (user.email == 'admin@gmail.com') {
+            if (user!.email == 'admin@gmail.com') {
               return const AdminHomePage();
             } else {
               return const NavigationScreenUser();
