@@ -24,4 +24,3 @@ Future signIn(String Email, String Password) async {
 Future signOut() async {
   await FirebaseAuth.instance.signOut();
 }
-

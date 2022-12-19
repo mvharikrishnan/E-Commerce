@@ -8,3 +8,12 @@ TextStyle HeadingTextStyle() {
   }
 
   String LottieLoginPage = 'https://assets3.lottiefiles.com/packages/lf20_1z0fledt.json';
+
+  class ConstantNames{
+    static String category = 'Category';
+    static String events = 'Events';
+    static String adminPage = 'Admin Page';
+    static String categoryName = 'Category Name';
+    static String submit = 'SUBMIT';
+    static String pleaseEnterErrorText ='Please Enter Category Names';
+  }

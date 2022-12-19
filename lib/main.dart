@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/core/utils/utils.dart';
+import 'package:ecommerceapp/view/presentation/admin/adminHome.dart';
 import 'package:ecommerceapp/view/presentation/user/navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       scaffoldMessengerKey: Utils.messengerKey,
       debugShowCheckedModeBanner: false,
       // theme: ThemeData(fontFamily: TradeGothic),
@@ -27,8 +28,8 @@ class MyApp extends StatelessWidget {
 }
 
 class mainPage extends StatelessWidget {
-  const mainPage({super.key});
-
+  mainPage({super.key});
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +40,17 @@ class mainPage extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if(snapshot.hasError){
-            return const Center(child: Text('Something Went Wrong'),);
-          }else 
-          if (snapshot.hasData) {
-            return const NavigationScreenUser();
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('Something Went Wrong'),
+            );
+          } else if (snapshot.hasData) {
+            // return const NavigationScreenUser();
+            if (user.email == 'admin@gmail.com') {
+              return const AdminHomePage();
+            } else {
+              return const NavigationScreenUser();
+            }
           } else {
             return const SignUpPage();
           }
@@ -51,4 +58,12 @@ class mainPage extends StatelessWidget {
       ),
     );
   }
+
+  // Widget NavigationChecker() {
+  //   if (user.email == 'admin@gmail.com') {
+  //     return const AdminHomePage();
+  //   } else if (user.email == 'harikrishnanmv@gmail.com') {
+  //     return const NavigationScreenUser();
+  //   }
+  // }
 }
