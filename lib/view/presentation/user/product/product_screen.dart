@@ -11,6 +11,7 @@ import 'package:ecommerceapp/view/presentation/user/product/widgets/review_widge
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/widget/divider.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Product_Viewing_screen extends StatelessWidget {
   const Product_Viewing_screen(
@@ -121,6 +122,20 @@ class Product_Viewing_screen extends StatelessWidget {
                       Onpressed: () async {
                         //add the product to cart
                         await addToCart(productModel: productModel);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: Container(
+                                decoration: BoxDecoration(color: kTransparent),
+                                child: Lottie.network(
+                                    'https://assets5.lottiefiles.com/packages/lf20_yt24wfpb.json',
+                                    repeat: false,
+                                    animate: true),
+                              ),
+                            );
+                          },
+                        );
                       },
                       ButtonColor: Colors.amber,
                       ButtonText: 'Add to Cart',

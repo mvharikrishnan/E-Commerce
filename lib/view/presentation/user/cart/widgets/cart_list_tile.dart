@@ -4,6 +4,7 @@ import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class cart_list_tile extends StatelessWidget {
   cart_list_tile({required this.productModel, super.key});
@@ -46,8 +47,47 @@ class cart_list_tile extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 //delete product from cart
-                deleteFromCart(ProductID: productModel.productName);
+
                 //show alert dialog box
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      actionsAlignment: MainAxisAlignment.spaceAround,
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              deleteFromCart(
+                                  ProductID: productModel.productName);
+                              Navigator.pop(context);
+                            },
+                            child: Icon(Icons.check),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(kGreen)),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(Icons.close),
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(KRed)),
+                          ),
+                        ],
+                        content: Container(
+                          height: 200,
+                          width: 200,
+                          child: Lottie.network(
+                              'https://assets1.lottiefiles.com/packages/lf20_lz5srsyo.json'),
+                        ),
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [Text('DO YOU WANT TO DELETE?')],
+                        ));
+                  },
+                );
               },
               child: Container(
                 width: 109,

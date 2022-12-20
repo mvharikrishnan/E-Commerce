@@ -1,3 +1,5 @@
+
+
 import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
@@ -81,16 +83,20 @@ class Cart_Screen extends StatelessWidget {
                       return ListView(
                         children: cartProducts.map(BuildCart).toList(),
                       );
-                    } else {
-                      return Center(
-                        child: Column(
-                          children: [
-                            LottieBuilder.network(
-                                'https://assets3.lottiefiles.com/packages/lf20_qh5z2fdq.json')
-                          ],
-                        ),
-                      );
                     }
+                    return Center(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 500,
+                            width: 500,
+                            // decoration: BoxDecoration(color: darkBlueK),
+                            child: Lottie.network(
+                                'https://assets3.lottiefiles.com/packages/lf20_qh5z2fdq.json'),
+                          )
+                        ],
+                      ),
+                    );
                   },
                 ),
               ),

@@ -3,10 +3,9 @@ import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 //Email ID of Current User
-final email = FirebaseAuth.instance.currentUser!.email;
 
 Future addToCart({required ProductModel productModel}) async {
-  
+  final email = FirebaseAuth.instance.currentUser!.email;
 //refernce to the document
   final documentProduct = FirebaseFirestore.instance
       .collection('Users')
@@ -33,9 +32,11 @@ Future addToCart({required ProductModel productModel}) async {
   await documentProduct.set(newProductToCartJSON);
 }
 
- deleteFromCart({required String ProductID}){
+deleteFromCart({required String ProductID}) {
+  final email = FirebaseAuth.instance.currentUser!.email;
   //reference to the document
-  final docCart = FirebaseFirestore.instance.collection('Users')
+  final docCart = FirebaseFirestore.instance
+      .collection('Users')
       .doc(email)
       .collection('Carts')
       .doc(ProductID);
