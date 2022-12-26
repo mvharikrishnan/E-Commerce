@@ -21,6 +21,23 @@ Future signIn(String Email, String Password) async {
   }
 }
 
+Future signUP(String Email, String Password, String UserName,
+    BuildContext context) async {
+  showDialog(
+      context: context,
+      builder: (context) => Center(
+            child: CircularProgressIndicator(),
+          ));
+  log('Sign Up called');
+  try {
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: Email, password: Password);
+    log('User Signed In');
+  } on FirebaseAuthException catch (e) {
+    log(e.toString());
+  }
+}
+
 Future signOut() async {
   await FirebaseAuth.instance.signOut();
 }

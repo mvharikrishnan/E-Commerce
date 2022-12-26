@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/controller/address.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/addressModel/addressModel.dart';
 import 'package:ecommerceapp/view/presentation/user/user_address/editUserAddress.dart';
@@ -95,19 +96,25 @@ class UserAddressTile extends StatelessWidget {
                     ),
                   ),
                   sizedBox10,
-                  Container(
-                    width: 86,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFD9D9D9),
-                      borderRadius: BorderRadius.circular(10),
+                  InkWell(
+                    onTap: (){
+                       deleteAddressFromFB(fullName: addressModel.docName);
+                    } 
+                       ,
+                    child: Container(
+                      width: 86,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFD9D9D9),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                          child: Text(
+                        'Remove',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      )),
                     ),
-                    child: const Center(
-                        child: Text(
-                      'Remove',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    )),
                   ),
                 ],
               )

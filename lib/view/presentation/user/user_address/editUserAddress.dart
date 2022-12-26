@@ -130,7 +130,7 @@ class EditUserAddress extends StatelessWidget {
                           //edit
 
                           await edituserAddressToFB(
-                              addressModel: AddressModel(
+                            addressModel: AddressModel(
                                 fullName: fullNameController.text.trim(),
                                 houseName: houseController.text.trim(),
                                 streetName: stateController.text.trim(),
@@ -139,13 +139,13 @@ class EditUserAddress extends StatelessWidget {
                                 state: stateController.text.trim(),
                                 phone: phoneController.text.trim(),
                                 country: countryController.text.trim(),
-                              ),
-                              docName: currentDocName);
+                                docName: addressModel.docName),
+                          );
                         },
                         child: Text(
                           'Submit Changes',
                           style: TextStyle(color: kBlack, fontSize: 20),
-                        ))
+                        )),
                   ],
                 )
               ],

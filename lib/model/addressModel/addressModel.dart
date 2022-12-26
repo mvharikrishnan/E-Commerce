@@ -7,6 +7,7 @@ class AddressModel {
   final String state;
   final String phone;
   final String country;
+  final String docName;
 
   AddressModel({
     required this.fullName,
@@ -17,6 +18,7 @@ class AddressModel {
     required this.state,
     required this.phone,
     required this.country,
+    required this.docName,
   });
 
   Map<String, dynamic> toJson() => {
@@ -28,15 +30,18 @@ class AddressModel {
         'state': state,
         'phone': phone,
         'country': country,
+        'docName': docName
       };
 
   static AddressModel fromJson(Map<String, dynamic> json) => AddressModel(
-      fullName: json['fullName'],
-      houseName: json['houseName'],
-      streetName: json['streetName'],
-      townName: json['townName'],
-      pincode: json['pincode'],
-      state: json['state'],
-      phone: json['phone'],
-      country: json['country']);
+        fullName: json['fullName'],
+        houseName: json['houseName'],
+        streetName: json['streetName'],
+        townName: json['townName'],
+        pincode: json['pincode'],
+        state: json['state'],
+        phone: json['phone'],
+        country: json['country'],
+        docName: json['docName'],
+      );
 }

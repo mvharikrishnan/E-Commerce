@@ -1,11 +1,14 @@
 import 'dart:ui';
 
+import 'package:ecommerceapp/controller/loginController/authentication.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/main.dart';
 import 'package:ecommerceapp/view/presentation/login/widgets/createFormFiled.dart';
 import 'package:ecommerceapp/view/presentation/login/widgets/methods.dart';
 import 'package:ecommerceapp/view/presentation/user/home/screenHomeU.dart';
 import 'package:ecommerceapp/view/presentation/user/navigation.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -18,6 +21,7 @@ class CreateAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
     return Scaffold(
       backgroundColor: offWhiteK,
       body: SingleChildScrollView(
@@ -43,27 +47,55 @@ class CreateAccount extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        formFieldTitle('Full Name'),
+                        sizedBoxHeight10,
+                        createFormField(
+                          TexteditingController: nameController,
+                          obscureText: false,
+                          validate: (text) {
+                            text != null && text.length < 3
+                                ? 'Enter Valid Name'
+                                : null;
+                          },
+                        ),
+                        sizedBoxHeight10,
                         formFieldTitle('Email'),
                         sizedBoxHeight10,
-                         createFormField(
+                        createFormField(
                           TexteditingController: emailController,
                           obscureText: false,
-                         ),
+                          validate: (text) {
+                            text != null && !EmailValidator.validate(text)
+                                ? "Enter a valid email"
+                                : null;
+                          },
+                        ),
                         sizedBoxHeight10,
-                        formFieldTitle('Password'), 
+                        formFieldTitle('Password'),
                         sizedBoxHeight10,
-                         createFormField(
-                          TexteditingController: passwordController,
-                          obscureText: true,
-                         ),
+                        createFormField(
+                            TexteditingController: passwordController,
+                            obscureText: true,
+                            validate: (text) {
+                              text != null && text.length > 6
+                                  ? 'Enter is too short'
+                                  : null;
+                            }),
                         sizedBoxHeight10,
                         sizedBoxHeight10,
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             //authenticate and then navigate
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => NavigationScreenUser(),
-                            ));
+                            await signUP(
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                                nameController.text.trim(),
+                                context);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => mainPage(),
+                                ));
                           },
                           child: Container(
                             height: 56,
@@ -92,11 +124,6 @@ class CreateAccount extends StatelessWidget {
                   child: Lottie.network(
                       'https://assets2.lottiefiles.com/packages/lf20_umqaz2yv.json'),
                 ),
-                sizedBoxHeight10,
-                sizedBoxHeight10,
-                sizedBoxHeight10,
-                sizedBoxHeight10,
-                sizedBoxHeight10,
                 Column(
                   children: [
                     Container(

@@ -14,14 +14,16 @@ Future addAddressToFB({required AddressModel addressModel}) async {
 
   //instance to the address with data
   final userAddress = AddressModel(
-      fullName: addressModel.fullName,
-      houseName: addressModel.houseName,
-      streetName: addressModel.streetName,
-      townName: addressModel.townName,
-      pincode: addressModel.pincode,
-      state: addressModel.state,
-      phone: addressModel.phone,
-      country: addressModel.country);
+    fullName: addressModel.fullName,
+    houseName: addressModel.houseName,
+    streetName: addressModel.streetName,
+    townName: addressModel.townName,
+    pincode: addressModel.pincode,
+    state: addressModel.state,
+    phone: addressModel.phone,
+    country: addressModel.country,
+    docName: addressModel.docName
+  );
 
   //convert the instance to JSON Format
   final userAddressJSON = userAddress.toJson();
@@ -31,7 +33,7 @@ Future addAddressToFB({required AddressModel addressModel}) async {
 }
 
 Future edituserAddressToFB(
-    {required AddressModel addressModel, required String docName}) async {
+    {required AddressModel addressModel}) async {
   final email = FirebaseAuth.instance.currentUser!.email;
 
   //reference to the document
@@ -39,7 +41,7 @@ Future edituserAddressToFB(
       .collection('Users')
       .doc(email)
       .collection('Address')
-      .doc(docName);
+      .doc(addressModel.docName);
 
   //instance to the edited address
   final userAddress = AddressModel(
@@ -50,10 +52,24 @@ Future edituserAddressToFB(
       pincode: addressModel.pincode,
       state: addressModel.state,
       phone: addressModel.phone,
-      country: addressModel.country);
+      country: addressModel.country,
+      docName: addressModel.docName);
   //convert the instance to JSON
   final userAddressJSON = userAddress.toJson();
 
   //update the userAddress
   await docAddress.update(userAddressJSON);
+}
+
+deleteAddressFromFB({required String fullName}) {
+  final email = FirebaseAuth.instance.currentUser!.email;
+
+  //reference to the document
+  final docAddress = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(email)
+      .collection('Address')
+      .doc(fullName);
+
+  docAddress.delete();
 }

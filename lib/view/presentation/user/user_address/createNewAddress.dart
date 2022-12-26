@@ -136,6 +136,7 @@ class CreateNewAddressScreen extends StatelessWidget {
                               state: stateController.text.trim(),
                               phone: phoneController.text.trim(),
                               country: countryController.text.trim(),
+                              docName: fullNameController.text.trim(),
                             ),
                           );
 
