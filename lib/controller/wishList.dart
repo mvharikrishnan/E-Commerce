@@ -23,10 +23,23 @@ Future addToWishList({required ProductModel productModel}) async {
       productSize: productModel.productSize,
       productImage: productModel.productImage);
 
-
   //convert the instance to JSON format
   final newProductWishlistJSON = newWishListProduct.toJson();
 
   //add the JSON to FireBase
   await documentProduct.set(newProductWishlistJSON);
+}
+
+removeFromWishList({required String productID}) {
+  //Current User
+  final email = FirebaseAuth.instance.currentUser!.email;
+
+  //reference to the document
+  final docProduct = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(email)
+      .collection('WishList')
+      .doc(productID);
+
+  docProduct.delete();
 }

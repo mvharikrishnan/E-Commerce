@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
+import 'package:ecommerceapp/model/addressModel/addressModel.dart';
 import 'package:ecommerceapp/model/categoryModel/catergoryMode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -37,4 +38,15 @@ Stream<List<ProductModel>> fetchWishListProducts(String UserEmail) =>
         .snapshots()
         .map((snapshots) => snapshots.docs
             .map((doc) => ProductModel.fromJson(doc.data()))
+            .toList());
+
+//Address Session
+Stream<List<AddressModel>> fetchUserAddress(String UserEmail) =>
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(UserEmail)
+        .collection('Address')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => AddressModel.fromJson(doc.data()))
             .toList());

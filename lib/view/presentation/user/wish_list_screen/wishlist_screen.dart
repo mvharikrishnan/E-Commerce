@@ -6,8 +6,7 @@ import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/presentation/user/wish_list_screen/widgets/wishListTile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:lottie/lottie.dart';
 
 class WishList_screen extends StatelessWidget {
@@ -15,7 +14,7 @@ class WishList_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final email = FirebaseAuth.instance.currentUser!.email;
+    final email = FirebaseAuth.instance.currentUser!.email;
     return Container(
       decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -50,15 +49,19 @@ class WishList_screen extends StatelessWidget {
                       return ListView(
                         children: wishListProducts.map(BuildWidget).toList(),
                       );
+                    } else {
+                      return Center(
+                        child: Container(
+                          height: 500,
+                          width: 500,
+                          decoration: BoxDecoration(color: kTransparent),
+                          child: Lottie.network(
+                            'https://assets10.lottiefiles.com/private_files/lf30_oqpbtola.json',
+                            animate: true,
+                          ),
+                        ),
+                      );
                     }
-                    return Center(
-                      child: Container(
-                        height: 500,
-                        width: 500,
-                        child: Lottie.network(
-                            'https://assets10.lottiefiles.com/private_files/lf30_oqpbtola.json'),
-                      ),
-                    );
                   },
                 ),
               ),

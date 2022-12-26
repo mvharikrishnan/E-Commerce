@@ -16,4 +16,5 @@ TextStyle HeadingTextStyle() {
     static String categoryName = 'Category Name';
     static String submit = 'SUBMIT';
     static String pleaseEnterErrorText ='Please Enter Category Names';
+    static String AddNewAddress = 'Add a new address';
   }
