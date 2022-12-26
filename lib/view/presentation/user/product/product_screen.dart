@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/controller/cart.dart';
+import 'package:ecommerceapp/controller/wishList.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
@@ -85,7 +86,23 @@ class Product_Viewing_screen extends StatelessWidget {
                           fontSize: 29, fontWeight: FontWeight.bold),
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await addToWishList(productModel: productModel);
+                          showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: Container(
+                                decoration: BoxDecoration(color: kTransparent),
+                                child: Lottie.network(
+                                    'https://assets10.lottiefiles.com/packages/lf20_f9e9tqcx.json',
+                                    repeat: false,
+                                    animate: true),
+                              ),
+                            );
+                          },
+                        );
+                        },
                         icon: const Icon(
                           Icons.favorite,
                           color: Colors.red,

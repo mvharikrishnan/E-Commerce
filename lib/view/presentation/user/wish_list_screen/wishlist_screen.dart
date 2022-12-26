@@ -1,15 +1,21 @@
+import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
+import 'package:ecommerceapp/view/presentation/user/wish_list_screen/widgets/wishListTile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lottie/lottie.dart';
 
 class WishList_screen extends StatelessWidget {
   const WishList_screen({super.key});
 
   @override
   Widget build(BuildContext context) {
+     final email = FirebaseAuth.instance.currentUser!.email;
     return Container(
       decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -33,72 +39,27 @@ class WishList_screen extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               Expanded(
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: double.infinity,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: skyBlueLightK,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 110,
-                              width: 110,
-                              decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      'assets/drawingImage/drawing2.jpeg'),
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            sizedBox10,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                const Text(
-                                  'Girl Portrait -A4 (Pencil Portrait)',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const Text(
-                                  '₹150',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Container(
-                                  width: 131,
-                                  height: 28,
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: const Center(
-                                      child: Text(
-                                    'Add to cart',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
+                child: StreamBuilder<List<ProductModel>>(
+                  stream: fetchWishListProducts(email!),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Something Went Wrong ${snapshot.error}');
+                    }
+                    if (snapshot.hasData) {
+                      final wishListProducts = snapshot.data!;
+                      return ListView(
+                        children: wishListProducts.map(BuildWidget).toList(),
+                      );
+                    }
+                    return Center(
+                      child: Container(
+                        height: 500,
+                        width: 500,
+                        child: Lottie.network(
+                            'https://assets10.lottiefiles.com/private_files/lf30_oqpbtola.json'),
                       ),
                     );
                   },
-                  separatorBuilder: (context, index) => sizedBoxHeight10,
-                  itemCount: 3,
                 ),
               ),
             ],
@@ -108,3 +69,7 @@ class WishList_screen extends StatelessWidget {
     );
   }
 }
+
+Widget BuildWidget(ProductModel productModel) => WishListTile(
+      productModel: productModel,
+    );

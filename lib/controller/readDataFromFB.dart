@@ -18,12 +18,23 @@ Stream<List<categoryModel>> fetchCategory({required String categoryName}) =>
             .toList());
 
 //Cart Session
+Stream<List<ProductModel>> fetchCartProducts(String userEmail) =>
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userEmail)
+        .collection('Carts')
+        .snapshots()
+        .map((snapshots) => snapshots.docs
+            .map((doc) => ProductModel.fromJson(doc.data()))
+            .toList());
 
-Stream<List<ProductModel>> fetchCartProducts(String userEmail) => FirebaseFirestore.instance
-    .collection('Users')
-    .doc(userEmail)
-    .collection('Carts')
-    .snapshots()
-    .map((snapshots) => snapshots.docs
-        .map((doc) => ProductModel.fromJson(doc.data()))
-        .toList());
+//WishList Session
+Stream<List<ProductModel>> fetchWishListProducts(String UserEmail) =>
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(UserEmail)
+        .collection('WishList')
+        .snapshots()
+        .map((snapshots) => snapshots.docs
+            .map((doc) => ProductModel.fromJson(doc.data()))
+            .toList());

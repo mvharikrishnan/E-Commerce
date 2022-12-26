@@ -46,14 +46,12 @@ class cart_list_tile extends StatelessWidget {
             left: 10,
             child: GestureDetector(
               onTap: () {
-                //delete product from cart
-
                 //show alert dialog box
                 showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      actionsAlignment: MainAxisAlignment.spaceAround,
+                        actionsAlignment: MainAxisAlignment.spaceAround,
                         actions: [
                           ElevatedButton(
                             onPressed: () {
