@@ -8,6 +8,7 @@ import 'package:ecommerceapp/view/presentation/user/order/order_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/user_address/user_address.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/presentation/user/wish_list_screen/wishlist_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ScreenAccountUser extends StatelessWidget {
@@ -15,6 +16,7 @@ class ScreenAccountUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _user = FirebaseAuth.instance.currentUser!;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -41,7 +43,7 @@ class ScreenAccountUser extends StatelessWidget {
                     style: TextStyle(fontSize: 24),
                   ),
                   Text(
-                    UserName,
+                    _user.displayName ?? 'User',
                     style: const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.bold),
                   ),
@@ -50,7 +52,7 @@ class ScreenAccountUser extends StatelessWidget {
               Column(
                 children: [
                   sizedBoxHeight10,
-                  const account_profile(),
+                  account_profile(user: _user),
                   sizedBoxHeight10,
                   const account_edit_button(),
                   sizedBoxHeight10,
@@ -91,9 +93,8 @@ class ScreenAccountUser extends StatelessWidget {
                   settingTile(
                     onPressed: () {
                       //navigation to login and secutity
-                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            const LoginAndSecurity(),
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LoginAndSecurity(),
                       ));
                     },
                     settingTitleName: 'Login And Security',

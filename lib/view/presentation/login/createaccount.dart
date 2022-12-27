@@ -1,6 +1,7 @@
-import 'dart:ui';
+
 
 import 'package:ecommerceapp/controller/loginController/authentication.dart';
+import 'package:ecommerceapp/controller/loginController/google_sign_in.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/main.dart';
@@ -126,19 +127,25 @@ class CreateAccount extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Container(
-                      height: 56,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(19),
-                          border: Border.all(width: 2)),
-                      child: ListTile(
-                        leading: Image.network(
-                            'http://pngimg.com/uploads/google/google_PNG19635.png',
-                            fit: BoxFit.cover),
-                        title: Text(
-                          '         Continue with Google',
-                          style: TextStyle(color: darkBlueK),
+                    InkWell(
+                      onTap: () async{
+                        await SignUP.SignInWithGoogle();
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 56,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            border: Border.all(width: 2)),
+                        child: ListTile(
+                          leading: Image.network(
+                              'http://pngimg.com/uploads/google/google_PNG19635.png',
+                              fit: BoxFit.cover),
+                          title: Text(
+                            '         Continue with Google',
+                            style: TextStyle(color: darkBlueK),
+                          ),
                         ),
                       ),
                     ),

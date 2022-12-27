@@ -2,9 +2,11 @@ import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/creator/home/creator_home_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/cart/cart_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 AppBar appBarUser(BuildContext context) {
+  final user = FirebaseAuth.instance.currentUser!;
   return AppBar(
     backgroundColor: skyBlueLightK,
     elevation: 0,
@@ -32,7 +34,7 @@ AppBar appBarUser(BuildContext context) {
         },
         child: CircleAvatar(
           radius: 25,
-          backgroundImage: NetworkImage(userDummyImage),
+          backgroundImage: NetworkImage(user.photoURL ?? userDummyImage),
         ),
       ),
       sizedBox10,

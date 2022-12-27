@@ -75,7 +75,7 @@ class User_Address_Manage_Screen extends StatelessWidget {
                   );
                 }
               },
-            ))
+            )),
           ],
         ),
       ),
