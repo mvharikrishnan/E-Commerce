@@ -71,21 +71,13 @@ class LoginPage extends StatelessWidget {
                         sizedBoxHeight10,
                         InkWell(
                           onTap: () async {
-                            //authenticate and then navigate
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //   builder: (context) => NavigationScreenUser(),
-                            // ));
                             log('Login Called');
-                            // final isValid = formKey.currentState!.validate();
-                            // if (!isValid) return;
+
                             log("Validation finished");
 
                             await signIn(emailController.text.trim(),
-                                passwordController.text.trim());
+                                passwordController.text.trim(), context);
 
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //   builder: (context) => mainPage(),
-                            // ));
                             Navigator.pop(context);
                           },
                           child: Container(

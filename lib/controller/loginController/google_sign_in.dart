@@ -1,7 +1,8 @@
-
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignUP {
@@ -12,7 +13,13 @@ class SignUP {
 
   GoogleSignInAccount get user => _user!;
 
-  static Future SignInWithGoogle() async {
+  static Future SignInWithGoogle(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
     log('Google Sign In called');
     final googleUser = await googleSignIn.signIn();
 

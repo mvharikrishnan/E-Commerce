@@ -24,8 +24,8 @@ class LoginAndSecurity extends StatelessWidget {
           child: Column(
             children: [
               ElevatedButton(
-                onPressed: () {
-                  signOut();
+                onPressed: () async {
+                  await signOut();
                   Navigator.pop(context);
                 },
                 child: const Center(child: Text('LOGOUT')),
