@@ -1,5 +1,3 @@
-
-
 import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
@@ -18,6 +16,7 @@ class Cart_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final email = FirebaseAuth.instance.currentUser!.email;
+
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -34,6 +33,30 @@ class Cart_Screen extends StatelessWidget {
         appBar: appBarUser(context),
         body: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  StreamBuilder(
+                    stream: fetchCartProducts(email!),
+                    builder: (context, snapshot) {
+                      final cartData = snapshot.data!;
+                      double totalSum = getSugTotal(cartData);
+                      if (snapshot.hasData) {
+                        return Text(
+                          'Subtotal: ₹$totalSum',
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -46,7 +69,7 @@ class Cart_Screen extends StatelessWidget {
                           borderRadius: BorderRadiusDirectional.circular(15),
                           color: const Color.fromARGB(255, 243, 206, 22)),
                       child: StreamBuilder<List<ProductModel>>(
-                        stream: fetchCartProducts(email!),
+                        stream: fetchCartProducts(email),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             final produts = snapshot.data!;
@@ -111,3 +134,10 @@ class Cart_Screen extends StatelessWidget {
 Widget BuildCart(ProductModel productModel) => cart_list_tile(
       productModel: productModel,
     );
+getSugTotal(List<ProductModel> cartZ) {
+  double total = 0;
+  for (ProductModel product in cartZ) {
+    total += int.parse(product.productPrice);
+  }
+  return total;
+}

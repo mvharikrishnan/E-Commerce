@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -16,7 +17,7 @@ class account_profile extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 100,
-          backgroundImage: NetworkImage(user.photoURL??userDummyImage),
+          backgroundImage: NetworkImage(user.photoURL ?? userDummyImage),
         )
       ],
     );

@@ -12,7 +12,10 @@ Future AddCategoryToFB({required categoryModel CategoryModel}) async {
 
   //Instance to the document
 
-  final newCategory = categoryModel(categoryName: CategoryModel.categoryName);
+  final newCategory = categoryModel(
+    categoryName: CategoryModel.categoryName,
+    categoryImageURL: CategoryModel.categoryImageURL,
+  );
 
   //Converting the instance to json
 

@@ -42,14 +42,16 @@ class CategoryGridTile extends StatelessWidget {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Container(
-              width: 88,
-              height: 79,
+              width: 100,
+              height: 100,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  image: NetworkImage(userDummyImage),
+                  fit: BoxFit.cover,
+                  image: NetworkImage(CategoryModel.categoryImageURL),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
