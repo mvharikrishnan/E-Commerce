@@ -24,13 +24,11 @@ import 'package:flutter/cupertino.dart';
 //   return currentAddress;
 // }
 
-
-class GetuserAddress{
+class GetuserAddress {
   static final _email = FirebaseAuth.instance.currentUser!.email;
 
-
-  static Future<List<AddressModel>> fetchUserAddress()async{
-    final _currentAddress =  FirebaseFirestore.instance
+  static Future<List<AddressModel>> fetchUserAddress() async {
+    final _currentAddress = FirebaseFirestore.instance
         .collection('Users')
         .doc(_email)
         .collection('Address')
@@ -39,16 +37,7 @@ class GetuserAddress{
             .map((doc) => AddressModel.fromJson(doc.data()))
             .toList());
 
-            final temp = await _currentAddress.first;
-            return temp;
-
-  }
-
-
-  static  getOneAddress(Future<List<AddressModel>> future)async{
-    List<AddressModel> list = await future;
-
-    AddressModel address = list[0];
-    return address;
+    final temp = await _currentAddress.first;
+    return temp;
   }
 }

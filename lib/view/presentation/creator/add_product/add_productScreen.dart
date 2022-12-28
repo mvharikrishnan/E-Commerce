@@ -196,7 +196,7 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                               ));
                               Navigator.pop(context);
                             },
-                            child: Container( 
+                            child: Container(
                               height: 50,
                               width: 100,
                               decoration: BoxDecoration(

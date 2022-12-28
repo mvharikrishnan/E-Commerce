@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/model/addressModel/addressModel.dart';
+
+import 'package:ecommerceapp/view/presentation/user/check_out/widgets/checkOutAddressTile.dart';
 import 'package:ecommerceapp/view/presentation/user/check_out/widgets/getUserAddress.dart';
-import 'package:ecommerceapp/view/presentation/user/user_address/widgets/userAddressTile.dart';
+
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:flutter/material.dart';
 
@@ -20,20 +24,37 @@ class CheckOutScreen extends StatefulWidget {
   State<CheckOutScreen> createState() => _CheckOutScreenState();
 }
 
-enum payment { razorpay, cod }
+String? paymentmethod;
 
 class _CheckOutScreenState extends State<CheckOutScreen> {
-  List<AddressModel> addressModel = getUserAddress(email: "harikrish.hmv@gmail.com");
-  payment? paymentmethod = payment.razorpay;
+  AddressModel? currentAddress;
+  onData(AddressModel addressModel) {
+    log(addressModel.fullName);
+    currentAddress = addressModel;
+  }
+
+  final addressModel = GetuserAddress.fetchUserAddress();
+
+  AddressModel selectedAddress = AddressModel(
+      fullName: 'fullName',
+      houseName: 'houseName',
+      streetName: 'streetName',
+      townName: 'townName',
+      pincode: 'pincode',
+      state: 'state',
+      phone: 'phone',
+      country: 'country',
+      docName: 'docName');
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Colors.white,
+                KWhite,
                 Color.fromARGB(255, 191, 249, 242),
               ]),
           borderRadius: BorderRadius.circular(10)),
@@ -52,18 +73,22 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   Container(
-                    height: 200,
+                    height: 240,
                     width: double.infinity,
-                    child: UserAddressTile(addressModel: addressModel[0]),
+                    child: CheckOutAddressTile(
+                        addressModelFuture: addressModel, dataAddress: onData),
                   ),
                   sizedBoxHeight10,
                   sizedBoxHeight10,
                   ListTile(
                     leading: Radio(
-                      value: payment,
+                      value: 'Razorpay',
                       groupValue: paymentmethod,
                       onChanged: (value) {
                         //set state
+                      setState(() {
+                          paymentmethod = value.toString();
+                      });
                       },
                     ),
                     title: Container(
@@ -79,10 +104,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   sizedBoxHeight10,
                   ListTile(
                     leading: Radio(
-                      value: payment,
+                      value: 'cod',
                       groupValue: paymentmethod,
                       onChanged: (value) {
                         //set state
+                       setState(() {
+                          paymentmethod = value.toString();
+                       });
                       },
                     ),
                     title: const Text(
@@ -96,17 +124,27 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               ),
               const Spacer(),
               const Spacer(),
-              Container(
-                height: 58,
-                width: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: skyBlueLightK),
-                child: Center(
-                    child: Text(
-                  'Proceed',
-                  style: TextStyle(fontSize: 20, fontFamily: TradeGothic),
-                )),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    selectedAddress = currentAddress!;
+                    log(paymentmethod.toString());
+                  });
+
+                  //checkwhat is selected
+                },
+                child: Container(
+                  height: 58,
+                  width: 200,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: skyBlueLightK),
+                  child: Center(
+                      child: Text(
+                    'Proceed',
+                    style: TextStyle(fontSize: 20, fontFamily: TradeGothic),
+                  )),
+                ),
               ),
               const Spacer(),
             ],
