@@ -11,6 +11,7 @@ import 'package:ecommerceapp/view/presentation/user/check_out/widgets/getUserAdd
 
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:flutter/material.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class CheckOutScreen extends StatefulWidget {
   CheckOutScreen({
@@ -20,6 +21,7 @@ class CheckOutScreen extends StatefulWidget {
   });
   final List<ProductModel> usersCartProducts;
   final String Useremail;
+
   @override
   State<CheckOutScreen> createState() => _CheckOutScreenState();
 }
@@ -27,6 +29,10 @@ class CheckOutScreen extends StatefulWidget {
 String? paymentmethod;
 
 class _CheckOutScreenState extends State<CheckOutScreen> {
+  //instance of racer pay
+  Razorpay razorpay = Razorpay();
+
+  //
   AddressModel? currentAddress;
   onData(AddressModel addressModel) {
     log(addressModel.fullName);
@@ -45,6 +51,35 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       phone: 'phone',
       country: 'country',
       docName: 'docName');
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+      razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+      razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    });
+    super.initState();
+  }
+
+  //Handlers for razoypay
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet is selected
+  }
+
+  //to clear the event lisenrs
+  @override
+  void dispose() {
+    razorpay.clear(); // Removes all listeners
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +121,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       groupValue: paymentmethod,
                       onChanged: (value) {
                         //set state
-                      setState(() {
+                        setState(() {
                           paymentmethod = value.toString();
-                      });
+                        });
                       },
                     ),
                     title: Container(
@@ -108,9 +143,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       groupValue: paymentmethod,
                       onChanged: (value) {
                         //set state
-                       setState(() {
+                        setState(() {
                           paymentmethod = value.toString();
-                       });
+                        });
                       },
                     ),
                     title: const Text(
@@ -129,9 +164,19 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   setState(() {
                     selectedAddress = currentAddress!;
                     log(paymentmethod.toString());
+                    log(widget.usersCartProducts.length.toString());
                   });
 
                   //checkwhat is selected
+                  if (paymentmethod == null) {
+                    return null;
+                  } else {
+                    if (paymentmethod == 'cod') {
+                      //!deviverd by cod
+                    } else {
+                      //!go to razor pay screen
+                    }
+                  }
                 },
                 child: Container(
                   height: 58,
