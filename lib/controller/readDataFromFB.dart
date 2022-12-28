@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/model/addressModel/addressModel.dart';
 import 'package:ecommerceapp/model/categoryModel/catergoryMode.dart';
+import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 //Products Session
@@ -51,17 +52,12 @@ Stream<List<AddressModel>> fetchUserAddress(String UserEmail) =>
             .map((doc) => AddressModel.fromJson(doc.data()))
             .toList());
 
-// //Single Address
-// Stream<List<AddressModel>> getUserUniqueAddress(String email){
-//   var Stream =  FirebaseFirestore.instance
-//         .collection('Users')
-//         .doc(email)
-//         .collection('Address')
-//         .snapshots()
-//         .map((snapshot) => snapshot.docs
-//             .map((doc) => AddressModel.fromJson(doc.data()))
-//             .toList());
-
-//             return Stream;
-
-// }
+//order session
+Stream<List<OrderModel>> fetchUserOrder(String UserEmail) => FirebaseFirestore
+    .instance
+    .collection('Users')
+    .doc(UserEmail)
+    .collection('Orders')
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => OrderModel.fromJSON(doc.data())).toList());
