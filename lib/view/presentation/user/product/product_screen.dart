@@ -3,7 +3,7 @@ import 'package:ecommerceapp/controller/wishList.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
-import 'package:ecommerceapp/view/presentation/user/cart/cart_screen.dart';
+
 import 'package:ecommerceapp/view/presentation/user/check_out/check_out_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/product/widgets/productScreenButton.dart';
 import 'package:ecommerceapp/view/presentation/user/product/widgets/productsDetails.dart';
@@ -11,16 +11,20 @@ import 'package:ecommerceapp/view/presentation/user/product/widgets/review_widge
 
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/widget/divider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Product_Viewing_screen extends StatelessWidget {
-  const Product_Viewing_screen(
+  Product_Viewing_screen(
       {required this.productModel, required this.ProductImage, super.key});
   final String ProductImage;
   final ProductModel productModel;
+
   @override
   Widget build(BuildContext context) {
+    final email = FirebaseAuth.instance.currentUser!.email;
+    List<ProductModel> singleProduct = [productModel];
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -89,19 +93,20 @@ class Product_Viewing_screen extends StatelessWidget {
                         onPressed: () async {
                           await addToWishList(productModel: productModel);
                           showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              content: Container(
-                                decoration: BoxDecoration(color: kTransparent),
-                                child: Lottie.network(
-                                    'https://assets10.lottiefiles.com/packages/lf20_f9e9tqcx.json',
-                                    repeat: false,
-                                    animate: true),
-                              ),
-                            );
-                          },
-                        );
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                content: Container(
+                                  decoration:
+                                      BoxDecoration(color: kTransparent),
+                                  child: Lottie.network(
+                                      'https://assets10.lottiefiles.com/packages/lf20_f9e9tqcx.json',
+                                      repeat: false,
+                                      animate: true),
+                                ),
+                              );
+                            },
+                          );
                         },
                         icon: const Icon(
                           Icons.favorite,
@@ -163,7 +168,9 @@ class Product_Viewing_screen extends StatelessWidget {
                       Onpressed: () {
                         //navigation to Buy now screen
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const CheckOutScreen(),
+                          builder: (context) => CheckOutScreen(
+                              usersCartProducts: singleProduct,
+                              Useremail: email!),
                         ));
                       },
                       ButtonColor: const Color.fromARGB(255, 237, 86, 5),

@@ -50,3 +50,18 @@ Stream<List<AddressModel>> fetchUserAddress(String UserEmail) =>
         .map((snapshot) => snapshot.docs
             .map((doc) => AddressModel.fromJson(doc.data()))
             .toList());
+
+// //Single Address
+// Stream<List<AddressModel>> getUserUniqueAddress(String email){
+//   var Stream =  FirebaseFirestore.instance
+//         .collection('Users')
+//         .doc(email)
+//         .collection('Address')
+//         .snapshots()
+//         .map((snapshot) => snapshot.docs
+//             .map((doc) => AddressModel.fromJson(doc.data()))
+//             .toList());
+
+//             return Stream;
+
+// }
