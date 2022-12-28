@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:ecommerceapp/controller/orders.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/model/addressModel/addressModel.dart';
+import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 
 import 'package:ecommerceapp/view/presentation/user/check_out/widgets/checkOutAddressTile.dart';
 import 'package:ecommerceapp/view/presentation/user/check_out/widgets/getUserAddress.dart';
@@ -32,7 +34,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   //instance of racer pay
   Razorpay razorpay = Razorpay();
 
-  //
+  double? cartPrice;
   AddressModel? currentAddress;
   onData(AddressModel addressModel) {
     log(addressModel.fullName);
@@ -58,20 +60,63 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
       razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     });
+
+    cartPrice = getCartTotal(widget.usersCartProducts);
     super.initState();
   }
+
+  //check Out options
+  var options = {
+    'key': 'rzp_test_mkzSidhb6RgmDG',
+    'amount': 500,
+    'name': 'Harikrishnan Mv Corp.',
+    'description': 'Demo',
+    'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
+    'external': {
+      'wallets': ['paytm']
+    }
+  };
 
   //Handlers for razoypay
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
+
+    for (var order in widget.usersCartProducts) {
+      newOrder(
+          orderModel: OrderModel(
+        cartPrice: cartPrice!,
+        productDescription: order.productDescription,
+        category: order.category,
+        productMaterial: order.productMaterial,
+        productPrice: order.productPrice,
+        productSize: order.productSize,
+        productMedium: order.productMedium,
+        productImage: order.productImage,
+        productName: order.productName,
+        id: order.productName,
+        isDeliverd: false,
+        isCancelled: false,
+        orderQuantity: widget.usersCartProducts.length,
+      ));
+    }
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(response.toString()),
+    ));
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
     // Do something when payment fails
+    log(response.toString());
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(response.toString())));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     // Do something when an external wallet is selected
+    log(response.toString());
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(response.toString())));
   }
 
   //to clear the event lisenrs
@@ -175,6 +220,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       //!deviverd by cod
                     } else {
                       //!go to razor pay screen
+                      razorpay.open(options);
                     }
                   }
                 },
@@ -198,4 +244,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       ),
     );
   }
+}
+
+getCartTotal(List<ProductModel> cartZ) {
+  double total = 0;
+  for (ProductModel product in cartZ) {
+    total += double.parse(product.productPrice);
+  }
+  return total;
 }
