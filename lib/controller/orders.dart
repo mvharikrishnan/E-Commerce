@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -33,4 +34,19 @@ Future newOrder({required OrderModel orderModel}) async {
 
   //adding the Json to Firebase
   docOrderRef.set(orderProductJson);
+}
+
+removeAfterSuccess({required List<ProductModel> ordeers}) {
+  final email = FirebaseAuth.instance.currentUser!.email;
+
+  for (var product in ordeers) {
+    final docCart = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(email)
+        .collection('Carts')
+        .doc(product.productName);
+
+    //Delete Product
+    docCart.delete();
+  }
 }

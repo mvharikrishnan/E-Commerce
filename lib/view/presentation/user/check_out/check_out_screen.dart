@@ -100,6 +100,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       ));
     }
     Navigator.of(context).pop();
+    removeAfterSuccess(ordeers: widget.usersCartProducts);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(response.toString()),
     ));
@@ -108,8 +109,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   void _handlePaymentError(PaymentFailureResponse response) {
     // Do something when payment fails
     log(response.toString());
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(response.toString())));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: kGreen,
+        content: Text('Successfully Orderd'),
+      ),
+    );
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
