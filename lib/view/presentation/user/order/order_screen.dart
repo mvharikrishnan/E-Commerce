@@ -88,10 +88,7 @@ class Order_Screen extends StatelessWidget {
                             if (snapshot.hasError) {
                               return Text('Something went wrong');
                             }
-                            // if (recentOrdes.isEmpty) {
-                            //   return const Center(
-                            //       child: Text('You have no recent orders'));
-                            // }
+
                             if (snapshot.hasData) {
                               final orderProducts = snapshot.data!;
 

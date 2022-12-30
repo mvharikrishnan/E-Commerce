@@ -45,26 +45,39 @@ class OrderProductTile extends StatelessWidget {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   sizedBoxHeight10,
-                  orderModel.isDeliverd?Text(
-                    'Delivered ✅',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: kGreen),
-                  ):Text(
-                    'Ready To Dispach 🔜',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Kyellow),
-                  ),
-                  const Text(
-                    'Delivered by Tomorrow',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
+                  orderModel.isDeliverd
+                      ? Text(
+                          'Delivered ✅',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: kGreen),
+                        )
+                      : Text(
+                          'Ready To Dispach 🔜',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Kyellow),
+                        ),
+
+                  //
+
+                  orderModel.isDeliverd
+                      ? Text(
+                          'Thank You For Choosing Us',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: kBlack),
+                        )
+                      : Text(
+                          'Delivery By Tomorrow',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: kBlack),
+                        ),
                 ],
               ),
             ],
