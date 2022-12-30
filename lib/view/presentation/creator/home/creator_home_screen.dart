@@ -6,6 +6,7 @@ import 'package:ecommerceapp/view/presentation/creator/add_product/add_productSc
 import 'package:ecommerceapp/view/presentation/creator/orders_received/order_recived_screen.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/appBarCreator.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -17,6 +18,7 @@ class Creator_Home_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final email = FirebaseAuth.instance.currentUser!.email;
     return Container(
       decoration: backGroundColor(),
       child: Scaffold(
@@ -78,7 +80,6 @@ class Creator_Home_screen extends StatelessWidget {
                         ));
                       },
                       child: Container(
-                        
                         height: 80,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -104,7 +105,8 @@ class Creator_Home_screen extends StatelessWidget {
                       onTap: () {
                         //navigation to order recivied screen
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Order_recived_screen(),
+                          builder: (context) =>
+                              Order_recived_screen(email: email!),
                         ));
                       },
                       child: Container(
