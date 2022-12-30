@@ -46,17 +46,17 @@ class OrderProductTile extends StatelessWidget {
                   ),
                   sizedBoxHeight10,
                   orderModel.isDeliverd?Text(
-                    'Delivered',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: KRed),
-                  ):Text(
-                    'Ready To Dispach',
+                    'Delivered ✅',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: kGreen),
+                  ):Text(
+                    'Ready To Dispach 🔜',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Kyellow),
                   ),
                   const Text(
                     'Delivered by Tomorrow',

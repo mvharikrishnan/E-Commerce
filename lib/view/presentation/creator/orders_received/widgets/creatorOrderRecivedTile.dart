@@ -47,115 +47,126 @@ class CreatorOrderRecivedTile extends StatelessWidget {
               sizedBoxHeight10,
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () async {
-                      //accept the order
-                      await creatorOrderConfirmation(
-                        order: OrderModel(
-                          cartPrice: orderModel.cartPrice,
-                          productDescription: orderModel.productDescription,
-                          category: orderModel.category,
-                          productMaterial: orderModel.productMaterial,
-                          productPrice: orderModel.productPrice,
-                          productSize: orderModel.productSize,
-                          productMedium: orderModel.productMedium,
-                          productImage: orderModel.productImage,
-                          productName: orderModel.productName,
-                          id: orderModel.id,
-                          isDeliverd: true,
-                          isCancelled: orderModel.isCancelled,
-                          orderQuantity: orderModel.orderQuantity,
-                        ),
-                      );
-                        log("${orderModel.productName} accepted");
-                      //show snak bar
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(
-                          '${orderModel.productName} Accepted',
-                          style: TextStyle(color: KWhite),
-                        ),
-                        backgroundColor: kGreen,
-                      ));
-                    },
-                    child: orderModel.isDeliverd
-                        ? Container(
-                            width: 89,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.green),
-                            child: const Center(
-                              child: Text(
-                                'Accepted',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400, fontSize: 18),
-                              ),
-                            ),
-                          )
-                        : Container(
-                            width: 89,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.green),
-                            child: const Center(
-                              child: Text(
-                                'Accept',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400, fontSize: 18),
-                              ),
-                            ),
+                  Visibility(
+                    visible: !orderModel.isCancelled,
+                    child: GestureDetector(
+                      onTap: () async {
+                        //accept the order
+                        await creatorOrderConfirmation(
+                          order: OrderModel(
+                            cartPrice: orderModel.cartPrice,
+                            productDescription: orderModel.productDescription,
+                            category: orderModel.category,
+                            productMaterial: orderModel.productMaterial,
+                            productPrice: orderModel.productPrice,
+                            productSize: orderModel.productSize,
+                            productMedium: orderModel.productMedium,
+                            productImage: orderModel.productImage,
+                            productName: orderModel.productName,
+                            id: orderModel.id,
+                            isDeliverd: true,
+                            isCancelled: orderModel.isCancelled,
+                            orderQuantity: orderModel.orderQuantity,
                           ),
+                        );
+                        log("${orderModel.productName} accepted");
+                        //show snak bar
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            '${orderModel.productName} Accepted',
+                            style: TextStyle(color: KWhite),
+                          ),
+                          backgroundColor: kGreen,
+                        ));
+                      },
+                      child: orderModel.isDeliverd
+                          ? Container(
+                              width: 89,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.green),
+                              child: const Center(
+                                child: Text(
+                                  'Accepted',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              width: 89,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.green),
+                              child: const Center(
+                                child: Text(
+                                  'Accept',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ),
+                    ),
                   ),
-                  sizedBox10,
-                  GestureDetector(
-                    onTap: () async {
-                      await creatorOrderConfirmation(
-                        order: OrderModel(
-                          cartPrice: orderModel.cartPrice,
-                          productDescription: orderModel.productDescription,
-                          category: orderModel.category,
-                          productMaterial: orderModel.productMaterial,
-                          productPrice: orderModel.productPrice,
-                          productSize: orderModel.productSize,
-                          productMedium: orderModel.productMedium,
-                          productImage: orderModel.productImage,
-                          productName: orderModel.productName,
-                          id: orderModel.id,
-                          isDeliverd: orderModel.isDeliverd,
-                          isCancelled: true,
-                          orderQuantity: orderModel.orderQuantity,
-                        ),
-                      );
+                  Visibility(
+                    visible: !orderModel.isDeliverd,
+                    child: GestureDetector(
+                      onTap: () async {
+                        await creatorOrderConfirmation(
+                          order: OrderModel(
+                            cartPrice: orderModel.cartPrice,
+                            productDescription: orderModel.productDescription,
+                            category: orderModel.category,
+                            productMaterial: orderModel.productMaterial,
+                            productPrice: orderModel.productPrice,
+                            productSize: orderModel.productSize,
+                            productMedium: orderModel.productMedium,
+                            productImage: orderModel.productImage,
+                            productName: orderModel.productName,
+                            id: orderModel.id,
+                            isDeliverd: orderModel.isDeliverd,
+                            isCancelled: true,
+                            orderQuantity: orderModel.orderQuantity,
+                          ),
+                        );
 
-                      log("${orderModel.productName} REJECTED");
-                    },
-                    child: orderModel.isCancelled?Container(
-                      width: 89,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.red),
-                      child: const Center(
-                        child: Text(
-                          'Rejected',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 18),
-                        ),
-                      ),
-                    ):Container(
-                      width: 89,
-                      height: 30,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.red),
-                      child: const Center(
-                        child: Text(
-                          'Reject',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 18),
-                        ),
-                      ),
+                        log("${orderModel.productName} REJECTED");
+                      },
+                      child: orderModel.isCancelled
+                          ? Container(
+                              width: 89,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.red),
+                              child: const Center(
+                                child: Text(
+                                  'Rejected',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              width: 89,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.red),
+                              child: const Center(
+                                child: Text(
+                                  'Reject',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ),
                     ),
                   ),
                 ],
