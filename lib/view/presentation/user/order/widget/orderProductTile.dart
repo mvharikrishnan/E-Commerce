@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,12 +45,18 @@ class OrderProductTile extends StatelessWidget {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   sizedBoxHeight10,
-                  const Text(
+                  orderModel.isDeliverd?Text(
+                    'Delivered',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: KRed),
+                  ):Text(
                     'Ready To Dispach',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green),
+                        color: kGreen),
                   ),
                   const Text(
                     'Delivered by Tomorrow',

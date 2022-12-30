@@ -33,53 +33,87 @@ class Order_Screen extends StatelessWidget {
         appBar: appBarUser(context),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              SingleChildScrollView(
-                child: Column(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                sizedBoxHeight10,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    sizedBoxHeight10,
+                    const Text(
+                      'Orders',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Orders',
-                          style:
-                              TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                        ),
-                        Column(
-                          children: [
-                            StreamBuilder(
-                              stream: fetchUserOrder(email!),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasError) {
-                                  return Text('Something went wrong');
+                        StreamBuilder(
+                          stream: fetchUserOrder(email!),
+                          builder: (context, snapshot) {
+                            List<OrderModel>currentOrders = [];
+                            if (snapshot.hasError) {
+                              return const Text('Something went wrong');
+                            }
+                            if (snapshot.hasData) {
+                              final orderProducts = snapshot.data!;
+                              for(OrderModel currentOrder in orderProducts){
+                                if(currentOrder.isDeliverd == false){
+                                  currentOrders.add(currentOrder);
                                 }
-                                if (snapshot.hasData) {
-                                  final orderProducts = snapshot.data!;
-                                  return ListView(
-                                    shrinkWrap: true,
-                                    children: orderProducts.map(BuildOrder).toList(),
-                                  );
-                                }
-                                return SizedBox();
-                              },
-                            ),
-                          ],
+                              }
+                              return ListView(
+                                shrinkWrap: true,
+                                children:
+                                    currentOrders.map(BuildOrder).toList(),
+                              );
+                            }
+                            return SizedBox();
+                          },
                         ),
-                        sizedBoxHeight10,
-                        DividerEcommerce(),
-                        const Text(
-                          'Recent Orders',
-                          style:
-                              TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                        )
                       ],
-                    )
+                    ),
+                    sizedBoxHeight10,
+                    DividerEcommerce(),
+                    const Text(
+                      'Recent Orders',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    Column(
+                      children: [
+                        StreamBuilder(
+                          stream: fetchUserOrder(email),
+                          builder: (context, snapshot) {
+                            List<OrderModel> recentOrdes = [];
+                            if (snapshot.hasError) {
+                              return Text('Something went wrong');
+                            }
+                            if (recentOrdes.isEmpty) {
+                              return const Center(
+                                  child: Text('You have no recent orders'));
+                            }
+                            if (snapshot.hasData) {
+                              final orderProducts = snapshot.data!;
+                              for(OrderModel recent in orderProducts){
+                                if(recent.isDeliverd == true){
+                                  recentOrdes.add(recent);
+                                }
+                              }
+                              return ListView(
+                                shrinkWrap: true,
+                                children:
+                                    recentOrdes.map(BuildOrder).toList(),
+                              );
+                            }
+                            return SizedBox();
+                          },
+                        ),
+                      ],
+                    ),
                   ],
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
