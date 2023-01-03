@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
-import 'package:ecommerceapp/view/presentation/login/createaccount.dart';
+
+import 'package:ecommerceapp/view/presentation/login/identifyUser.dart';
 import 'package:ecommerceapp/view/presentation/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -37,9 +38,8 @@ class SignUpPage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  //navigation to create account screen
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CreateAccount(),
+                    builder: (context) => IdentifyRoleScreen(),
                   ));
                 },
                 child: Container(

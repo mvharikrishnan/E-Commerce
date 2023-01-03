@@ -5,17 +5,15 @@ import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/main.dart';
 import 'package:ecommerceapp/view/presentation/login/widgets/createFormFiled.dart';
 import 'package:ecommerceapp/view/presentation/login/widgets/methods.dart';
-import 'package:ecommerceapp/view/presentation/user/home/screenHomeU.dart';
-import 'package:ecommerceapp/view/presentation/user/navigation.dart';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:lottie/lottie.dart';
 
 class CreateAccount extends StatelessWidget {
-  const CreateAccount({super.key});
-
+  const CreateAccount({required this.role, super.key});
+  final String role;
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
@@ -73,11 +71,8 @@ class CreateAccount extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           //authenticate and then navigate
-                          await signUP(
-                              emailController.text.trim(),
-                              passwordController.text.trim(),
-                             
-                              context);
+                          await signUP(emailController.text.trim(),
+                              passwordController.text.trim(), context);
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -137,9 +132,10 @@ class CreateAccount extends StatelessWidget {
                   ),
                   sizedBoxHeight10,
                   sizedBoxHeight10,
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text('Already have an account?'))
+                  // TextButton(
+                  //   onPressed: () {},
+                  //   child: const Text('Already have an account?'),
+                  // )
                 ],
               )
             ],

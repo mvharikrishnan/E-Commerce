@@ -36,6 +36,7 @@ Future signUP(String Email, String Password, BuildContext context) async {
   try {
     await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: Email, password: Password);
+
     log('User Signed In');
   } on FirebaseAuthException catch (e) {
     log(e.toString());
