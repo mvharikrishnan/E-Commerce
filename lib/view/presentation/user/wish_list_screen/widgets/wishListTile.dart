@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/controller/cart.dart';
 import 'package:ecommerceapp/controller/wishList.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
@@ -50,19 +51,26 @@ class WishListTile extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Container(
-                      width: 131,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
+                    GestureDetector(
+                      onTap: () async{
+                        //add to wishlist 
+                        await addToCart(productModel: productModel);
+                        await removeFromWishList(productID: productModel.productName);
+                      },
+                      child: Container(
+                        width: 131,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                            child: Text(
+                          'Add to cart',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        )),
                       ),
-                      child: const Center(
-                          child: Text(
-                        'Add to cart',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      )),
                     ),
                     sizedBox10,
                     //remove

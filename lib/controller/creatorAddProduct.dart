@@ -5,7 +5,9 @@ import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:flutter/material.dart';
 
-Future AddProductToFB({required ProductModel productModel,}) async {
+Future AddProductToFB({
+  required ProductModel productModel,
+}) async {
   //Reference To to the document
   final docCreator = FirebaseFirestore.instance
       .collection('CreatorsProducts')
@@ -13,15 +15,14 @@ Future AddProductToFB({required ProductModel productModel,}) async {
 
   //Instance to the document
   final newProduct = ProductModel(
-    productName: productModel.productName,
-    productDescription: productModel.productDescription,
-    category: productModel.category,
-    productPrice: productModel.productPrice,
-    productMaterial: productModel.productMaterial,
-    productMedium: productModel.productMedium,
-    productSize: productModel.productSize,
-    productImage: productModel.productImage
-  );
+      productName: productModel.productName,
+      productDescription: productModel.productDescription,
+      category: productModel.category,
+      productPrice: productModel.productPrice,
+      productMaterial: productModel.productMaterial,
+      productMedium: productModel.productMedium,
+      productSize: productModel.productSize,
+      productImage: productModel.productImage);
 
   //converting the Instance to json Format
   final newProductJson = newProduct.toJson();
@@ -33,4 +34,15 @@ Future AddProductToFB({required ProductModel productModel,}) async {
   //   content: Text("${productModel.productName} Created"),
   //   backgroundColor: kGreen,
   // );
+}
+
+removeProductFromFireBase({required ProductModel productModel}) async {
+  //reference to the document
+  final docCreator = FirebaseFirestore.instance
+      .collection('CreatorsProducts')
+      .doc(productModel.productName);
+
+  //delete data from firebase
+  await docCreator.delete();
+  log('After Adding');
 }

@@ -99,6 +99,7 @@ class Order_Screen extends StatelessWidget {
                               }
                               return ListView(
                                 shrinkWrap: true,
+                                physics: ScrollPhysics( ),
                                 children: recentOrdes.map(BuildOrder).toList(),
                               );
                             } else {
