@@ -1,14 +1,15 @@
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class category_tile extends StatelessWidget {
-  const category_tile({super.key});
-
+  const category_tile({required this.productModel, super.key});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -38,7 +39,7 @@ class category_tile extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 fit: BoxFit.fill,
-                image: NetworkImage(userDummyImage),
+                image: NetworkImage(productModel.productImage),
               ),
             ),
           ),
@@ -51,19 +52,19 @@ class category_tile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Girl Portrait - A4(Pencil Portrait)',
+                productModel.productName,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     fontFamily: TradeGothic),
               ),
               sizedBoxHeight10,
-              const Text(
-                "150/-",
+              Text(
+                "₹${productModel.productPrice}",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               sizedBoxHeight10,
-              const Text('Portrait')
+              Text(productModel.category)
             ],
           ),
         ),

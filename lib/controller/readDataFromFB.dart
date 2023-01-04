@@ -3,7 +3,7 @@ import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/model/addressModel/addressModel.dart';
 import 'package:ecommerceapp/model/categoryModel/catergoryMode.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 //Products Session
 Stream<List<ProductModel>> FetchProducts({required String CollectionName}) =>
@@ -18,6 +18,8 @@ Stream<List<categoryModel>> fetchCategory({required String categoryName}) =>
         (snapshots) => snapshots.docs
             .map((doc) => categoryModel.fromJson(doc.data()))
             .toList());
+
+
 
 //Cart Session
 Stream<List<ProductModel>> fetchCartProducts(String userEmail) =>

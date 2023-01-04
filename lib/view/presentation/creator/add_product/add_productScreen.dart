@@ -24,8 +24,8 @@ class Add_Product_Screen extends StatefulWidget {
 
 class _Add_Product_ScreenState extends State<Add_Product_Screen> {
   File? ImageFile1;
-  File? ImageFile2;
-  File? ImageFile3;
+  // File? ImageFile2;
+  // File? ImageFile3;
   String? category;
 
   void _callbackFuntion(String data) {
@@ -88,33 +88,33 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                                 ),
                               ),
                               sizedBox10,
-                              Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      height: 104,
-                                      width: 115,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Color.fromARGB(
-                                              255, 192, 191, 191)),
-                                      child: iconImageAdd(),
-                                    ),
-                                  ),
-                                  sizedBoxHeight10,
-                                  Container(
-                                    height: 104,
-                                    width: 115,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color:
-                                            Color.fromARGB(255, 192, 191, 191)),
-                                    child: iconImageAdd(),
-                                  ),
-                                ],
-                              )
+                              // Column(
+                              //   children: [
+                              //     GestureDetector(
+                              //       onTap: () {},
+                              //       child: Container(
+                              //         height: 104,
+                              //         width: 115,
+                              //         decoration: BoxDecoration(
+                              //             borderRadius:
+                              //                 BorderRadius.circular(10),
+                              //             color: Color.fromARGB(
+                              //                 255, 192, 191, 191)),
+                              //         child: iconImageAdd(),
+                              //       ),
+                              //     ),
+                              //     sizedBoxHeight10,
+                              //     Container(
+                              //       height: 104,
+                              //       width: 115,
+                              //       decoration: BoxDecoration(
+                              //           borderRadius: BorderRadius.circular(10),
+                              //           color:
+                              //               Color.fromARGB(255, 192, 191, 191)),
+                              //       child: iconImageAdd(),
+                              //     ),
+                              //   ],
+                              // )
                             ],
                           )
                         ],
@@ -135,9 +135,6 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Product Category'),
                       sizedBoxHeight10,
-                      // AddProductTextFormField(
-                      //   controller: productCategoryController,
-                      // ),
                       AddCategoryDropDownTile(callback: _callbackFuntion),
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Prize'),
