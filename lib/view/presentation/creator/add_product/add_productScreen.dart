@@ -8,6 +8,7 @@ import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/creator/add_product/methods/addMethods.dart';
+import 'package:ecommerceapp/view/presentation/creator/add_product/widgets/addCategoryDropDown.dart';
 import 'package:ecommerceapp/view/presentation/creator/add_product/widgets/addProductTextFormField.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/appBarCreator.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
@@ -25,13 +26,19 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
   File? ImageFile1;
   File? ImageFile2;
   File? ImageFile3;
+  String? category;
+
+  void _callbackFuntion(String data) {
+    category = data;
+    log("log from callback $category");
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController productNameController = TextEditingController();
     final TextEditingController productDescriptionController =
         TextEditingController();
-    final TextEditingController productCategoryController =
-        TextEditingController();
+
     final TextEditingController productPriceController =
         TextEditingController();
     final TextEditingController productMaterialController =
@@ -128,9 +135,10 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Product Category'),
                       sizedBoxHeight10,
-                      AddProductTextFormField(
-                        controller: productCategoryController,
-                      ),
+                      // AddProductTextFormField(
+                      //   controller: productCategoryController,
+                      // ),
+                      AddCategoryDropDownTile(callback: _callbackFuntion),
                       sizedBoxHeight10,
                       AddProductFormTitle(Title: 'Prize'),
                       sizedBoxHeight10,
@@ -161,6 +169,7 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                           GestureDetector(
                             onTap: () async {
                               //add product to firebase function here
+                              log(category.toString());
                               final String FinalImageURL = await uploadFile();
                               log('Download Image URl : $FinalImageURL');
                               final newProduct = ProductModel(
@@ -168,8 +177,7 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                                       productNameController.text.trim(),
                                   productDescription:
                                       productDescriptionController.text.trim(),
-                                  category:
-                                      productCategoryController.text.trim(),
+                                  category: category ?? 'Others',
                                   productPrice:
                                       productPriceController.text.trim(),
                                   productMaterial:

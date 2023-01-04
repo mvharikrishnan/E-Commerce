@@ -26,7 +26,7 @@ Future signIn(String Email, String Password, BuildContext context) async {
   }
 }
 
-Future signUP(String Email, String Password, BuildContext context) async {
+Future signUP(String Email, String Password, BuildContext context) async { 
   showDialog(
       context: context,
       builder: (context) => Center(
