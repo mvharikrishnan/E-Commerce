@@ -14,7 +14,6 @@ class HomeScreenGridTile extends StatelessWidget {
         //navigate to product viwing screen
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => Product_Viewing_screen(
-            ProductImage: productModel.productImage,
             productModel: productModel,
           ),
         ));

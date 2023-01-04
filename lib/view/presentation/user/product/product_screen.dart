@@ -17,8 +17,8 @@ import 'package:lottie/lottie.dart';
 
 class Product_Viewing_screen extends StatelessWidget {
   Product_Viewing_screen(
-      {required this.productModel, required this.ProductImage, super.key});
-  final String ProductImage;
+      {required this.productModel, super.key});
+  
   final ProductModel productModel;
 
   @override
