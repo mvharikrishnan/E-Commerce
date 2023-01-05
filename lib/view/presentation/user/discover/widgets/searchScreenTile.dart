@@ -2,41 +2,30 @@ import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
-import 'package:ecommerceapp/view/presentation/user/product/product_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class category_tile extends StatelessWidget {
-  const category_tile({required this.productModel, super.key});
+class searchScreenTile extends StatelessWidget {
+  const searchScreenTile({
+    Key? key,
+    required this.productModel,
+  }) : super(key: key);
+
   final ProductModel productModel;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => Product_Viewing_screen(
-            productModel: productModel,
-          ),
-        ));
-      },
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
       child: Stack(
         children: [
           Container(
             height: 140,
             width: double.infinity,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 5.0, // has the effect of softening the shadow
-                spreadRadius: 1.0, // has the effect of extending the shadow
-                offset: Offset(
-                  8.0, // horizontal, move right 10
-                  2.0, // vertical, move down 10
-                ),
-              )
-            ], borderRadius: BorderRadius.circular(10), color: skyBlueLightK),
+            decoration: BoxDecoration(
+                boxShadow: const [],
+                borderRadius: BorderRadius.circular(10),
+                color: skyBlueLightK),
           ),
           Positioned(
             left: 15,
@@ -47,7 +36,7 @@ class category_tile extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   image: NetworkImage(productModel.productImage),
                 ),
               ),
@@ -61,33 +50,32 @@ class category_tile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  productModel.productName,
+                  'Girl Portrait - A4(Pencil Portrait)',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                       fontFamily: TradeGothic),
                 ),
                 sizedBoxHeight10,
-                Text(
-                  "₹${productModel.productPrice}",
+                const Text(
+                  "150/-",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 sizedBoxHeight10,
-                Text(productModel.productMaterial)
+                const Text('Portrait')
               ],
             ),
           ),
           Positioned(
-            right: 0,
-            top: 6,
+            bottom: 5,
+            right: 10,
             child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.more_vert_sharp,
-                size: 29,
-              ),
-            ),
-          ),
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.red,
+                )),
+          )
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ecommerceapp/controller/bloc/searchBloc/search_bloc.dart';
 import 'package:ecommerceapp/core/utils/utils.dart';
 import 'package:ecommerceapp/view/presentation/admin/adminHome.dart';
 import 'package:ecommerceapp/view/presentation/user/navigation.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:ecommerceapp/view/presentation/login/signUP.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +22,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      scaffoldMessengerKey: Utils.messengerKey,
-      debugShowCheckedModeBanner: false,
-      // theme: ThemeData(fontFamily: TradeGothic),
-      home: mainPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SearchBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        scaffoldMessengerKey: Utils.messengerKey,
+        debugShowCheckedModeBanner: false,
+        // theme: ThemeData(fontFamily: TradeGothic),
+        home: mainPage(),
+      ),
     );
   }
 }
