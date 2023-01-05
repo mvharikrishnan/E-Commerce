@@ -14,6 +14,7 @@ TextStyle HeadingTextStyle() {
     static String events = 'Events';
     static String adminPage = 'Admin Page';
     static String categoryName = 'Category Name';
+    static String eventName = 'Event Name';
     static String submit = 'SUBMIT';
     static String pleaseEnterErrorText ='Please Enter Category Names';
     static String AddNewAddress = 'Add a new address';

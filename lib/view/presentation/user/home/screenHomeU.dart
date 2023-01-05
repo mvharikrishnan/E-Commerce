@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
+import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
@@ -36,15 +37,31 @@ class ScreenHomeUser extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // const SlidingBarItem(),
-              SizedBox(
-                height: 100,
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  //physics: const ScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => const SlidingBarItem(),
-                  separatorBuilder: (context, index) => sizedBox10,
-                  itemCount: 6,
+              Padding(
+                padding: const EdgeInsets.only(left: 10, top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        Text(
+                          'HEY ',
+                          style:
+                              TextStyle(fontWeight: FontWeight.bold, fontSize: 30,fontFamily: TradeGothic),
+                        ),
+                        Text(
+                          'ARTAHOLIC',
+                          style:
+                              TextStyle(fontWeight: FontWeight.bold, fontSize: 25,fontFamily: TradeGothic),
+                        ),
+                      ],
+                    ),
+                    //end
+
+                    
+
+                  ],
                 ),
               ),
               sizedBoxHeight10,

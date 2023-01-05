@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/model/addressModel/addressModel.dart';
 import 'package:ecommerceapp/model/categoryModel/catergoryMode.dart';
+import 'package:ecommerceapp/model/eventModel/eventModel.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 
 
@@ -19,6 +20,13 @@ Stream<List<categoryModel>> fetchCategory({required String categoryName}) =>
             .map((doc) => categoryModel.fromJson(doc.data()))
             .toList());
 
+
+//Event Session
+Stream<List<eventModel>> fetchEvents() =>
+    FirebaseFirestore.instance.collection("Events").snapshots().map(
+        (snapshots) => snapshots.docs
+            .map((doc) => eventModel.fromJson(doc.data()))
+            .toList());
 
 
 //Cart Session

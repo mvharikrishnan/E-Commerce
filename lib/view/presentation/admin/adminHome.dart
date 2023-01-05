@@ -2,6 +2,7 @@ import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/admin/adminCategory/adminCategory.dart';
+import 'package:ecommerceapp/view/presentation/admin/adminEvent/adminEvent.dart';
 import 'package:ecommerceapp/view/presentation/admin/widgets/adminAppBar.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,9 @@ class AdminHomePage extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     //navigation to Events
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AdminEventScren(),
+                    ));
                   },
                   child: Container(
                     height: 100,
