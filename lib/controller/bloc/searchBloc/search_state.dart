@@ -7,5 +7,6 @@ class SearchState {
 }
 
 class InitialState extends SearchState {
+ 
   InitialState() : super(productList: []);
 }

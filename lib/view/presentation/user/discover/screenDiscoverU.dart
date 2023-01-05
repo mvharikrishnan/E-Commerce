@@ -10,22 +10,13 @@ import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class ScreenDiscoverUser extends StatelessWidget {
   const ScreenDiscoverUser({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List DummyArts = [
-      'assets/drawingImage/drawing1.jpeg',
-      'assets/drawingImage/drawing2.jpeg',
-      'assets/drawingImage/drawing3.jpeg',
-      'assets/drawingImage/drawing4.jpeg',
-      'assets/drawingImage/drawing5.jpeg'
-    ];
-
-    String searchQuery = '';
-    Future<List<ProductModel>> serachResults;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -51,9 +42,9 @@ class ScreenDiscoverUser extends StatelessWidget {
                       .add(SearchProduct(input: value));
                 },
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: 'we have something for you',
                   hintStyle: TextStyle(
-                      color: KWhite, fontSize: 24, fontWeight: FontWeight.bold),
+                      color: KWhite, fontSize: 15, fontWeight: FontWeight.bold),
                   prefixIcon: const Icon(Icons.search),
                   prefixIconColor: Colors.white,
                   fillColor: skyBlueLightK,
@@ -80,15 +71,22 @@ class ScreenDiscoverUser extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
-                    return ListView.builder(
-                      itemCount: state.productList.length,
-                      shrinkWrap: true,
-                      physics: const ScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return searchScreenTile(
-                            productModel: state.productList[index]);
-                      },
-                    );
+                    if (state.productList.isEmpty) {
+                      return Center(
+                        child: Lottie.asset(
+                            'assets/drawingImage/lookingForArt.json'),
+                      );
+                    } else {
+                      return ListView.builder(
+                        itemCount: state.productList.length,
+                        shrinkWrap: true,
+                        physics: const ScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return searchScreenTile(
+                              productModel: state.productList[index]);
+                        },
+                      );
+                    }
                   },
                 ),
               ),
