@@ -50,32 +50,32 @@ class searchScreenTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Girl Portrait - A4(Pencil Portrait)',
+                  productModel.productName,
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
                       fontFamily: TradeGothic),
                 ),
                 sizedBoxHeight10,
-                const Text(
-                  "150/-",
+                Text(
+                  "₹${productModel.productPrice}",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 sizedBoxHeight10,
-                const Text('Portrait')
+                Text(productModel.category)
               ],
             ),
           ),
-          Positioned(
-            bottom: 5,
-            right: 10,
-            child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite_rounded,
-                  color: Colors.red,
-                )),
-          )
+          // Positioned(
+          //   bottom: 5,
+          //   right: 10,
+          //   child: IconButton(
+          //       onPressed: () {},
+          //       icon: const Icon(
+          //         Icons.favorite_rounded,
+          //         color: Colors.red,
+          //       )),
+          // ),
         ],
       ),
     );
