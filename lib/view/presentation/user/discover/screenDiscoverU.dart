@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerceapp/controller/bloc/searchBloc/search_bloc.dart';
-import 'package:ecommerceapp/controller/searchProduct.dart';
+
 import 'package:ecommerceapp/core/colors/colors.dart';
-import 'package:ecommerceapp/core/constants/appConstants.dart';
+
 import 'package:ecommerceapp/core/constants/user/constants.dart';
-import 'package:ecommerceapp/model/ProductModel/productModel.dart';
+
 import 'package:ecommerceapp/view/presentation/user/discover/widgets/searchScreenTile.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 

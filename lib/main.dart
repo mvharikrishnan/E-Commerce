@@ -43,6 +43,7 @@ class mainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -57,10 +58,11 @@ class mainPage extends StatelessWidget {
               child: Text('Something Went Wrong'),
             );
           } else if (snapshot.hasData) {
-            // return const NavigationScreenUser();
+                //admin navigation
             if (user!.email == 'admin@gmail.com') {
               return const AdminHomePage();
             } else {
+              //user page navigation
               return const NavigationScreenUser();
             }
           } else {

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:ecommerceapp/controller/roles.dart';
 import 'package:ecommerceapp/core/utils/utils.dart';
+import 'package:ecommerceapp/model/roleModels/roleModels.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,8 @@ Future signIn(String Email, String Password, BuildContext context) async {
   }
 }
 
-Future signUP(String Email, String Password, BuildContext context) async { 
+Future signUP(
+    String Email, String Password, BuildContext context, String role) async {
   showDialog(
       context: context,
       builder: (context) => Center(
@@ -37,9 +40,17 @@ Future signUP(String Email, String Password, BuildContext context) async {
     await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: Email, password: Password);
 
-    log('User Signed In');
+    log('$role Signed In');
   } on FirebaseAuthException catch (e) {
     log(e.toString());
+  }
+
+  if (role == "creator") {
+    final creatorModel creator = creatorModel(creatorEmail: Email);
+    customRoles.AddCreatorEmail(CreatorModel: creator);
+  } else if (role == "user") {
+    final userModel user = userModel(userEmail: Email);
+    customRoles.AddUserEmail(UserModel: user);
   }
 }
 

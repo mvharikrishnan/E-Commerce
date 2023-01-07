@@ -22,7 +22,7 @@ class EventTIle extends StatelessWidget {
               height: 0.4 * size.width,
               width: size.width,
               decoration: BoxDecoration(
-                color: kGreen,
+                color: kGrey,
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   fit: BoxFit.cover,

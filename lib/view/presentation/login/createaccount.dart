@@ -72,7 +72,7 @@ class CreateAccount extends StatelessWidget {
                         onTap: () async {
                           //authenticate and then navigate
                           await signUP(emailController.text.trim(),
-                              passwordController.text.trim(), context);
+                              passwordController.text.trim(), context, role);
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

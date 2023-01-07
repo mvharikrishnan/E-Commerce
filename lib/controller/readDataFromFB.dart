@@ -4,7 +4,8 @@ import 'package:ecommerceapp/model/addressModel/addressModel.dart';
 import 'package:ecommerceapp/model/categoryModel/catergoryMode.dart';
 import 'package:ecommerceapp/model/eventModel/eventModel.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
-
+import 'package:ecommerceapp/model/roleModels/roleModels.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 //Products Session
 Stream<List<ProductModel>> FetchProducts({required String CollectionName}) =>
@@ -20,14 +21,12 @@ Stream<List<categoryModel>> fetchCategory({required String categoryName}) =>
             .map((doc) => categoryModel.fromJson(doc.data()))
             .toList());
 
-
 //Event Session
-Stream<List<eventModel>> fetchEvents() =>
-    FirebaseFirestore.instance.collection("Events").snapshots().map(
-        (snapshots) => snapshots.docs
-            .map((doc) => eventModel.fromJson(doc.data()))
-            .toList());
-
+Stream<List<eventModel>> fetchEvents() => FirebaseFirestore.instance
+    .collection("Events")
+    .snapshots()
+    .map((snapshots) =>
+        snapshots.docs.map((doc) => eventModel.fromJson(doc.data())).toList());
 
 //Cart Session
 Stream<List<ProductModel>> fetchCartProducts(String userEmail) =>
@@ -71,3 +70,17 @@ Stream<List<OrderModel>> fetchUserOrder(String UserEmail) => FirebaseFirestore
     .snapshots()
     .map((snapshot) =>
         snapshot.docs.map((doc) => OrderModel.fromJSON(doc.data())).toList());
+
+//CreatorEmail session
+Stream<List<creatorModel>> fetchCreatorEmails() => FirebaseFirestore.instance
+    .collection('creatorEmail')
+    .snapshots()
+    .map((snapShot) =>
+        snapShot.docs.map((doc) => creatorModel.fromJson(doc.data())).toList());
+
+//userEmail session
+// Stream<userModel> fetchUserEmails() => FirebaseFirestore.instance
+//     .collection('UserEmail')
+//     .snapshots()
+//     .map((snapShot) =>
+//         snapShot.docs.map((doc) => userModel.fromJson(doc.data())).toList());

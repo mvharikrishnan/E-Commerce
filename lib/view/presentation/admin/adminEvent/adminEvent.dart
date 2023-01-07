@@ -43,7 +43,7 @@ class AdminEventScren extends StatelessWidget {
                     children: currentEvents.map(BuildEvents).toList(),
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: Text('Please Add Events'),
                   );
                 }

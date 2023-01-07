@@ -5,6 +5,7 @@ import 'package:ecommerceapp/view/presentation/user/account/widget/account_profi
 import 'package:ecommerceapp/view/presentation/user/account/widget/settingTile.dart';
 import 'package:ecommerceapp/view/presentation/user/loginAndSecurity/loginAndSecurity.dart';
 import 'package:ecommerceapp/view/presentation/user/order/order_screen.dart';
+import 'package:ecommerceapp/view/presentation/user/privacyNote/privacyNote.dart';
 import 'package:ecommerceapp/view/presentation/user/user_address/user_address.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/presentation/user/wish_list_screen/wishlist_screen.dart';
@@ -87,6 +88,9 @@ class ScreenAccountUser extends StatelessWidget {
                   settingTile(
                     onPressed: () {
                       //navigation to privacy note
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const PrivacyNoteScreen(),
+                      ));
                     },
                     settingTitleName: 'Privacy Note',
                   ),

@@ -1,8 +1,9 @@
-import 'package:ecommerceapp/core/colors/colors.dart';
+import 'package:ecommerceapp/controller/loginController/authentication.dart';
+
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:flutter/material.dart';
 
- appBarCreator(BuildContext context) {
+appBarCreator(BuildContext context) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,9 +34,11 @@ import 'package:flutter/material.dart';
         ],
       ),
       IconButton(
-          onPressed: () {},
+          onPressed: () {
+            signOut();
+          },
           icon: const Icon(
-            Icons.wrap_text_rounded,
+            Icons.logout,
             size: 30,
           ))
     ],
