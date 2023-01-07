@@ -65,8 +65,10 @@ class mainPage extends StatelessWidget {
               return StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
-                  final user = FirebaseAuth.instance.currentUser!;
-                  log("Current User = ${user.email.toString()}");
+                  log('Start');
+                  final user = FirebaseAuth.instance.currentUser;
+                  log('End');
+                  // log("Current User = ${user!.email.toString()}");
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
                       child: CircularProgressIndicator(),
@@ -77,7 +79,7 @@ class mainPage extends StatelessWidget {
                     );
                   } else if (snapshot.hasData) {
                     //admin navigation
-                    if (user.email == 'admin@gmail.com') {
+                    if (user!.email == 'admin@gmail.com') {
                       return const AdminHomePage();
                     } else {
                       //user page navigation
@@ -95,14 +97,17 @@ class mainPage extends StatelessWidget {
                           .where((creator) => creator == currentUserEmail)
                           .isNotEmpty;
 
+                      //for console
+                      (containsEmail)
+                          ? log('Creator Logged In')
+                          : log("user Logged in");
                       log(containsEmail.toString());
                       return containsEmail
                           ? const Creator_Home_screen()
                           : const NavigationScreenUser();
                     }
-                  } else {
-                    return const SignUpPage();
                   }
+                  return const SignUpPage();
                 },
               );
             } else {
