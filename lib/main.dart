@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:ecommerceapp/controller/bloc/searchBloc/search_bloc.dart';
+import 'package:ecommerceapp/controller/roles.dart';
 import 'package:ecommerceapp/core/utils/utils.dart';
 import 'package:ecommerceapp/view/presentation/admin/adminHome.dart';
+import 'package:ecommerceapp/view/presentation/creator/home/creator_home_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,33 +45,72 @@ class mainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          final user = FirebaseAuth.instance.currentUser;
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return const Center(
-              child: Text('Something Went Wrong'),
-            );
-          } else if (snapshot.hasData) {
-                //admin navigation
-            if (user!.email == 'admin@gmail.com') {
-              return const AdminHomePage();
+      body: StreamBuilder(
+          stream: FetchAllCreator(),
+          builder: (context, snap) {
+            //
+            if (snap.hasError) {
+              log(snap.error.toString());
+              return Center(
+                child: Text('SNAP has error ${snap.error}'),
+              );
+            } else if (snap.hasData) {
+              final creatorList = snap.data!;
+              log(creatorList.first.creatorEmail.toString());
+
+              if (creatorList.isEmpty) {
+                return const Text('Creator List is empty');
+              }
+              return StreamBuilder<User?>(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  final user = FirebaseAuth.instance.currentUser!;
+                  log("Current User = ${user.email.toString()}");
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Something Went Wrong'),
+                    );
+                  } else if (snapshot.hasData) {
+                    //admin navigation
+                    if (user.email == 'admin@gmail.com') {
+                      return const AdminHomePage();
+                    } else {
+                      //user page navigation
+                      final currentUserEmail = user.email!;
+                      final List<String> listOfCreator = [];
+                      for (var creator in creatorList) {
+                        listOfCreator.add(creator.creatorEmail);
+                      }
+                      log("ListOfCreator = $listOfCreator");
+
+                      // bool containsEmail = listOfCreator
+                      //     .contains((creator) => creator.email == user.email);
+
+                      bool containsEmail = listOfCreator
+                          .where((creator) => creator == currentUserEmail)
+                          .isNotEmpty;
+
+                      log(containsEmail.toString());
+                      return containsEmail
+                          ? const Creator_Home_screen()
+                          : const NavigationScreenUser();
+                    }
+                  } else {
+                    return const SignUpPage();
+                  }
+                },
+              );
             } else {
-              //user page navigation
-              return const NavigationScreenUser();
+              return CircularProgressIndicator();
             }
-          } else {
-            return const SignUpPage();
-          }
-        },
-      ),
+
+            //////////////////////////////
+          }),
     );
   }
 

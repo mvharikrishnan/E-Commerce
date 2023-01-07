@@ -59,7 +59,7 @@ class customRoles {
 
 //   return creatorModels.first;
 // }
-Future<List<String>> setAllDocumentInsideCreators() async {
+Future<List<String>> getAllDocumentInsideCreators() async {
   List<String> idList = [];
   var collection = FirebaseFirestore.instance.collection('creatorEmail');
   var querySnapshots = await collection.get();
@@ -71,7 +71,7 @@ Future<List<String>> setAllDocumentInsideCreators() async {
   }
   return idList;
 }
-Future<List<String>> setAllDocumentInsideUsers() async {
+Future<List<String>> getAllDocumentInsideUsers() async {
   List<String> idList = [];
   var collection = FirebaseFirestore.instance.collection('UserEmail');
   var querySnapshots = await collection.get();
@@ -83,3 +83,10 @@ Future<List<String>> setAllDocumentInsideUsers() async {
   }
   return idList;
 }
+
+
+Stream<List<creatorModel>> FetchAllCreator() =>
+    FirebaseFirestore.instance.collection('creatorEmail').snapshots().map(
+        (snapShot) => snapShot.docs
+            .map((doc) => creatorModel.fromJson(doc.data()))
+            .toList());
