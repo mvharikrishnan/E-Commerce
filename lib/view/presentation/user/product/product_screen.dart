@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:ecommerceapp/controller/cart.dart';
+import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/controller/wishList.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
@@ -16,9 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class Product_Viewing_screen extends StatelessWidget {
-  Product_Viewing_screen(
-      {required this.productModel, super.key});
-  
+  Product_Viewing_screen({required this.productModel, super.key});
+
   final ProductModel productModel;
 
   @override
@@ -89,30 +91,82 @@ class Product_Viewing_screen extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 29, fontWeight: FontWeight.bold),
                     ),
-                    IconButton(
-                        onPressed: () async {
-                          await addToWishList(productModel: productModel);
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                content: Container(
-                                  decoration:
-                                      BoxDecoration(color: kTransparent),
-                                  child: Lottie.network(
-                                      'https://assets10.lottiefiles.com/packages/lf20_f9e9tqcx.json',
-                                      repeat: false,
-                                      animate: true),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                          size: 35,
-                        ))
+                    // IconButton(
+                    //     onPressed: () async {
+                    //       await addToWishList(productModel: productModel);
+                    //       showDialog(
+                    //         context: context,
+                    //         builder: (context) {
+                    //           return AlertDialog(
+                    //             content: Container(
+                    //               decoration:
+                    //                   BoxDecoration(color: kTransparent),
+                    //               child: Lottie.network(
+                    //                   'https://assets10.lottiefiles.com/packages/lf20_f9e9tqcx.json',
+                    //                   repeat: false,
+                    //                   animate: true),
+                    //             ),
+                    //           );
+                    //         },
+                    //       );
+                    //     },
+                    //     icon: const Icon(
+                    //       Icons.favorite,
+                    //       color: Colors.red,
+                    //       size: 35,
+                    //     ))
+                    Positioned(
+                      right: 10,
+                      bottom: 5,
+                      child: StreamBuilder<List<ProductModel>>(
+                          stream: fetchWishListProducts(email!),
+                          //streamBUilder for wishlist collection
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text("🚫");
+                            }
+                            if (snapshot.hasData) {
+                              final wishListProducts = snapshot.data!;
+                              List<String> ProductNames = [];
+                              for (ProductModel product in wishListProducts) {
+                                ProductNames.add(product.productName);
+                              }
+                              bool isFav = ProductNames.where((product) =>
+                                      product == productModel.productName)
+                                  .isNotEmpty;
+                              return isFav
+                                  ? IconButton(
+                                      onPressed: () {
+                                        //add product to wish list
+                                        log("Removed From wishlist");
+                                        removeFromWishList(
+                                            productID:
+                                                productModel.productName);
+                                      },
+                                      icon: const Icon(
+                                        Icons.favorite,
+                                        size: 30,
+                                        color: Colors.red,
+                                      ),
+                                    )
+                                  : IconButton(
+                                      onPressed: () {
+                                        //add product to wish list
+                                        log("Added to wishlist");
+                                        addToWishList(
+                                            productModel: productModel);
+                                      },
+                                      icon: const Icon(
+                                        Icons.favorite_border_sharp,
+                                        size: 30,
+                                        color: Colors.red,
+                                      ),
+                                    );
+                            } else {
+                              return Text("⁉️");
+                            }
+                          }),
+                    ),
                   ],
                 ),
                 Column(
@@ -170,7 +224,7 @@ class Product_Viewing_screen extends StatelessWidget {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => CheckOutScreen(
                               usersCartProducts: singleProduct,
-                              Useremail: email!),
+                              Useremail: email),
                         ));
                       },
                       ButtonColor: const Color.fromARGB(255, 237, 86, 5),
