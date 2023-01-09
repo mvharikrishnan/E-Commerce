@@ -49,7 +49,6 @@ class mainPage extends StatelessWidget {
       body: StreamBuilder(
           stream: FetchAllCreator(),
           builder: (context, snap) {
-            //
             if (snap.hasError) {
               log(snap.error.toString());
               return Center(
@@ -57,7 +56,7 @@ class mainPage extends StatelessWidget {
               );
             } else if (snap.hasData) {
               final creatorList = snap.data!;
-              log(creatorList.first.creatorEmail.toString());
+              log(creatorList.toString());
 
               if (creatorList.isEmpty) {
                 return const Text('Creator List is empty');
@@ -65,10 +64,8 @@ class mainPage extends StatelessWidget {
               return StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
-                  log('Start');
                   final user = FirebaseAuth.instance.currentUser;
-                  log('End');
-                  // log("Current User = ${user!.email.toString()}");
+
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
                       child: CircularProgressIndicator(),
@@ -90,9 +87,6 @@ class mainPage extends StatelessWidget {
                       }
                       log("ListOfCreator = $listOfCreator");
 
-                      // bool containsEmail = listOfCreator
-                      //     .contains((creator) => creator.email == user.email);
-
                       bool containsEmail = listOfCreator
                           .where((creator) => creator == currentUserEmail)
                           .isNotEmpty;
@@ -111,19 +105,9 @@ class mainPage extends StatelessWidget {
                 },
               );
             } else {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
-
-            //////////////////////////////
           }),
     );
   }
-
-  // Widget NavigationChecker() {
-  //   if (user.email == 'admin@gmail.com') {
-  //     return const AdminHomePage();
-  //   } else if (user.email == 'harikrishnanmv@gmail.com') {
-  //     return const NavigationScreenUser();
-  //   }
-  // }
 }

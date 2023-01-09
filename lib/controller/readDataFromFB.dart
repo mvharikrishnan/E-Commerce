@@ -5,7 +5,7 @@ import 'package:ecommerceapp/model/categoryModel/catergoryMode.dart';
 import 'package:ecommerceapp/model/eventModel/eventModel.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 import 'package:ecommerceapp/model/roleModels/roleModels.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 
 //Products Session
 Stream<List<ProductModel>> FetchProducts({required String CollectionName}) =>

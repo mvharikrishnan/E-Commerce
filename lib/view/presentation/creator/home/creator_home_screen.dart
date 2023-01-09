@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ecommerceapp/core/colors/colors.dart';
+
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/creator/active_product/active_products_screen.dart';
 import 'package:ecommerceapp/view/presentation/creator/add_product/add_productScreen.dart';
@@ -7,10 +7,9 @@ import 'package:ecommerceapp/view/presentation/creator/orders_received/order_rec
 import 'package:ecommerceapp/view/presentation/creator/widgets/appBarCreator.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Creator_Home_screen extends StatelessWidget {

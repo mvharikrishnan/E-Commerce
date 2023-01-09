@@ -59,30 +59,30 @@ class customRoles {
 
 //   return creatorModels.first;
 // }
-Future<List<String>> getAllDocumentInsideCreators() async {
-  List<String> idList = [];
-  var collection = FirebaseFirestore.instance.collection('creatorEmail');
-  var querySnapshots = await collection.get();
-  for (var snapshot in querySnapshots.docs) {
-    var documentID = snapshot.id; // <-- Document ID
-    log(documentID);
+// Future<List<String>> getAllDocumentInsideCreators() async {
+//   List<String> idList = [];
+//   var collection = FirebaseFirestore.instance.collection('creatorEmail');
+//   var querySnapshots = await collection.get();
+//   for (var snapshot in querySnapshots.docs) {
+//     var documentID = snapshot.id; // <-- Document ID
+//     log(documentID);
 
-    idList.add(documentID);
-  }
-  return idList;
-}
-Future<List<String>> getAllDocumentInsideUsers() async {
-  List<String> idList = [];
-  var collection = FirebaseFirestore.instance.collection('UserEmail');
-  var querySnapshots = await collection.get();
-  for (var snapshot in querySnapshots.docs) {
-    var documentID = snapshot.id; // <-- Document ID
-    log(documentID);
+//     idList.add(documentID);
+//   }
+//   return idList;
+// }
+// Future<List<String>> getAllDocumentInsideUsers() async {
+//   List<String> idList = [];
+//   var collection = FirebaseFirestore.instance.collection('UserEmail');
+//   var querySnapshots = await collection.get();
+//   for (var snapshot in querySnapshots.docs) {
+//     var documentID = snapshot.id; // <-- Document ID
+//     log(documentID);
 
-    idList.add(documentID);
-  }
-  return idList;
-}
+//     idList.add(documentID);
+//   }
+//   return idList;
+// }
 
 
 Stream<List<creatorModel>> FetchAllCreator() =>
