@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecommerceapp/controller/bloc/searchBloc/search_bloc.dart';
 
 import 'package:ecommerceapp/core/colors/colors.dart';
@@ -16,6 +18,9 @@ class ScreenDiscoverUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   BlocProvider.of<SearchBloc>(context).add()
+    // });
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -37,6 +42,7 @@ class ScreenDiscoverUser extends StatelessWidget {
               //TextFieldButton
               TextFormField(
                 onChanged: (value) {
+                  log(value);
                   BlocProvider.of<SearchBloc>(context)
                       .add(SearchProduct(input: value));
                 },

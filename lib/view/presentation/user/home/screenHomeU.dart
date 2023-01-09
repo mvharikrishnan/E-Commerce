@@ -28,9 +28,9 @@ class ScreenHomeUser extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: appBarUser(context),
-        drawer: Drawer(
-          backgroundColor: offWhiteK,
-        ),
+        // drawer: Drawer(
+        //   backgroundColor: offWhiteK,
+        // ),
         body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

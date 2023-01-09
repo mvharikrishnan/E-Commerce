@@ -1,8 +1,13 @@
+import 'dart:developer';
+
+import 'package:ecommerceapp/controller/readDataFromFB.dart';
+import 'package:ecommerceapp/controller/wishList.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/product/product_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -13,6 +18,7 @@ class category_tile extends StatelessWidget {
   final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
+    final email = FirebaseAuth.instance.currentUser!.email;
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
@@ -26,7 +32,7 @@ class category_tile extends StatelessWidget {
           Container(
             height: 140,
             width: double.infinity,
-            decoration: BoxDecoration(boxShadow: [
+            decoration:  BoxDecoration(boxShadow: [
               BoxShadow(
                 color: Colors.grey,
                 blurRadius: 5.0, // has the effect of softening the shadow
@@ -78,15 +84,54 @@ class category_tile extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 0,
-            top: 6,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.more_vert_sharp,
-                size: 29,
-              ),
-            ),
+            right: 10,
+            bottom: 5,
+            child: StreamBuilder<List<ProductModel>>(
+                stream: fetchWishListProducts(email!),
+                //streamBUilder for wishlist collection
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("🚫");
+                  }
+                  if (snapshot.hasData) {
+                    final wishListProducts = snapshot.data!;
+                    List<String> ProductNames = [];
+                    for (ProductModel product in wishListProducts) {
+                      ProductNames.add(product.productName);
+                    }
+                    bool isFav = ProductNames.where(
+                            (product) => product == productModel.productName)
+                        .isNotEmpty;
+                    return isFav
+                        ? IconButton(
+                            onPressed: () {
+                              //add product to wish list
+                              log("Removed From wishlist");
+                              removeFromWishList(
+                                  productID: productModel.productName);
+                            },
+                            icon: const Icon(
+                              Icons.favorite,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                          )
+                        : IconButton(
+                            onPressed: () {
+                              //add product to wish list
+                              log("Added to wishlist");
+                              addToWishList(productModel: productModel);
+                            },
+                            icon: const Icon(
+                              Icons.favorite_border_sharp,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                          );
+                  } else {
+                    return Text("⁉️");
+                  }
+                }),
           ),
         ],
       ),

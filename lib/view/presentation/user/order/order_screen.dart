@@ -62,6 +62,7 @@ class Order_Screen extends StatelessWidget {
                                 }
                               }
                               return ListView(
+                                physics: ScrollPhysics(),
                                 shrinkWrap: true,
                                 children:
                                     currentOrders.map(BuildOrder).toList(),

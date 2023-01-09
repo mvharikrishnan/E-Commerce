@@ -1,7 +1,12 @@
+import 'dart:developer';
+
+import 'package:ecommerceapp/controller/readDataFromFB.dart';
+import 'package:ecommerceapp/controller/wishList.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +20,7 @@ class searchScreenTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final email = FirebaseAuth.instance.currentUser!.email;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Stack(
@@ -76,6 +82,56 @@ class searchScreenTile extends StatelessWidget {
           //         color: Colors.red,
           //       )),
           // ),
+          Positioned(
+            right: 10,
+            top: 10,
+            child: StreamBuilder<List<ProductModel>>(
+                stream: fetchWishListProducts(email!),
+                //streamBUilder for wishlist collection
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("🚫");
+                  }
+                  if (snapshot.hasData) {
+                    final wishListProducts = snapshot.data!;
+                    List<String> ProductNames = [];
+                    for (ProductModel product in wishListProducts) {
+                      ProductNames.add(product.productName);
+                    }
+                    bool isFav = ProductNames.where(
+                            (product) => product == productModel.productName)
+                        .isNotEmpty;
+                    return isFav
+                        ? IconButton(
+                            onPressed: () {
+                              //add product to wish list
+                              log("Removed From wishlist");
+                              removeFromWishList(
+                                  productID: productModel.productName);
+                            },
+                            icon: const Icon(
+                              Icons.favorite,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                          )
+                        : IconButton(
+                            onPressed: () {
+                              //add product to wish list
+                              log("Added to wishlist");
+                              addToWishList(productModel: productModel);
+                            },
+                            icon: const Icon(
+                              Icons.favorite_border_sharp,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                          );
+                  } else {
+                    return Text("⁉️");
+                  }
+                }),
+          ),
         ],
       ),
     );

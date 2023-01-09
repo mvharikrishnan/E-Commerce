@@ -115,9 +115,7 @@ class Product_Viewing_screen extends StatelessWidget {
                     //       color: Colors.red,
                     //       size: 35,
                     //     ))
-                    Positioned(
-                      right: 10,
-                      bottom: 5,
+                    SizedBox(
                       child: StreamBuilder<List<ProductModel>>(
                           stream: fetchWishListProducts(email!),
                           //streamBUilder for wishlist collection
@@ -183,10 +181,10 @@ class Product_Viewing_screen extends StatelessWidget {
                       style: TextStyle(fontSize: 17),
                     ),
                     sizedBoxHeight10,
-                    const Text(
-                      'Creator:Creator Name',
-                      style: TextStyle(color: Colors.blue),
-                    )
+                    // const Text(
+                    //   'Creator:Creator Name',
+                    //   style: TextStyle(color: Colors.blue),
+                    // )
                   ],
                 ),
                 sizedBoxHeight10,
@@ -244,7 +242,7 @@ class Product_Viewing_screen extends StatelessWidget {
                 DividerEcommerce(),
                 ProductsDetails(productModel: productModel),
                 DividerEcommerce(),
-                const Review_Screen(),
+                // const Review_Screen(),
               ],
             ),
           ),
