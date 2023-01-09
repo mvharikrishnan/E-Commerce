@@ -10,16 +10,12 @@ part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc() : super(InitialState()) {
-    on<SearchEvent>((event, emit) {
-      // TODO: implement event handler
-    });
-
     //searching
     on<SearchProduct>((event, emit) async {
       List<ProductModel> searchedList =
           await SearchProductClass.productSearch(searchValue: event.input);
 
-    emit(SearchState(productList: searchedList));
+      emit(SearchState(productList: searchedList));
     });
   }
 }

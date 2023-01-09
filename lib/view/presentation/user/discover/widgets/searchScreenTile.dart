@@ -72,16 +72,6 @@ class searchScreenTile extends StatelessWidget {
               ],
             ),
           ),
-          // Positioned(
-          //   bottom: 5,
-          //   right: 10,
-          //   child: IconButton(
-          //       onPressed: () {},
-          //       icon: const Icon(
-          //         Icons.favorite_rounded,
-          //         color: Colors.red,
-          //       )),
-          // ),
           Positioned(
             right: 10,
             top: 10,

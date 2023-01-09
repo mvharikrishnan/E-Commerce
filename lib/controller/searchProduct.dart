@@ -4,9 +4,9 @@ import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 class SearchProductClass {
   static Future<List<ProductModel>> productSearch(
       {required String searchValue}) async {
-    final allProducts = await FetchProducts(CollectionName: 'CreatorsProducts');
+    final allProducts = FetchProducts(CollectionName: 'CreatorsProducts');
     List<ProductModel> filteredProducts = [];
-    final xxxx = allProducts.listen((event) {
+    allProducts.listen((event) {
       for (ProductModel product in event) {
         if (product.productName
             .toString()
@@ -22,7 +22,7 @@ class SearchProductClass {
   static Future<List<ProductModel>> intialProductList() async {
     final allProducts = await FetchProducts(CollectionName: 'CreatorsProducts');
     List<ProductModel> initalProductList = [];
-    final xxxx = allProducts.listen((event) {
+    allProducts.listen((event) {
       for (ProductModel product in event) {
         initalProductList.add(product);
       }

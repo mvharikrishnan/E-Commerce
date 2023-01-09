@@ -10,7 +10,7 @@ import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/check_out/check_out_screen.dart';
 import 'package:ecommerceapp/view/presentation/user/product/widgets/productScreenButton.dart';
 import 'package:ecommerceapp/view/presentation/user/product/widgets/productsDetails.dart';
-import 'package:ecommerceapp/view/presentation/user/product/widgets/review_widget.dart';
+
 
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/widget/divider.dart';
