@@ -7,8 +7,7 @@ import 'package:ecommerceapp/view/presentation/user/check_out/check_out_screen.d
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:lottie/lottie.dart';
 
 class Cart_Screen extends StatelessWidget {
@@ -17,6 +16,7 @@ class Cart_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final email = FirebaseAuth.instance.currentUser!.email;
+    final size = MediaQuery.of(context).size;
     List<ProductModel> userCartProducts = [];
     return Container(
       decoration: BoxDecoration(
@@ -67,12 +67,13 @@ class Cart_Screen extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            CheckOutScreen(usersCartProducts: userCartProducts,Useremail: email),
+                        builder: (context) => CheckOutScreen(
+                            usersCartProducts: userCartProducts,
+                            Useremail: email),
                       ));
                     },
                     child: Container(
-                        width: 350,
+                        width: 0.9 * size.width,
                         height: 55,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadiusDirectional.circular(15),
@@ -115,23 +116,27 @@ class Cart_Screen extends StatelessWidget {
                     }
                     if (snapshot.hasData) {
                       final cartProducts = snapshot.data!;
-                      return ListView(
-                        children: cartProducts.map(BuildCart).toList(),
-                      );
+                      return cartProducts.isEmpty
+                          ? Center(
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 1 * size.width,
+                                    width: 1 * size.width,
+                                    // decoration: BoxDecoration(color: darkBlueK),
+                                    child: Lottie.network(
+                                      'https://assets3.lottiefiles.com/packages/lf20_qh5z2fdq.json',
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          : ListView(
+                              children: cartProducts.map(BuildCart).toList(),
+                            );
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
                     }
-                    return Center(
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 500,
-                            width: 500,
-                            // decoration: BoxDecoration(color: darkBlueK),
-                            child: Lottie.network(
-                                'https://assets3.lottiefiles.com/packages/lf20_qh5z2fdq.json'),
-                          )
-                        ],
-                      ),
-                    );
                   },
                 ),
               ),
