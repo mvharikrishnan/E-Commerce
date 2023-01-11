@@ -7,8 +7,7 @@ import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/login/identifyUser.dart';
 import 'package:ecommerceapp/view/presentation/login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:lottie/lottie.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -32,7 +31,15 @@ class SignUpPage extends StatelessWidget {
             ],
           ),
           Column(
-            children: const [Text('APP NAME')],
+            children: [
+              Text(
+                'ARTIFY',
+                style: TextStyle(
+                  fontFamily: TradeGothic,
+                  fontSize: 24,
+                ),
+              )
+            ],
           ),
           Column(
             children: [

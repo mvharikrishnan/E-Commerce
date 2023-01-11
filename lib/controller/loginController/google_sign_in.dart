@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ecommerceapp/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,5 +38,10 @@ class SignUP {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
     log('Google Sign in finished');
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => mainPage(),
+        ),
+        (route) => route.isFirst);
   }
 }

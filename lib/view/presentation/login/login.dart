@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:ecommerceapp/controller/loginController/authentication.dart';
+import 'package:ecommerceapp/controller/loginController/google_sign_in.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/main.dart';
+import 'package:ecommerceapp/view/presentation/login/createaccount.dart';
+import 'package:ecommerceapp/view/presentation/login/identifyUser.dart';
 import 'package:ecommerceapp/view/presentation/login/widgets/createFormFiled.dart';
 import 'package:ecommerceapp/view/presentation/login/widgets/methods.dart';
 
@@ -114,26 +117,38 @@ class LoginPage extends StatelessWidget {
                 sizedBoxHeight10,
                 Column(
                   children: [
-                    Container(
-                      height: 56,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(19),
-                          border: Border.all(width: 2)),
-                      child: ListTile(
-                        leading: Image.network(
-                            'http://pngimg.com/uploads/google/google_PNG19635.png',
-                            fit: BoxFit.cover),
-                        title: Text(
-                          '         Continue with Google',
-                          style: TextStyle(color: darkBlueK),
+                    InkWell(
+                      onTap: () async {
+                        await SignUP.SignInWithGoogle(context);
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 56,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            border: Border.all(width: 2)),
+                        child: ListTile(
+                          leading: Image.network(
+                              'http://pngimg.com/uploads/google/google_PNG19635.png',
+                              fit: BoxFit.cover),
+                          title: Text(
+                            '         Continue with Google',
+                            style: TextStyle(color: darkBlueK),
+                          ),
                         ),
                       ),
                     ),
                     sizedBoxHeight10,
                     sizedBoxHeight10,
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          //give push and remove until
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) => const IdentifyRoleScreen(),
+                          ));
+                        },
                         child: const Text('Create an account?'))
                   ],
                 )
