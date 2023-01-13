@@ -38,7 +38,7 @@ class SignUpPage extends StatelessWidget {
                   fontFamily: TradeGothic,
                   fontSize: 24,
                 ),
-              )
+              ),
             ],
           ),
           Column(
