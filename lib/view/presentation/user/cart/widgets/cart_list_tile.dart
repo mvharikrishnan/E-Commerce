@@ -11,14 +11,15 @@ class cart_list_tile extends StatelessWidget {
   final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(
         children: [
           Container(
             // margin:const EdgeInsets.all(100.0),
-            width: 390,
-            height: 165,
+            width: double.infinity,
+            height: 0.18 * size.height,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -31,8 +32,8 @@ class cart_list_tile extends StatelessWidget {
             left: 10,
             top: 10,
             child: Container(
-              width: 109,
-              height: 109,
+              width: 0.27 * size.width,
+              height: 0.27 * size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(productModel.productImage),
@@ -74,10 +75,12 @@ class cart_list_tile extends StatelessWidget {
                           ),
                         ],
                         content: Container(
-                          height: 200,
-                          width: 200,
+                          height: 0.5 * size.width,
+                          width: 0.5 * size.width,
                           child: Lottie.network(
-                              'https://assets1.lottiefiles.com/packages/lf20_lz5srsyo.json'),
+                            'https://assets1.lottiefiles.com/packages/lf20_lz5srsyo.json',
+                            fit: BoxFit.cover
+                          ),
                         ),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

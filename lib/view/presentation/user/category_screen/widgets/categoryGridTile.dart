@@ -15,6 +15,7 @@ class CategoryGridTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         //screen to category viewing list screen
@@ -24,8 +25,8 @@ class CategoryGridTile extends StatelessWidget {
         ));
       },
       child: Container(
-        width: 166,
-        height: 168,
+        width: 0.166 * size.width,
+        height: 0.168 * size.width,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -42,8 +43,8 @@ class CategoryGridTile extends StatelessWidget {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Container(
-              width: 100,
-              height: 100,
+              width: 0.25 * size.width,
+              height: 0.25 * size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
