@@ -55,8 +55,7 @@ class cart_list_tile extends StatelessWidget {
                         actions: [
                           ElevatedButton(
                             onPressed: () {
-                              deleteFromCart(
-                                  ProductID: productModel.productName);
+                              deleteFromCart(productModel: productModel);
                               Navigator.pop(context);
                             },
                             child: Icon(Icons.check),

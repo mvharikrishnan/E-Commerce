@@ -11,7 +11,6 @@ import 'package:ecommerceapp/view/presentation/user/check_out/check_out_screen.d
 import 'package:ecommerceapp/view/presentation/user/product/widgets/productScreenButton.dart';
 import 'package:ecommerceapp/view/presentation/user/product/widgets/productsDetails.dart';
 
-
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/widget/divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -181,10 +180,10 @@ class Product_Viewing_screen extends StatelessWidget {
                       style: TextStyle(fontSize: 17),
                     ),
                     sizedBoxHeight10,
-                    // const Text(
-                    //   'Creator:Creator Name',
-                    //   style: TextStyle(color: Colors.blue),
-                    // )
+                    Text(
+                      'Creator: ${productModel.creatorEmail}',
+                      style: TextStyle(color: Colors.blue),
+                    )
                   ],
                 ),
                 sizedBoxHeight10,

@@ -4,10 +4,9 @@ import 'package:ecommerceapp/controller/orders.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class CreatorOrderRecivedTile extends StatelessWidget {
   const CreatorOrderRecivedTile({required this.orderModel, super.key});

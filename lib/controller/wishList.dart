@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 Future addToWishList({required ProductModel productModel}) async {
   final email = FirebaseAuth.instance.currentUser!.email;
-
+  final id = DateTime.now().microsecondsSinceEpoch;
   //reference to the document
   final documentProduct = FirebaseFirestore.instance
       .collection('Users')
@@ -23,6 +23,7 @@ Future addToWishList({required ProductModel productModel}) async {
     productSize: productModel.productSize,
     productImage: productModel.productImage,
     creatorEmail: productModel.creatorEmail,
+    productID: id.toString(),
   );
 
   //convert the instance to JSON format

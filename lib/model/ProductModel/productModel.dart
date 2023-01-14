@@ -8,6 +8,7 @@ class ProductModel {
   final String productMedium;
   final String productImage;
   final String creatorEmail;
+  final String? productID;
 
   ProductModel({
     required this.productName,
@@ -18,7 +19,8 @@ class ProductModel {
     required this.productMedium,
     required this.productSize,
     required this.productImage,
-    required this.creatorEmail
+    required this.creatorEmail,
+    this.productID,
   });
 
   Map<String, dynamic> toJson() => {
@@ -30,7 +32,8 @@ class ProductModel {
         'productSize': productSize,
         'productMedium': productMedium,
         'productImage': productImage,
-        'creatorEmail':creatorEmail
+        'creatorEmail': creatorEmail,
+        'productID': productID,
       };
 
   static ProductModel fromJson(Map<String, dynamic> json) => ProductModel(
@@ -43,5 +46,6 @@ class ProductModel {
         productSize: json['productSize'],
         productImage: json['productImage'],
         creatorEmail: json['creatorEmail'],
+        productID: json['productID'],
       );
 }

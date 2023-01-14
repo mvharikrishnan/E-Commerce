@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 Future AddProductToFB({
   required ProductModel productModel,
 }) async {
+
+  final id = DateTime.now().microsecondsSinceEpoch;
   //Reference To to the document
   final docCreator = FirebaseFirestore.instance
       .collection('CreatorsProducts')
@@ -30,6 +32,7 @@ Future AddProductToFB({
     productSize: productModel.productSize,
     productImage: productModel.productImage,
     creatorEmail: productModel.creatorEmail,
+    productID:id.toString(),
   );
 
   //converting the Instance to json Format

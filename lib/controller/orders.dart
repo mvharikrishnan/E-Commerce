@@ -53,7 +53,7 @@ removeAfterSuccess({required List<ProductModel> ordeers}) {
         .collection('Users')
         .doc(email)
         .collection('Carts')
-        .doc(product.productName);
+        .doc("${product.productName}${product.productID}");
 
     //Delete Product
     docCart.delete();
