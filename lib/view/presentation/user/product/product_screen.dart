@@ -25,6 +25,7 @@ class Product_Viewing_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final email = FirebaseAuth.instance.currentUser!.email;
+    final size = MediaQuery.of(context).size;
     List<ProductModel> singleProduct = [productModel];
     return Container(
       decoration: BoxDecoration(
@@ -55,9 +56,9 @@ class Product_Viewing_screen extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.share_outlined,
-                        size: 30,
+                        size: 0.1 * size.width,
                       ),
                     ),
                   ],
@@ -72,7 +73,7 @@ class Product_Viewing_screen extends StatelessWidget {
                 sizedBoxHeight10,
                 Container(
                   width: double.infinity,
-                  height: 320,
+                  height: 0.320*size.height,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(

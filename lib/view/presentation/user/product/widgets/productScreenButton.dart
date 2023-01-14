@@ -14,11 +14,12 @@ class ProductScreenButtons extends StatelessWidget {
   final BuildContext ctx;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return InkWell(
-      onTap:  Onpressed,
+      onTap: Onpressed,
       child: Container(
         width: double.infinity,
-        height: 50,
+        height: 0.060 * size.height,
         decoration: BoxDecoration(
           color: ButtonColor,
           borderRadius: BorderRadius.circular(20),
