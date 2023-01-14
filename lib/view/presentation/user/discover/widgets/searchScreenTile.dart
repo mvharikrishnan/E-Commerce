@@ -22,6 +22,7 @@ class searchScreenTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final email = FirebaseAuth.instance.currentUser!.email;
+    final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: InkWell(
@@ -34,7 +35,7 @@ class searchScreenTile extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              height: 140,
+              height: 0.150 * size.height,
               width: double.infinity,
               decoration: BoxDecoration(
                   boxShadow: const [],
@@ -45,8 +46,8 @@ class searchScreenTile extends StatelessWidget {
               left: 15,
               top: 15,
               child: Container(
-                width: 109,
-                height: 109,
+                width: 0.250 * size.width,
+                height: 0.250 * size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(

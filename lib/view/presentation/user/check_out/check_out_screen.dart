@@ -68,7 +68,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   //check Out options
   var options = {
     'key': 'rzp_test_mkzSidhb6RgmDG',
-    'amount': 500,
+    'amount': 50000,
     'name': 'Harikrishnan Mv Corp.',
     'description': 'Demo',
     'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
