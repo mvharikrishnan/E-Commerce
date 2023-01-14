@@ -3,7 +3,7 @@ import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
-import 'package:ecommerceapp/view/presentation/user/account/widget/settingTile.dart';
+
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

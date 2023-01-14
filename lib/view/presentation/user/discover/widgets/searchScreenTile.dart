@@ -47,7 +47,7 @@ class searchScreenTile extends StatelessWidget {
               top: 15,
               child: Container(
                 width: 0.250 * size.width,
-                height: 0.250 * size.width,
+                height: 0.250  * size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
