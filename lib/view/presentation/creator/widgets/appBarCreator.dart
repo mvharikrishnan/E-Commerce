@@ -1,9 +1,11 @@
 import 'package:ecommerceapp/controller/loginController/authentication.dart';
 
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 appBarCreator(BuildContext context) {
+  final user = FirebaseAuth.instance.currentUser!;
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -17,7 +19,7 @@ appBarCreator(BuildContext context) {
           sizedBox10,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children:  [
               Text(
                 'Art and Craft',
                 style: TextStyle(
@@ -26,7 +28,7 @@ appBarCreator(BuildContext context) {
                 ),
               ),
               Text(
-                'Bussiness',
+                user.email!,
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               )
             ],

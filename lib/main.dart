@@ -61,11 +61,16 @@ class mainPage extends StatelessWidget {
               if (creatorList.isEmpty) {
                 return const Text('Creator List is empty');
               }
+              final List<String> listOfCreator = [];
+              for (var creator in creatorList) {
+                listOfCreator.add(creator.creatorEmail);
+              }
+              log("ListOfCreator = $listOfCreator");
               return StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
                   final user = FirebaseAuth.instance.currentUser;
-
+                  
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
                       child: CircularProgressIndicator(),
@@ -80,16 +85,13 @@ class mainPage extends StatelessWidget {
                       return const AdminHomePage();
                     } else {
                       //user page navigation
-                      final currentUserEmail = user.email!;
-                      final List<String> listOfCreator = [];
-                      for (var creator in creatorList) {
-                        listOfCreator.add(creator.creatorEmail);
-                      }
-                      log("ListOfCreator = $listOfCreator");
 
-                      bool containsEmail = listOfCreator
-                          .where((creator) => creator == currentUserEmail)
-                          .isNotEmpty;
+                      // bool containsEmail = listOfCreator
+                      //     .where((creator) => creator == currentUserEmail)
+                      //     .isNotEmpty;
+                      final currentUserEmail = user.email;
+                      bool containsEmail =
+                          listOfCreator.any((mail) => mail == currentUserEmail);
 
                       //for console
                       (containsEmail)

@@ -46,7 +46,6 @@ class HomeScreenGridTile extends StatelessWidget {
               ),
             ),
           ),
-          
           Positioned(
             bottom: 67,
             left: 5,

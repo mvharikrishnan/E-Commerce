@@ -15,7 +15,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       List<ProductModel> searchedList =
           await SearchProductClass.productSearch(searchValue: event.input);
 
-      emit(SearchState(productList: searchedList));
+      emit(SearchState(productList: searchedList,initalList: []));
+    });
+
+    on<InitailSearchList>((event, emit) {
+      emit(SearchState(productList: [],initalList: event.list));
     });
   }
 }

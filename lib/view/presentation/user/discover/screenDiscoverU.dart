@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:ecommerceapp/controller/bloc/searchBloc/search_bloc.dart';
+import 'package:ecommerceapp/controller/searchProduct.dart';
 
 import 'package:ecommerceapp/core/colors/colors.dart';
 
 import 'package:ecommerceapp/core/constants/user/constants.dart';
+import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 
 import 'package:ecommerceapp/view/presentation/user/discover/widgets/searchScreenTile.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
@@ -18,9 +20,11 @@ class ScreenDiscoverUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   BlocProvider.of<SearchBloc>(context).add()
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      List<ProductModel> list = await SearchProductClass.intialProductList();
+      log("Initial List is ${list.length.toString()}");
+      BlocProvider.of<SearchBloc>(context).add(InitailSearchList(list: list));
+    });
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -77,11 +81,18 @@ class ScreenDiscoverUser extends StatelessWidget {
                 child: BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
                     if (state.productList.isEmpty) {
-                      return Center(
-                        child: Lottie.asset(
-                            'assets/drawingImage/lookingForArt.json'),
+                      log('Initial List is presented');
+                      return ListView.builder(
+                        itemCount: state.initalList.length,
+                        shrinkWrap: true,
+                        physics: const ScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return searchScreenTile(
+                              productModel: state.initalList[index]);
+                        },
                       );
                     } else {
+                      log('Searched List is presented');
                       return ListView.builder(
                         itemCount: state.productList.length,
                         shrinkWrap: true,

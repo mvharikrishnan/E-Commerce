@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 
 class SearchProductClass {
   static Future<List<ProductModel>> productSearch(
       {required String searchValue}) async {
+        
     final allProducts = FetchProducts(CollectionName: 'CreatorsProducts');
     List<ProductModel> filteredProducts = [];
     allProducts.listen((event) {
@@ -27,6 +30,7 @@ class SearchProductClass {
         initalProductList.add(product);
       }
     });
+    log("List From stream is ${initalProductList.length}");
     return initalProductList;
   }
 }

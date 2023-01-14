@@ -17,7 +17,7 @@ class Creator_Home_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final email = FirebaseAuth.instance.currentUser!.email;
+    final user = FirebaseAuth.instance.currentUser!;
     return Container(
       decoration: backGroundColor(),
       child: Scaffold(
@@ -105,7 +105,7 @@ class Creator_Home_screen extends StatelessWidget {
                         //navigation to order recivied screen
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                              Order_recived_screen(email: email!),
+                              Order_recived_screen(email: user.email!),
                         ));
                       },
                       child: Container(
