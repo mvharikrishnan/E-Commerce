@@ -5,6 +5,7 @@ import 'package:ecommerceapp/controller/roles.dart';
 import 'package:ecommerceapp/core/utils/utils.dart';
 import 'package:ecommerceapp/view/presentation/admin/adminHome.dart';
 import 'package:ecommerceapp/view/presentation/creator/home/creator_home_screen.dart';
+import 'package:ecommerceapp/view/presentation/splash/splashScreen.dart';
 import 'package:ecommerceapp/view/presentation/user/navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         scaffoldMessengerKey: Utils.messengerKey,
         debugShowCheckedModeBanner: false,
         // theme: ThemeData(fontFamily: TradeGothic),
-        home: mainPage(),
+        home: const SplashScreen(),
       ),
     );
   }
@@ -70,7 +71,7 @@ class mainPage extends StatelessWidget {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
                   final user = FirebaseAuth.instance.currentUser;
-                  
+
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
                       child: CircularProgressIndicator(),
