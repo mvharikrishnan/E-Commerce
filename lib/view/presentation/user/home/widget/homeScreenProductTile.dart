@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/controller/wishList.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
@@ -17,6 +17,7 @@ class HomeScreenGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final email = FirebaseAuth.instance.currentUser!.email;
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         //navigate to product viwing screen
@@ -35,8 +36,8 @@ class HomeScreenGridTile extends StatelessWidget {
             ),
           ),
           Container(
-            width: 200,
-            height: 200,
+            width: 0.8 * size.width,
+            height: 0.5 * size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,

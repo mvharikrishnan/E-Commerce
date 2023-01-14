@@ -8,6 +8,8 @@ TextStyle HeadingTextStyle() {
   }
 
   String LottieLoginPage = 'https://assets3.lottiefiles.com/packages/lf20_1z0fledt.json';
+  
+
 
   class ConstantNames{
     static String category = 'Category';
