@@ -23,6 +23,7 @@ Future addToCart({required ProductModel productModel}) async {
     productMedium: productModel.productMedium,
     productSize: productModel.productSize,
     productImage: productModel.productImage,
+    creatorEmail: productModel.creatorEmail
   );
 
   //convert the instance to JSON format

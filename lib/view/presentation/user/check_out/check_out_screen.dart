@@ -85,6 +85,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       newOrder(
           orderModel: OrderModel(
         cartPrice: cartPrice!,
+        userEmail: widget.Useremail,
+        creatorEmail: order.creatorEmail,
         productDescription: order.productDescription,
         category: order.category,
         productMaterial: order.productMaterial,

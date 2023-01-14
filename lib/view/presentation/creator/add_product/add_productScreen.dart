@@ -13,6 +13,7 @@ import 'package:ecommerceapp/view/presentation/creator/add_product/widgets/addPr
 import 'package:ecommerceapp/view/presentation/creator/widgets/appBarCreator.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Add_Product_Screen extends StatefulWidget {
@@ -46,6 +47,7 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
     final TextEditingController productSizeController = TextEditingController();
     final TextEditingController productMediumController =
         TextEditingController();
+    final user = FirebaseAuth.instance.currentUser!;
     return Container(
       decoration: backGroundColor(),
       child: SafeArea(
@@ -170,20 +172,20 @@ class _Add_Product_ScreenState extends State<Add_Product_Screen> {
                               final String FinalImageURL = await uploadFile();
                               log('Download Image URl : $FinalImageURL');
                               final newProduct = ProductModel(
-                                  productName:
-                                      productNameController.text.trim(),
-                                  productDescription:
-                                      productDescriptionController.text.trim(),
-                                  category: category ?? 'Others',
-                                  productPrice:
-                                      productPriceController.text.trim(),
-                                  productMaterial:
-                                      productMaterialController.text.trim(),
-                                  productMedium:
-                                      productMediumController.text.trim(),
-                                  productSize:
-                                      productSizeController.text.trim(),
-                                  productImage: FinalImageURL.toString());
+                                productName: productNameController.text.trim(),
+                                productDescription:
+                                    productDescriptionController.text.trim(),
+                                category: category ?? 'Others',
+                                productPrice:
+                                    productPriceController.text.trim(),
+                                productMaterial:
+                                    productMaterialController.text.trim(),
+                                productMedium:
+                                    productMediumController.text.trim(),
+                                productSize: productSizeController.text.trim(),
+                                productImage: FinalImageURL.toString(),
+                                creatorEmail: user.email!,
+                              );
                               log('Before Method');
 
                               await AddProductToFB(

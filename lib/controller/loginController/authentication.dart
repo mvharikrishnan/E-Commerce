@@ -32,7 +32,7 @@ Future signUP(
     String Email, String Password, BuildContext context, String role) async {
   showDialog(
       context: context,
-      builder: (context) => Center(
+      builder: (context) => const Center(
             child: CircularProgressIndicator(),
           ));
   log('Sign Up called');

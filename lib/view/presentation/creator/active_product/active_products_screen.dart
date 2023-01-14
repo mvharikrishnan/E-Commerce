@@ -1,10 +1,12 @@
 import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
+import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 import 'package:ecommerceapp/view/presentation/creator/active_product/widgets/activeProductTile.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/appBarCreator.dart';
 import 'package:ecommerceapp/view/presentation/creator/widgets/back_ground_color.dart';
 import 'package:ecommerceapp/view/widget/divider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -14,6 +16,8 @@ class Active_Products_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user  = FirebaseAuth.instance.currentUser!;
+
     return Container(
       decoration: backGroundColor(),
       child: Scaffold(
@@ -35,7 +39,7 @@ class Active_Products_screen extends StatelessWidget {
                       ),
                       sizedBoxHeight10,
                       StreamBuilder<List<ProductModel>>(
-                        stream: FetchProducts(CollectionName: 'CreatorsProducts'),
+                        stream: fetchCreatorsProducts(user.email!),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {

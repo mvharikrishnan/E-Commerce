@@ -14,14 +14,16 @@ Future addToWishList({required ProductModel productModel}) async {
 
   //Instance of the product model with data
   final newWishListProduct = ProductModel(
-      productName: productModel.productName,
-      productDescription: productModel.productDescription,
-      category: productModel.category,
-      productPrice: productModel.productPrice,
-      productMaterial: productModel.productMaterial,
-      productMedium: productModel.productMedium,
-      productSize: productModel.productSize,
-      productImage: productModel.productImage);
+    productName: productModel.productName,
+    productDescription: productModel.productDescription,
+    category: productModel.category,
+    productPrice: productModel.productPrice,
+    productMaterial: productModel.productMaterial,
+    productMedium: productModel.productMedium,
+    productSize: productModel.productSize,
+    productImage: productModel.productImage,
+    creatorEmail: productModel.creatorEmail,
+  );
 
   //convert the instance to JSON format
   final newProductWishlistJSON = newWishListProduct.toJson();

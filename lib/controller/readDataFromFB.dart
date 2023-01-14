@@ -61,15 +61,35 @@ Stream<List<AddressModel>> fetchUserAddress(String UserEmail) =>
             .map((doc) => AddressModel.fromJson(doc.data()))
             .toList());
 
-//order session
-Stream<List<OrderModel>> fetchUserOrder(String UserEmail) => FirebaseFirestore
+//order session on user Side
+Stream<List<OrderModel>> fetchUserOrder(String creatorEmail) => FirebaseFirestore
     .instance
     .collection('Users')
-    .doc(UserEmail)
+    .doc(creatorEmail)
     .collection('Orders')
     .snapshots()
     .map((snapshot) =>
         snapshot.docs.map((doc) => OrderModel.fromJSON(doc.data())).toList());
+
+//order session on user Side
+Stream<List<OrderModel>> fetchUserOrderOnCreator(String creatorEmail) => FirebaseFirestore
+    .instance
+    .collection('creatorEmail')
+    .doc(creatorEmail)
+    .collection('recivedOrders')
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => OrderModel.fromJSON(doc.data())).toList());
+
+//product displaying on creator side
+Stream<List<ProductModel>> fetchCreatorsProducts(String creatorEmail) => FirebaseFirestore
+    .instance
+    .collection('creatorEmail')
+    .doc(creatorEmail)
+    .collection('creatorProducts')
+    .snapshots()
+    .map((snapshot) =>
+        snapshot.docs.map((doc) => ProductModel.fromJson(doc.data())).toList());
 
 //CreatorEmail session
 Stream<List<creatorModel>> fetchCreatorEmails() => FirebaseFirestore.instance

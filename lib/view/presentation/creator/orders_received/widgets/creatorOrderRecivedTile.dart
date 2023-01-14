@@ -37,11 +37,11 @@ class CreatorOrderRecivedTile extends StatelessWidget {
                 orderModel.productName,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
-              const Text(
-                'View Address',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+              Text(
+                orderModel.userEmail,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
                     color: Colors.lightBlue),
               ),
               sizedBoxHeight10,
@@ -67,6 +67,8 @@ class CreatorOrderRecivedTile extends StatelessWidget {
                             isDeliverd: true,
                             isCancelled: orderModel.isCancelled,
                             orderQuantity: orderModel.orderQuantity,
+                            creatorEmail: orderModel.creatorEmail,
+                            userEmail: orderModel.userEmail,
                           ),
                         );
                         log("${orderModel.productName} accepted");
@@ -118,6 +120,8 @@ class CreatorOrderRecivedTile extends StatelessWidget {
                       onTap: () async {
                         await creatorOrderConfirmation(
                           order: OrderModel(
+                            creatorEmail: orderModel.creatorEmail,
+                            userEmail: orderModel.userEmail,
                             cartPrice: orderModel.cartPrice,
                             productDescription: orderModel.productDescription,
                             category: orderModel.category,

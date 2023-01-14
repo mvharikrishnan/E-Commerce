@@ -15,6 +15,8 @@ class OrderModel {
   final bool isDeliverd;
   final bool isCancelled;
   final int orderQuantity;
+  final String userEmail;
+  final String creatorEmail;
 
   OrderModel({
     required this.cartPrice,
@@ -30,6 +32,8 @@ class OrderModel {
     required this.isDeliverd,
     required this.isCancelled,
     required this.orderQuantity,
+    required this.userEmail,
+    required this.creatorEmail,
   });
 
   //to JSON
@@ -47,21 +51,26 @@ class OrderModel {
         'isDeliverd': isDeliverd,
         'isCancelled': isCancelled,
         'orderQuantity': orderQuantity,
+        'userEmail': userEmail,
+        'creatorEmail': creatorEmail,
       };
 
   //fromJSON
   static OrderModel fromJSON(Map<String, dynamic> json) => OrderModel(
-      cartPrice: json['cartPrice'],
-      productDescription: json['productDescription'],
-      category: json['category'],
-      productMaterial: json['productMaterial'],
-      productPrice: json['productPrice'],
-      productSize: json['productSize'],
-      productMedium: json['productMedium'],
-      productImage: json['productImage'],
-      productName: json['productName'],
-      id: json['id'],
-      isDeliverd: json['isDeliverd'],
-      isCancelled: json['isCancelled'],
-      orderQuantity: json['orderQuantity']);
+        cartPrice: json['cartPrice'],
+        productDescription: json['productDescription'],
+        category: json['category'],
+        productMaterial: json['productMaterial'],
+        productPrice: json['productPrice'],
+        productSize: json['productSize'],
+        productMedium: json['productMedium'],
+        productImage: json['productImage'],
+        productName: json['productName'],
+        id: json['id'],
+        isDeliverd: json['isDeliverd'],
+        isCancelled: json['isCancelled'],
+        orderQuantity: json['orderQuantity'],
+        userEmail: json['userEmail'],
+        creatorEmail: json['creatorEmail'],
+      );
 }

@@ -36,7 +36,7 @@ class Order_recived_screen extends StatelessWidget {
                         ),
                         sizedBoxHeight10,
                         StreamBuilder(
-                            stream: fetchUserOrder(email),
+                            stream: fetchUserOrderOnCreator(email),
                             builder: (context, snapshot) {
                               
                               if (snapshot.hasError) {

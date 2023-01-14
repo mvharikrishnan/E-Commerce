@@ -50,20 +50,20 @@ class activeProductTile extends StatelessWidget {
             )
           ],
         ),
-        sizedBoxHeight10,
-        Container(
-          height: 40,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.amber),
-          child: const Center(
-              child: Text(
-            'Edit Product',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          )),
-        ),
-        sizedBoxHeight10,
-        GestureDetector(
-          onTap: () {
+        // sizedBoxHeight10,
+        // Container(
+        //   height: 40,
+        //   decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(10), color: Colors.amber),
+        //   child: const Center(
+        //       child: Text(
+        //     'Edit Product',
+        //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        //   )),
+        // ),
+        // sizedBoxHeight10,
+        // GestureDetector(
+        //   onTap: () {
             //function to delete
             // showDialog(
             //   context: context,
@@ -82,19 +82,19 @@ class activeProductTile extends StatelessWidget {
             //     );
             //   },
             // );
-          },
-          child: Container(
-            height: 40,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color(0xFFFC7F0B)),
-            child: const Center(
-                child: Text(
-              'Remove',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            )),
-          ),
-        ),
+        //   },
+        //   child: Container(
+        //     height: 40,
+        //     decoration: BoxDecoration(
+        //         borderRadius: BorderRadius.circular(10),
+        //         color: Color(0xFFFC7F0B)),
+        //     child: const Center(
+        //         child: Text(
+        //       'Remove',
+        //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        //     )),
+        //   ),
+        // ),
         sizedBoxHeight10,
         DividerEcommerce(),
       ],

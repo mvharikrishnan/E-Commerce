@@ -26,16 +26,9 @@ AppBar appBarUser(BuildContext context) {
         ),
       ),
       sizedBox10,
-      GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => Creator_Home_screen(),
-          ));
-        },
-        child: CircleAvatar(
-          radius: 25,
-          backgroundImage: NetworkImage(user.photoURL ?? userDummyImage),
-        ),
+      CircleAvatar(
+        radius: 25,
+        backgroundImage: NetworkImage(user.photoURL ?? userDummyImage),
       ),
       sizedBox10,
     ],
