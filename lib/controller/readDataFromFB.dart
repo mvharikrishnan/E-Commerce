@@ -6,7 +6,6 @@ import 'package:ecommerceapp/model/eventModel/eventModel.dart';
 import 'package:ecommerceapp/model/orderModel/orderModel.dart';
 import 'package:ecommerceapp/model/roleModels/roleModels.dart';
 
-
 //Products Session
 Stream<List<ProductModel>> FetchProducts({required String CollectionName}) =>
     FirebaseFirestore.instance.collection(CollectionName).snapshots().map(
@@ -62,34 +61,37 @@ Stream<List<AddressModel>> fetchUserAddress(String UserEmail) =>
             .toList());
 
 //order session on user Side
-Stream<List<OrderModel>> fetchUserOrder(String creatorEmail) => FirebaseFirestore
-    .instance
-    .collection('Users')
-    .doc(creatorEmail)
-    .collection('Orders')
-    .snapshots()
-    .map((snapshot) =>
-        snapshot.docs.map((doc) => OrderModel.fromJSON(doc.data())).toList());
+Stream<List<OrderModel>> fetchUserOrder(String creatorEmail) =>
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(creatorEmail)
+        .collection('Orders')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJSON(doc.data()))
+            .toList());
 
 //order session on user Side
-Stream<List<OrderModel>> fetchUserOrderOnCreator(String creatorEmail) => FirebaseFirestore
-    .instance
-    .collection('creatorEmail')
-    .doc(creatorEmail)
-    .collection('recivedOrders')
-    .snapshots()
-    .map((snapshot) =>
-        snapshot.docs.map((doc) => OrderModel.fromJSON(doc.data())).toList());
+Stream<List<OrderModel>> fetchUserOrderOnCreator(String creatorEmail) =>
+    FirebaseFirestore.instance
+        .collection('creatorEmail')
+        .doc(creatorEmail)
+        .collection('recivedOrders')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJSON(doc.data()))
+            .toList());
 
 //product displaying on creator side
-Stream<List<ProductModel>> fetchCreatorsProducts(String creatorEmail) => FirebaseFirestore
-    .instance
-    .collection('creatorEmail')
-    .doc(creatorEmail)
-    .collection('creatorProducts')
-    .snapshots()
-    .map((snapshot) =>
-        snapshot.docs.map((doc) => ProductModel.fromJson(doc.data())).toList());
+Stream<List<ProductModel>> fetchCreatorsProducts(String creatorEmail) =>
+    FirebaseFirestore.instance
+        .collection('creatorEmail')
+        .doc(creatorEmail)
+        .collection('creatorProducts')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => ProductModel.fromJson(doc.data()))
+            .toList());
 
 //CreatorEmail session
 Stream<List<creatorModel>> fetchCreatorEmails() => FirebaseFirestore.instance
@@ -98,9 +100,10 @@ Stream<List<creatorModel>> fetchCreatorEmails() => FirebaseFirestore.instance
     .map((snapShot) =>
         snapShot.docs.map((doc) => creatorModel.fromJson(doc.data())).toList());
 
-//userEmail session
-// Stream<userModel> fetchUserEmails() => FirebaseFirestore.instance
-//     .collection('UserEmail')
-//     .snapshots()
-//     .map((snapShot) =>
-//         snapShot.docs.map((doc) => userModel.fromJson(doc.data())).toList());
+//userEmail session future
+Future<userModel> fetchUserEmails({required String email}) async {
+  final doc =
+      await FirebaseFirestore.instance.collection('userEmail').doc(email).get();
+
+  return userModel.fromJson(doc.data()!);
+}

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/view/presentation/user/account/widget/account_edit_button.dart';
@@ -43,11 +46,28 @@ class ScreenAccountUser extends StatelessWidget {
                     'Hello, ',
                     style: TextStyle(fontSize: 24),
                   ),
-                  Text(
-                    _user.displayName ?? 'User',
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
+                  FutureBuilder(
+                      future: fetchUserEmails(email: _user.email!),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          log(snapshot.error.toString());
+                          return const Text("Error");
+                        }
+                        if (snapshot.hasData) {
+                          final data = snapshot.data!;
+                          return Text(
+                            _user.displayName ?? data.userName,
+                            style: const TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          );
+                        } else {
+                          return const Text(
+                            'User',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          );
+                        }
+                      }),
                 ],
               ),
               Column(
