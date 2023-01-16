@@ -28,8 +28,8 @@ Future signIn(String Email, String Password, BuildContext context) async {
   }
 }
 
-Future signUP(
-    String Email, String Password, BuildContext context, String role) async {
+Future signUP(String Email, String Password, String name, BuildContext context,
+    String role) async {
   showDialog(
       context: context,
       builder: (context) => const Center(
@@ -46,10 +46,10 @@ Future signUP(
   }
 
   if (role == "creator") {
-    final creatorModel creator = creatorModel(creatorEmail: Email);
-    customRoles.AddCreatorEmail(CreatorModel: creator);
+    final creatorModel creator = creatorModel(creatorEmail: Email,creatorName: name);
+    customRoles.AddCreatorEmail(CreatorModel: creator,);
   } else if (role == "user") {
-    final userModel user = userModel(userEmail: Email);
+    final userModel user = userModel(userEmail: Email,userName: name);
     customRoles.AddUserEmail(UserModel: user);
   }
 }

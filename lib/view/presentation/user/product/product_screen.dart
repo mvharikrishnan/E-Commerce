@@ -26,6 +26,8 @@ class Product_Viewing_screen extends StatelessWidget {
   Widget build(BuildContext context) {
     final email = FirebaseAuth.instance.currentUser!.email;
     final size = MediaQuery.of(context).size;
+    //for shareplus box
+    final box = context.findRenderObject() as RenderBox?;
     List<ProductModel> singleProduct = [productModel];
     return Container(
       decoration: BoxDecoration(
@@ -55,7 +57,10 @@ class Product_Viewing_screen extends StatelessWidget {
                           fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        //!share plus
+                        log("Share Button pressed");
+                      },
                       icon: Icon(
                         Icons.share_outlined,
                         size: 0.1 * size.width,
@@ -73,7 +78,7 @@ class Product_Viewing_screen extends StatelessWidget {
                 sizedBoxHeight10,
                 Container(
                   width: double.infinity,
-                  height: 0.320*size.height,
+                  height: 0.320 * size.height,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
@@ -232,11 +237,8 @@ class Product_Viewing_screen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.security),
-                    ),
-                    const Text('Secure Transaction')
+                    const Icon(Icons.security),
+                    Text('Secure Transaction')
                   ],
                 ),
                 DividerEcommerce(),

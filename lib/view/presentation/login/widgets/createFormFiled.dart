@@ -18,9 +18,11 @@ class createFormField extends StatelessWidget {
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
-      obscureText:obscureText,
-      autovalidateMode: AutovalidateMode.onUserInteraction ,
+      obscureText: obscureText,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: validate,
+      
+      // onChanged: (value) => validate,
     );
   }
 }

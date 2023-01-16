@@ -15,6 +15,7 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: offWhiteK,
       body: Column(
@@ -24,8 +25,8 @@ class SignUpPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 300,
-                width: 400,
+                height: 0.300 * size.height,
+                width: 0.400 * size.width,
                 child: Lottie.network(LottieLoginPage),
               ),
             ],

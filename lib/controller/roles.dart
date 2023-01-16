@@ -12,7 +12,9 @@ class customRoles {
         .doc(CreatorModel.creatorEmail);
 
     //instance to the document
-    final newCreator = creatorModel(creatorEmail: CreatorModel.creatorEmail);
+    final newCreator = creatorModel(
+        creatorEmail: CreatorModel.creatorEmail,
+        creatorName: CreatorModel.creatorName);
 
     //converting the instance
     final creatorJson = newCreator.toJson();
@@ -28,7 +30,8 @@ class customRoles {
         .doc(UserModel.userEmail);
 
     //instance to the document
-    final newUser = userModel(userEmail: UserModel.userEmail);
+    final newUser =
+        userModel(userEmail: UserModel.userEmail, userName: UserModel.userName);
 
     //converting the instance
     final userJson = newUser.toJson();
@@ -84,9 +87,8 @@ class customRoles {
 //   return idList;
 // }
 
-
-Stream<List<creatorModel>> FetchAllCreator() =>
-    FirebaseFirestore.instance.collection('creatorEmail').snapshots().map(
-        (snapShot) => snapShot.docs
-            .map((doc) => creatorModel.fromJson(doc.data()))
-            .toList());
+Stream<List<creatorModel>> FetchAllCreator() => FirebaseFirestore.instance
+    .collection('creatorEmail')
+    .snapshots()
+    .map((snapShot) =>
+        snapShot.docs.map((doc) => creatorModel.fromJson(doc.data())).toList());

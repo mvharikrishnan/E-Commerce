@@ -18,6 +18,7 @@ class CreateAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
 
     return Scaffold(
       backgroundColor: offWhiteK,
@@ -43,6 +44,14 @@ class CreateAccount extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      formFieldTitle('Name'),
+                      sizedBoxHeight10,
+                      createFormField(
+                          TexteditingController: nameController,
+                          obscureText: false,
+                          validate: (text) {
+                            text != null ? 'Enter valid name' : null;
+                          }),
                       sizedBoxHeight10,
                       formFieldTitle('Email'),
                       sizedBoxHeight10,
@@ -71,8 +80,12 @@ class CreateAccount extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           //authenticate and then navigate
-                          await signUP(emailController.text.trim(),
-                              passwordController.text.trim(), context, role);
+                          await signUP(
+                              emailController.text.trim(),
+                              passwordController.text.trim(),
+                              nameController.text.trim(),
+                              context,
+                              role);
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
