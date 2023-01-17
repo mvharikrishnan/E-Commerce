@@ -7,6 +7,7 @@ import 'package:ecommerceapp/view/presentation/admin/adminHome.dart';
 import 'package:ecommerceapp/view/presentation/creator/home/creator_home_screen.dart';
 import 'package:ecommerceapp/view/presentation/splash/splashScreen.dart';
 import 'package:ecommerceapp/view/presentation/user/navigation.dart';
+import 'package:ecommerceapp/view/widget/internetScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ecommerceapp/view/presentation/login/signUP.dart';
@@ -62,6 +63,7 @@ class mainPage extends StatelessWidget {
               if (creatorList.isEmpty) {
                 return const Text('Creator List is empty');
               }
+
               final List<String> listOfCreator = [];
               for (var creator in creatorList) {
                 listOfCreator.add(creator.creatorEmail);
