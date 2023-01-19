@@ -26,7 +26,6 @@ class ScreenAccountUser extends StatelessWidget {
     return name.userName;
   }
 
- 
   @override
   Widget build(BuildContext context) {
     // WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -92,20 +91,7 @@ class ScreenAccountUser extends StatelessWidget {
                     account_profile(user: _user),
                     sizedBoxHeight10,
                     //edit username tile
-                    StreamBuilder(
-                        stream: getUserDetails(email: _user.email!),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return account_edit_button(username: "");
-                          }
-                          if (snapshot.hasData) {
-                            final name = snapshot.data!;
-                            log("button data ${name.userName}");
-                            return account_edit_button(username: name.userName);
-                          } else {
-                            return account_edit_button(username: 'd');
-                          }
-                        }),
+                    account_edit_button(),
                     sizedBoxHeight10,
                     settingTile(
                       onPressed: () {

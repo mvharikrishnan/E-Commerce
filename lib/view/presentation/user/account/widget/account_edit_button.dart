@@ -11,9 +11,7 @@ import 'package:flutter/material.dart';
 class account_edit_button extends StatelessWidget {
   account_edit_button({
     Key? key,
-    required this.username,
   }) : super(key: key);
-  final String username;
 
   final user = FirebaseAuth.instance.currentUser!;
 
