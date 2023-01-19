@@ -8,27 +8,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class account_edit_button extends StatefulWidget {
+class account_edit_button extends StatelessWidget {
   account_edit_button({
     Key? key,
     required this.username,
   }) : super(key: key);
   final String username;
 
-  @override
-  State<account_edit_button> createState() => _account_edit_buttonState();
-}
-
-TextEditingController? _nameController;
-
-class _account_edit_buttonState extends State<account_edit_button> {
   final user = FirebaseAuth.instance.currentUser!;
-  @override
-  void initState() {
-    // TODO: implement initState
-    _nameController = TextEditingController(text: widget.username);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +60,6 @@ class _account_edit_buttonState extends State<account_edit_button> {
                 obscureText: false,
                 TexteditingController: _nameController,
               ),
-              // TextFormField(
-              //   controller: _nameController,
-              // )
             ],
           ),
         ),
