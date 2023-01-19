@@ -102,6 +102,8 @@ class mainPage extends StatelessWidget {
                           : log("user Logged in");
                       log(containsEmail.toString());
                       return containsEmail
+                          // ? goToCreator(context: context)
+                          // : goToUser(context: context);
                           ? const Creator_Home_screen()
                           : const NavigationScreenUser();
                     }
@@ -115,4 +117,20 @@ class mainPage extends StatelessWidget {
           }),
     );
   }
+}
+
+goToUser({required BuildContext context}) {
+  Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => NavigationScreenUser(),
+      ),
+      (route) => false);
+}
+
+goToCreator({required BuildContext context}) {
+  Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => Creator_Home_screen(),
+      ),
+      (route) => false);
 }

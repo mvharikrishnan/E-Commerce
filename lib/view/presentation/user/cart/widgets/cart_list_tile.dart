@@ -11,6 +11,10 @@ class cart_list_tile extends StatelessWidget {
   final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
+    String originalString = productModel.creatorEmail;
+    List<String> splitString = originalString.split("@");
+    // Output: "Hello"
+
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -78,9 +82,8 @@ class cart_list_tile extends StatelessWidget {
                           height: 0.5 * size.width,
                           width: 0.5 * size.width,
                           child: Lottie.network(
-                            'https://assets1.lottiefiles.com/packages/lf20_lz5srsyo.json',
-                            fit: BoxFit.cover
-                          ),
+                              'https://assets1.lottiefiles.com/packages/lf20_lz5srsyo.json',
+                              fit: BoxFit.cover),
                         ),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -137,10 +140,10 @@ class cart_list_tile extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: 130,
             top: 100,
-            child: Text('Sold by : Aneesh ArtWorks'),
+            child: Text("Sold by : ${splitString[0]}"),
           ),
         ],
       ),

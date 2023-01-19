@@ -7,8 +7,6 @@ import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/widget/divider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Order_Screen extends StatelessWidget {
   const Order_Screen({super.key});
@@ -16,6 +14,7 @@ class Order_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final email = FirebaseAuth.instance.currentUser!.email;
+    final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -61,14 +60,27 @@ class Order_Screen extends StatelessWidget {
                                   currentOrders.add(currentOrder);
                                 }
                               }
-                              return ListView(
-                                physics: ScrollPhysics(),
-                                shrinkWrap: true,
-                                children:
-                                    currentOrders.map(BuildOrder).toList(),
-                              );
+                              return currentOrders.isEmpty
+                                  ? Center(
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                              height: 1 * size.width,
+                                              width: 1 * size.width,
+                                              // decoration: BoxDecoration(color: darkBlueK),
+                                              child: const Text("No Orders"))
+                                        ],
+                                      ),
+                                    )
+                                  : ListView(
+                                      physics: const ScrollPhysics(),
+                                      shrinkWrap: true,
+                                      children: currentOrders
+                                          .map(BuildOrder)
+                                          .toList(),
+                                    );
                             }
-                            return SizedBox();
+                            return const SizedBox();
                           },
                         ),
                       ],
@@ -98,16 +110,30 @@ class Order_Screen extends StatelessWidget {
                                   recentOrdes.add(recent);
                                 }
                               }
-                              return ListView(
-                                shrinkWrap: true,
-                                physics: ScrollPhysics( ),
-                                children: recentOrdes.map(BuildOrder).toList(),
-                              );
+
+                              return recentOrdes.isEmpty
+                                  ? Center(
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                              height: 1 * size.width,
+                                              width: 1 * size.width,
+                                              // decoration: BoxDecoration(color: darkBlueK),
+                                              child: const Text(
+                                                  "Order Some product."))
+                                        ],
+                                      ),
+                                    )
+                                  : ListView(
+                                      shrinkWrap: true,
+                                      physics: ScrollPhysics(),
+                                      children:
+                                          recentOrdes.map(BuildOrder).toList(),
+                                    );
                             } else {
                               return const Center(
                                   child: Text('You have no recent orders'));
                             }
-                            return SizedBox();
                           },
                         ),
                       ],

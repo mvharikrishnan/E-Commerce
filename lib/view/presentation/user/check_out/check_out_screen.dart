@@ -104,7 +104,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     Navigator.of(context).pop();
     removeAfterSuccess(ordeers: widget.usersCartProducts);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(response.toString()),
+      content: const Text("Successfully Orderd"),
+      backgroundColor: kGreen,
     ));
   }
 
@@ -113,8 +114,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     log(response.toString());
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: kGreen,
-        content: Text('Successfully Orderd'),
+        backgroundColor: KRed,
+        content: const Text('Failed to order'),
       ),
     );
   }
