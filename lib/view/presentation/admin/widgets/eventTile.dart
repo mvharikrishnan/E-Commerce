@@ -32,9 +32,10 @@ class EventTIle extends StatelessWidget {
             ),
             sizedBoxHeight10,
             Container(
-              height: 40,
+              height: 0.10 * size.width,
               width: size.width,
-              decoration: BoxDecoration(color: KWhite,borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(
+                  color: KWhite, borderRadius: BorderRadius.circular(10)),
               child: Center(child: Text(ModelEvent.eventName)),
             ),
           ],

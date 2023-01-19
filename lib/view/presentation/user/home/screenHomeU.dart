@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerceapp/controller/readDataFromFB.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
@@ -6,7 +8,7 @@ import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/ProductModel/productModel.dart';
 import 'package:ecommerceapp/view/presentation/user/widget/appBarUser.dart';
 import 'package:ecommerceapp/view/presentation/user/home/widget/homeScreenProductTile.dart';
-import 'package:ecommerceapp/view/presentation/user/home/widget/slidingBarItemTile.dart';
+
 import 'package:flutter/material.dart';
 
 class ScreenHomeUser extends StatelessWidget {
@@ -44,52 +46,79 @@ class ScreenHomeUser extends StatelessWidget {
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
+                      children: [
                         Text(
                           'HEY ',
-                          style:
-                              TextStyle(fontWeight: FontWeight.bold, fontSize: 30,fontFamily: TradeGothic),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                              fontFamily: TradeGothic),
                         ),
                         Text(
                           'ARTAHOLIC',
-                          style:
-                              TextStyle(fontWeight: FontWeight.bold, fontSize: 25,fontFamily: TradeGothic),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              fontFamily: TradeGothic),
                         ),
                       ],
                     ),
                     //end
-
-                    
-
                   ],
                 ),
               ),
               sizedBoxHeight10,
-              CarouselSlider(
-                options: CarouselOptions(height: 185.0),
-                items: [1, 2, 3, 4, 5].map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                                'assets/drawingImage/artfestposter2.jpg'),
-                          ),
-                          // color: Colors.amber,
-                        ),
-                        // child: Text(
-                        //   'text $i',
-                        //   style: TextStyle(fontSize: 16.0),
-                        // ),
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
+              StreamBuilder(
+                  stream: fetchEvents(),
+                  builder: (context, snapsnot) {
+                    return CarouselSlider(
+                      options: CarouselOptions(height: 185.0),
+                      items: [1, 2, 3, 4, 5].map((i) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            if (snapsnot.hasData) {
+                              final image = snapsnot.data!.first;
+                              log("IMAGE EVENT ${image.eventImageURL}");
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(image.eventImageURL),
+                                  ),
+                                  // color: Colors.amber,
+                                ),
+                                // child: Text(
+                                //   'text $i',
+                                //   style: TextStyle(fontSize: 16.0),
+                                // ),
+                              );
+                            } else {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        'assets/drawingImage/artfestposter2.jpg'),
+                                  ),
+                                  // color: Colors.amber,
+                                ),
+                                // child: Text(
+                                //   'text $i',
+                                //   style: TextStyle(fontSize: 16.0),
+                                // ),
+                              );
+                            }
+                          },
+                        );
+                      }).toList(),
+                    );
+                  }),
               sizedBoxHeight10,
               const Padding(
                 padding: EdgeInsets.only(left: 15),

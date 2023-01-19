@@ -27,3 +27,24 @@ Future AddCategoryToFB({required categoryModel CategoryModel}) async {
   await docCategory.set(newCategoryJson);
   log('Added to DB');
 }
+
+Future EditEvent({required categoryModel model})async{
+//Reference to the document
+
+  final docCategory = FirebaseFirestore.instance
+      .collection('ProductCategory')
+      .doc(model.categoryName);
+
+  //Instance to the document
+
+  final newCategory = categoryModel(
+    categoryName: model.categoryName,
+    categoryImageURL: model.categoryImageURL,
+  );
+
+  //Converting the instance to json
+
+  final newCategoryJson = newCategory.toJson();
+  log('Before Adding categpry');
+  await docCategory.update(newCategoryJson);
+}

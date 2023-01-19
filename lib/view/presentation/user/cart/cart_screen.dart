@@ -43,7 +43,7 @@ class Cart_Screen extends StatelessWidget {
                     stream: fetchCartProducts(email!),
                     builder: (context, snapshot) {
                       final cartData = snapshot.data!;
-                      userCartProducts = cartData;
+                      // userCartProducts = cartData;
                       double totalSum = getSugTotal(cartData);
                       if (snapshot.hasData) {
                         return Text(
@@ -127,7 +127,7 @@ class Cart_Screen extends StatelessWidget {
                                     child: Lottie.network(
                                       'https://assets3.lottiefiles.com/packages/lf20_qh5z2fdq.json',
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             )

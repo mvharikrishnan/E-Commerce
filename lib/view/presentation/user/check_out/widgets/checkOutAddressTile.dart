@@ -1,8 +1,7 @@
-import 'package:ecommerceapp/controller/address.dart';
 import 'package:ecommerceapp/core/constants/user/constants.dart';
 import 'package:ecommerceapp/model/addressModel/addressModel.dart';
 import 'package:ecommerceapp/view/presentation/user/user_address/editUserAddress.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 class CheckOutAddressTile extends StatelessWidget {

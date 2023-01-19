@@ -23,33 +23,35 @@ class AdminEventScren extends StatelessWidget {
             child:
                 AdminAppBar(isVisible: false, TitleText: ConstantNames.events),
             preferredSize: const Size(double.infinity, 60)),
-        body: Column(
-          children: [
-            StreamBuilder<List<eventModel>>(
-              stream: fetchEvents(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('Something error occurs'),
-                  );
-                }
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              StreamBuilder<List<eventModel>>(
+                stream: fetchEvents(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Something error occurs'),
+                    );
+                  }
 
-                if (snapshot.hasData) {
-                  final currentEvents = snapshot.data!;
+                  if (snapshot.hasData) {
+                    final currentEvents = snapshot.data!;
 
-                  return ListView(
-                    physics: ScrollPhysics(),
-                    shrinkWrap: true,
-                    children: currentEvents.map(BuildEvents).toList(),
-                  );
-                } else {
-                  return const Center(
-                    child: Text('Please Add Events'),
-                  );
-                }
-              },
-            )
-          ],
+                    return ListView(
+                      physics: ScrollPhysics(),
+                      shrinkWrap: true,
+                      children: currentEvents.map(BuildEvents).toList(),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('Please Add Events'),
+                    );
+                  }
+                },
+              )
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
