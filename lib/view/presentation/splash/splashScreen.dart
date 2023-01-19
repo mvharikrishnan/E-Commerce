@@ -1,13 +1,7 @@
-import 'dart:async';
-import 'dart:developer';
-
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:ecommerceapp/core/colors/colors.dart';
 import 'package:ecommerceapp/core/constants/appConstants.dart';
 import 'package:ecommerceapp/main.dart';
-import 'package:ecommerceapp/view/widget/internetScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connectivity_checker/internet_connectivity_checker.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,10 +12,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late StreamSubscription subscription;
-  var isDeviceConnected = false;
-  bool isAlertdialog = false;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -29,15 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-  //connection checking
-  // getConnectivity()=>subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) async{
-  //   final isConnected = await InternetConnectivity().isConnectedToInternet();
-  // });
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final isConnected = InternetConnectivity().isConnectedToInternet();
     return Scaffold(
       backgroundColor: skyBlueLightK,
       body: SafeArea(
@@ -69,29 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) =>InternetStream(),
+          builder: (context) => mainPage(),
         ));
-    
-  }
-}
-
-class InternetStream extends StatelessWidget {
-  const InternetStream({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    Stream<bool> stream = InternetConnectivity().isConnectedToInternet();
-    return StreamBuilder(
-      stream: stream,
-      builder: (context, snapshot) {
-        log("Internet Stream ");        if (snapshot.hasData && (snapshot.data as bool) == true) {
-          return mainPage();
-        } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          return const InternetScreen();
-        }
-      },
-    );
   }
 }

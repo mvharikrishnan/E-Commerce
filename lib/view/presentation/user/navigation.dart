@@ -3,6 +3,7 @@ import 'package:ecommerceapp/view/presentation/user/account/screenAccountU.dart'
 import 'package:ecommerceapp/view/presentation/user/category_screen/screenCategoryU.dart';
 import 'package:ecommerceapp/view/presentation/user/discover/screenDiscoverU.dart';
 import 'package:ecommerceapp/view/presentation/user/home/screenHomeU.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavigationScreenUser extends StatefulWidget {
@@ -16,7 +17,7 @@ final List<Widget> _screens = <Widget>[
   const ScreenHomeUser(),
   const ScreenCategoryUser(),
   const ScreenDiscoverUser(),
-  const ScreenAccountUser(),
+  ScreenAccountUser(),
 ];
 int _currentIndex = 0;
 

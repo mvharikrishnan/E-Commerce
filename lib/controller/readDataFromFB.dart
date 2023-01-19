@@ -103,7 +103,14 @@ Stream<List<creatorModel>> fetchCreatorEmails() => FirebaseFirestore.instance
 //userEmail session future
 Future<userModel> fetchUserEmails({required String email}) async {
   final doc =
-      await FirebaseFirestore.instance.collection('userEmail').doc(email).get();
+      await FirebaseFirestore.instance.collection('UserEmail').doc(email).get();
 
   return userModel.fromJson(doc.data()!);
 }
+
+  Stream<userModel> getUserDetails({required String email}) =>
+      FirebaseFirestore.instance
+          .collection("UserEmail")
+          .doc(email)
+          .snapshots()
+          .map((snapshot) =>userModel.fromJson(snapshot.data()!));
